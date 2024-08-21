@@ -23,7 +23,7 @@ def visit_site():
         print(f"Failed to visit {url} - Error: {e}")
 
 # Schedule the task to run every 5 minutes
-schedule.every(1).minutes.do(visit_site)
+schedule.every(5).minutes.do(visit_site)
 
 if __name__ == "__main__":
     # Run the Flask app in a separate thread
