@@ -71,7 +71,7 @@ search-engine-parser
 selenium
 spamwatch
 speedtest-cli
-sqlalchemy==1.3.23
+sqlalchemy
 sqlalchemy-json
 telegraph
 tgcrypto
