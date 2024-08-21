@@ -4,6 +4,7 @@ import schedule
 import requests
 from flask import Flask
 from flask_restful import Resource, Api
+from threading import Thread
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,7 +16,7 @@ class Greeting(Resource):
 api.add_resource(Greeting, '/')
 
 def visit_site():
-    url = f"http://localhost:{os.environ.get('PORT', 443)}"
+    url = f"http://localhost:{os.environ.get('PORT', 5000)}"  # Change default port to 5000
     try:
         response = requests.get(url)
         print(f"Visited {url} - Status Code: {response.status_code}")
@@ -25,10 +26,12 @@ def visit_site():
 # Schedule the task to run every 5 minutes
 schedule.every(5).minutes.do(visit_site)
 
+def run_flask_app():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))  # Ensure port is an integer
+
 if __name__ == "__main__":
     # Run the Flask app in a separate thread
-    from threading import Thread
-    flask_thread = Thread(target=lambda: app.run(host="0.0.0.0", port=os.environ.get("PORT", 443)))
+    flask_thread = Thread(target=run_flask_app)
     flask_thread.start()
 
     # Run the scheduler
