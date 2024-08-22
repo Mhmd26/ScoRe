@@ -305,7 +305,15 @@ async def _(event):
 async def Hussein(event):
     if event.reply_to and event.sender_id in progs:
         reply_msg = await event.get_reply_message()
-        owner_id = reply_msg.from_id.user_id
+        
+        # تحقق من وجود reply_msg.from_id ووجود user_id
+        if reply_msg.from_id and hasattr(reply_msg.from_id, 'user_id'):
+            owner_id = reply_msg.from_id.user_id
+        else:
+            print("reply_msg.from_id أو user_id غير متاح")
+            return
+        
+        # تحقق من كون owner_id مطابقًا لـ l313l.uid
         if owner_id == l313l.uid:
             if event.message.message == "شيع الولد":
                 animation_interval = 4
@@ -318,5 +326,4 @@ async def Hussein(event):
                 ]
                 for i in animation_ttl:
                     await asyncio.sleep(animation_interval)
-                    await event.reply(animation_chars[i % 14])
-
+                    await event.reply(animation_chars[i % len(animation_chars)])
