@@ -23,7 +23,7 @@ from telethon.tl.types import (
 from telethon.utils import get_display_name
 
 from JoKeRUB import l313l
-
+from Conf import zq_lo
 from ..core.data import _sudousers_list
 from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
