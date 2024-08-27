@@ -2,6 +2,7 @@ import os
 import time
 import schedule
 import requests
+import subprocess
 from flask import Flask
 from flask_restful import Resource, Api
 from threading import Thread
@@ -16,19 +17,30 @@ class Greeting(Resource):
 api.add_resource(Greeting, '/')
 
 def visit_site():
-    url = f"http://localhost:{os.environ.get('PORT', 8000)}"
+    url = f"http://localhost:{os.environ.get('PORT', 10000)}"
     try:
         response = requests.get(url)
         print(f"Visited {url} - Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:
         print(f"Failed to visit {url} - Error: {e}")
 
+def run_python_command():
+    command = ["python3", "-c", "ser.py"]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True)
+        print(f"Command Output: {result.stdout}")
+        if result.stderr:
+            print(f"Command Error: {result.stderr}")
+    except Exception as e:
+        print(f"Failed to execute command - Error: {e}")
+
 # جدولة المهمة لتعمل كل 3 دقائق
 schedule.every(3).minutes.do(visit_site)
+schedule.every(3).minutes.do(run_python_command)
 
 def run_flask_app():
     try:
-        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), threaded=True)
+        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)), threaded=True)
     except Exception as e:
         print(f"Failed to start Flask server - Error: {e}")
 
