@@ -1,6 +1,5 @@
 telethon
 pydub
-gunicorn
 schedule
 waitress
 gunicorn
