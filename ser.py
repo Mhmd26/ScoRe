@@ -2,14 +2,9 @@ import os
 import time
 import schedule
 import requests
-import logging
 from flask import Flask
 from flask_restful import Resource, Api
 from threading import Thread
-
-# إعداد تسجيل الأخطاء
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 api = Api(app)
@@ -24,21 +19,27 @@ def visit_site():
     url = f"http://localhost:{os.environ.get('PORT', 8000)}"
     try:
         response = requests.get(url)
-        logger.info(f"Visited {url} - Status Code: {response.status_code}")
+        print(f"Visited {url} - Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:
-        logger.error(f"Failed to visit {url} - Error: {e}")
+        print(f"Failed to visit {url} - Error: {e}")
 
 # جدولة المهمة لتعمل كل 3 دقائق
 schedule.every(3).minutes.do(visit_site)
 
 def run_flask_app():
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), threaded=True)
+    try:
+        app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), threaded=True)
+    except Exception as e:
+        print(f"Failed to start Flask server - Error: {e}")
 
 if __name__ == "__main__":
     # تشغيل خادم Flask في خيط منفصل
     flask_thread = Thread(target=run_flask_app)
     flask_thread.start()
-    logger.info("Flask server started.")
+    print("Flask server started.")
+    
+    # الانتظار بضع ثواني للتأكد من أن خادم Flask قد بدأ
+    time.sleep(5)
     
     # تشغيل المجدول
     while True:
