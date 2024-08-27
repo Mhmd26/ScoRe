@@ -2,8 +2,14 @@ import os
 import time
 import schedule
 import requests
+import logging
 from flask import Flask
 from flask_restful import Resource, Api
+from threading import Thread
+
+# إعداد تسجيل الأخطاء
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,23 +21,26 @@ class Greeting(Resource):
 api.add_resource(Greeting, '/')
 
 def visit_site():
-    url = f"http://localhost:{os.environ.get('PORT', 10000)}"
+    url = f"http://localhost:{os.environ.get('PORT', 8000)}"
     try:
         response = requests.get(url)
-        print(f"Visited {url} - Status Code: {response.status_code}")
+        logger.info(f"Visited {url} - Status Code: {response.status_code}")
     except requests.exceptions.RequestException as e:
-        print(f"Failed to visit {url} - Error: {e}")
+        logger.error(f"Failed to visit {url} - Error: {e}")
 
-# Schedule the task to run every 5 minutes
+# جدولة المهمة لتعمل كل 3 دقائق
 schedule.every(3).minutes.do(visit_site)
 
-if __name__ == "__main__":
-    # Run the Flask app in a separate thread
-    from threading import Thread
-    flask_thread = Thread(target=lambda: app.run(host="0.0.0.0", port=os.environ.get("PORT", 10000)))
-    flask_thread.start()
+def run_flask_app():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)), threaded=True)
 
-    # Run the scheduler
+if __name__ == "__main__":
+    # تشغيل خادم Flask في خيط منفصل
+    flask_thread = Thread(target=run_flask_app)
+    flask_thread.start()
+    logger.info("Flask server started.")
+    
+    # تشغيل المجدول
     while True:
         schedule.run_pending()
         time.sleep(1)
