@@ -15,7 +15,7 @@ class Greeting(Resource):
 api.add_resource(Greeting, '/')
 
 def visit_site():
-    url = f"http://localhost:{os.environ.get('PORT', 443)}"
+    url = f"http://localhost:{os.environ.get('PORT', 10000)}"
     try:
         response = requests.get(url)
         print(f"Visited {url} - Status Code: {response.status_code}")
@@ -28,7 +28,7 @@ schedule.every(3).minutes.do(visit_site)
 if __name__ == "__main__":
     # Run the Flask app in a separate thread
     from threading import Thread
-    flask_thread = Thread(target=lambda: app.run(host="0.0.0.0", port=os.environ.get("PORT", 443)))
+    flask_thread = Thread(target=lambda: app.run(host="0.0.0.0", port=os.environ.get("PORT", 10000)))
     flask_thread.start()
 
     # Run the scheduler
