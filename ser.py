@@ -30,7 +30,7 @@ def visit_site():
         logger.error(f"Failed to visit {url} - Error: {e}")
 
 def run_python_command():
-    command = ["python3", "-c", "print('Executing scheduled task')"]
+    command = ["python3", "ser.py"]
     try:
         result = subprocess.run(command, capture_output=True, text=True)
         logger.info(f"Command Output: {result.stdout}")
@@ -41,7 +41,7 @@ def run_python_command():
 
 # جدولة المهمة لتعمل كل 3 دقائق
 schedule.every(3).minutes.do(visit_site)
-schedule.every(3).minutes.do(run_python_command)
+schedule.every(10).minutes.do(run_python_command)
 
 def run_flask_app():
     try:
