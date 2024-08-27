@@ -1,6 +1,5 @@
 telethon
 pydub
-myproject
 schedule
 waitress
 gunicorn
