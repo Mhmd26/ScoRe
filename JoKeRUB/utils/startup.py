@@ -103,7 +103,7 @@ async def startupmessage():
               **  """,
                 
                
-                buttons=[(Button.url("سورس العقرب", "https://t.me/Scorpions_scorp"),)],
+                buttons=[(Button.url("سورس العقرب", "https://t.me/Scorpion_scorp"),)],
             )
     except Exception as e:
         LOGS.error(e)
