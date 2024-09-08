@@ -1,5 +1,5 @@
 try:
-    from . import BASE, SESSION
+    from . import BASE, SESSION, engine
 except ImportError as e:
     raise AttributeError from e
 from sqlalchemy import Column, String, UnicodeText
@@ -15,7 +15,7 @@ class Globals(BASE):
         self.value = value
 
 
-Globals.__table__.create(checkfirst=True)
+Globals.__table__.create(bind=engine, checkfirst=True)
 
 
 def gvarstatus(variable):

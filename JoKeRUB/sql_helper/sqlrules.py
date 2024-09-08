@@ -1,6 +1,6 @@
 import threading
 from sqlalchemy import Column, String, UnicodeText, distinct, func
-from . import *
+from . import *, engine
 
 class Rules(BASE):
     __tablename__ = "rules"
@@ -14,7 +14,7 @@ class Rules(BASE):
         return "<Chat {} rules: {}>".format(self.chat_id, self.rules)
 
 
-Rules.__table__.create(checkfirst=True)
+Rules.__table__.create(bind=engine, checkfirst=True)
 
 INSERTION_LOCK = threading.RLock()
 

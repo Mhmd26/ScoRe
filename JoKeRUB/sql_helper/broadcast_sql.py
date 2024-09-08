@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String, UnicodeText, distinct, func
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class CatBroadcast(BASE):
@@ -25,7 +25,7 @@ class CatBroadcast(BASE):
         )
 
 
-CatBroadcast.__table__.create(checkfirst=True)
+CatBroadcast.__table__.create(bind=engine, checkfirst=True)
 
 CATBROADCAST_INSERTION_LOCK = threading.RLock()
 

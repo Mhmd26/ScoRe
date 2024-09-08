@@ -1,6 +1,6 @@
 from sqlalchemy import Boolean, Column, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Locks(BASE):
@@ -22,7 +22,7 @@ class Locks(BASE):
         self.url = False
 
 
-Locks.__table__.create(checkfirst=True)
+Locks.__table__.create(bind=engine, checkfirst=True)
 
 
 def init_locks(chat_id, reset=False):

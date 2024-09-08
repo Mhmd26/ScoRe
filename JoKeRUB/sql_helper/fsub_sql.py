@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Numeric, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class forceSubscribe(BASE):
@@ -13,7 +13,7 @@ class forceSubscribe(BASE):
         self.channel = channel
 
 
-forceSubscribe.__table__.create(checkfirst=True)
+forceSubscribe.__table__.create(bind=engine, checkfirst=True)
 
 
 def is_fsub(chat_id):

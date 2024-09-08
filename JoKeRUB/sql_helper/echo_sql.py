@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, UnicodeText
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Echos(BASE):
@@ -30,7 +30,7 @@ class Echos(BASE):
         )
 
 
-Echos.__table__.create(checkfirst=True)
+Echos.__table__.create(bind=engine, checkfirst=True)
 
 
 def is_echo(chat_id, user_id):

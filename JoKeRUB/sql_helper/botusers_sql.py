@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Users(BASE):
@@ -20,7 +20,7 @@ class Users(BASE):
         return "<User %s>" % self.chat_id
 
 
-Users.__table__.create(checkfirst=True)
+Users.__table__.create(bind=engine, checkfirst=True)
 
 
 def add_me_in_db(message_id: int, chat_id: int, um_id: int):
