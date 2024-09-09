@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, UnicodeText
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class ChatBot(BASE):
@@ -30,7 +30,7 @@ class ChatBot(BASE):
         )
 
 
-ChatBot.__table__.create(bind=engine, checkfirst=True)
+ChatBot.__table__.create(checkfirst=True)
 
 
 def is_added(chat_id, user_id):

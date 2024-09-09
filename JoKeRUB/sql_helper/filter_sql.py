@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Numeric, String, UnicodeText
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class Filter(BASE):
@@ -24,7 +24,7 @@ class Filter(BASE):
         )
 
 
-Filter.__table__.create(bind=engine, checkfirst=True)
+Filter.__table__.create(checkfirst=True)
 
 
 def get_filter(chat_id, keyword):

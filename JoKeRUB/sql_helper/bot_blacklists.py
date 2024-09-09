@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, UnicodeText
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class Bot_BlackList(BASE):
@@ -22,7 +22,7 @@ class Bot_BlackList(BASE):
         return "<BL %s>" % self.chat_id
 
 
-Bot_BlackList.__table__.create(bind=engine, checkfirst=True)
+Bot_BlackList.__table__.create(checkfirst=True)
 
 
 def add_user_to_bl(

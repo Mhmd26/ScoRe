@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, UnicodeText
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class Bot_Starters(BASE):
@@ -17,7 +17,7 @@ class Bot_Starters(BASE):
         self.username = username
 
 
-Bot_Starters.__table__.create(bind=engine, checkfirst=True)
+Bot_Starters.__table__.create(checkfirst=True)
 
 
 def add_starter_to_db(

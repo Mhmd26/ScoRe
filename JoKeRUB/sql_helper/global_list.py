@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String, UnicodeText, distinct, func
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class CatGloballist(BASE):
@@ -25,7 +25,7 @@ class CatGloballist(BASE):
         )
 
 
-CatGloballist.__table__.create(bind=engine, checkfirst=True)
+CatGloballist.__table__.create(checkfirst=True)
 
 CATGLOBALLIST_INSERTION_LOCK = threading.RLock()
 

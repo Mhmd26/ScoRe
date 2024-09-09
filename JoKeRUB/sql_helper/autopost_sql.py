@@ -1,6 +1,6 @@
 import threading
 from sqlalchemy import Column, String, UnicodeText, distinct, func
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class Post(BASE):
@@ -25,7 +25,7 @@ class Post(BASE):
 
 
 
-Post.__table__.create(bind=engine, checkfirst=True)
+Post.__table__.create(checkfirst=True)
 
 POST_FILTER_INSERTION_LOCK = threading.RLock()
 

@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, String, UnicodeText, distinct, func
 
-from . import BASE, SESSION, engine
+from . import BASE, SESSION
 
 
 class BlackListFilters(BASE):
@@ -25,7 +25,7 @@ class BlackListFilters(BASE):
         )
 
 
-BlackListFilters.__table__.create(bind=engine, checkfirst=True)
+BlackListFilters.__table__.create(checkfirst=True)
 
 BLACKLIST_FILTER_INSERTION_LOCK = threading.RLock()
 
