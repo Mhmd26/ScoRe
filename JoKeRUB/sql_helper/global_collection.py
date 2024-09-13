@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, PickleType, UnicodeText, distinct, func
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Cat_GlobalCollection(BASE):
@@ -28,7 +28,7 @@ class Cat_GlobalCollection(BASE):
         )
 
 
-Cat_GlobalCollection.__table__.create(checkfirst=True)
+Cat_GlobalCollection.__table__.create(bind=engine, checkfirst=True)
 
 CAT_GLOBALCOLLECTION = threading.RLock()
 

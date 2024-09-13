@@ -1,5 +1,5 @@
 try:
-    from . import BASE, SESSION
+    from . import BASE, SESSION, engine
 except ImportError as e:
     raise AttributeError from e
 
@@ -20,7 +20,7 @@ class Welcome(BASE):
         self.f_mesg_id = f_mesg_id
 
 
-Welcome.__table__.create(checkfirst=True)
+Welcome.__table__.create(bind=engine, checkfirst=True)
 
 
 def get_welcome(chat_id):

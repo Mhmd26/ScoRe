@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Text
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class GoogleDriveCreds(BASE):
@@ -12,7 +12,7 @@ class GoogleDriveCreds(BASE):
         self.user = user
 
 
-GoogleDriveCreds.__table__.create(checkfirst=True)
+GoogleDriveCreds.__table__.create(bind=engine, checkfirst=True)
 
 
 def save_credentials(user, credentials):

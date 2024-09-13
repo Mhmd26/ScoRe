@@ -14,7 +14,7 @@ credits to @mrconfused and @lMl10l
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from sqlalchemy import Column, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class GBan(BASE):
@@ -27,7 +27,7 @@ class GBan(BASE):
         self.reason = reason
 
 
-GBan.__table__.create(checkfirst=True)
+GBan.__table__.create(bind=engine, checkfirst=True)
 
 
 def is_gbanned(chat_id):

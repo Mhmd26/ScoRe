@@ -1,5 +1,5 @@
 try:
-    from . import BASE, SESSION
+    from . import BASE, SESSION, engine
 except ImportError as e:
     raise Exception("Hello!") from e
 from sqlalchemy import Column, String
@@ -15,7 +15,7 @@ class AljokerLink(BASE):
         self.url = str(url)
 
 
-AljokerLink.__table__.create(checkfirst=True)
+AljokerLink.__table__.create(bind=engine, checkfirst=True)
 
 
 def get_link(key):

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, UnicodeText
 from sqlalchemy_json import MutableJson, NestedMutableJson
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Cat_GlobalCollection_Json(BASE):
@@ -16,7 +16,7 @@ class Cat_GlobalCollection_Json(BASE):
         self.njson = njson
 
 
-Cat_GlobalCollection_Json.__table__.create(checkfirst=True)
+Cat_GlobalCollection_Json.__table__.create(bind=engine, checkfirst=True)
 
 
 def get_collection(keywoard):

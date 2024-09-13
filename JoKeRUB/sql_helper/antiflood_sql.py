@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, Integer, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 DEF_COUNT = 0
 DEF_LIMIT = 0
@@ -23,7 +23,7 @@ class FloodControl(BASE):
         return "<flood control for %s>" % self.chat_id
 
 
-FloodControl.__table__.create(checkfirst=True)
+FloodControl.__table__.create(bind=engine, checkfirst=True)
 
 INSERTION_LOCK = threading.RLock()
 

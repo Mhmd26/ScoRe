@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Blockedid(BASE):
@@ -11,7 +11,7 @@ class Blockedid(BASE):
         self.chat_id = chat_id
 
 
-Blockedid.__table__.create(checkfirst=True)
+Blockedid.__table__.create(bind=engine, checkfirst=True)
 
 
 def add_nibba_in_db(chat_id: int):

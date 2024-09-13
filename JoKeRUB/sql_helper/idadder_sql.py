@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class Moidata(BASE):
@@ -11,7 +11,7 @@ class Moidata(BASE):
         self.chat_id = chat_id
 
 
-Moidata.__table__.create(checkfirst=True)
+Moidata.__table__.create(bind=engine, checkfirst=True)
 
 
 def add_usersid_in_db(chat_id: int):

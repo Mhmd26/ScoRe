@@ -9,7 +9,7 @@
 
 from sqlalchemy import Column, String, UnicodeText
 
-from . import BASE, SESSION
+from . import BASE, SESSION, engine
 
 
 class PmPermit_Sql(BASE):
@@ -28,7 +28,7 @@ class PmPermit_Sql(BASE):
         self.reason = reason
 
 
-PmPermit_Sql.__table__.create(checkfirst=True)
+PmPermit_Sql.__table__.create(bind=engine, checkfirst=True)
 
 
 def approve(user_id, first_name, date, username, reason):

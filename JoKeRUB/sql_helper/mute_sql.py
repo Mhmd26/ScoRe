@@ -1,5 +1,5 @@
 try:
-    from . import BASE, SESSION
+    from . import BASE, SESSION, engine
 except ImportError as e:
     raise Exception("Hello!") from e
 from sqlalchemy import Column, String
@@ -15,7 +15,7 @@ class Mute(BASE):
         self.chat_id = str(chat_id)
 
 
-Mute.__table__.create(checkfirst=True)
+Mute.__table__.create(bind=engine, checkfirst=True)
 
 
 def is_muted(sender, chat_id):
