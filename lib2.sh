@@ -16,9 +16,9 @@ cp "$SOURCE_FILE2" "$DESTINATION_DIR2"
 
 # التحقق من نجاح النسخ
 if [ $? -eq 0 ]; then
-    echo "The files was copied successfully. ✔️"
+    echo "✎┊‌ The files was copied successfully. ✔️"
 else
-    echo "File copy failed. ❌"
+    echo "✎┊‌ File copy failed. ❌"
 fi
 
 pip install sqlalchemy
@@ -113,11 +113,11 @@ pip install ipaddress
 pip install img2html
 pip install webcolors
 pip install py-googletrans
-
+pip install googletrans==4.0.0-rc1
 if [ $? -eq 0 ]; then
-    echo "Libraries loaded successfully. ✔️"
+    echo "✎┊‌ Libraries loaded successfully. "
 else
-    echo "Libraries failed. ❌"
+    echo "✎┊‌ Libraries failed. ❌"
 fi
 
 cp /data/data/com.termux/files/home/ScoR/lib2.sh /root/
