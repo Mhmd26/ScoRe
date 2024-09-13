@@ -4,7 +4,7 @@ import subprocess
 def run_command(command, retry_count=0):
     try:
         result = subprocess.run(command, shell=True, check=True, text=True)
-        print("✅✅✅✅") 
+        print(" ✎┊‌ Dnoe ✓") 
         return result.stdout
     except subprocess.CalledProcessError as e:
         if "Network is unreachable" in e.stderr and retry_count < 5:
