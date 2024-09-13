@@ -119,5 +119,3 @@ if [ $? -eq 0 ]; then
 else
     echo "✎┊‌ Libraries failed. ❌"
 fi
-
-cp /data/data/com.termux/files/home/ScoR/lib2.sh /root/
