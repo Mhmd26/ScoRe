@@ -7,7 +7,7 @@ def install_package(package):
     for attempt in range(10):  
         result = subprocess.run(["sudo", "apt", "install", "-y", package], capture_output=True, text=True)
         if result.returncode == 0:
-            print(f"Installed {package} successfully. (✅✅✅)")
+            print(f"✎┊‌ Installed {package} successfully. (✓✓)")
             return
         else:
             print(f"Failed to install {package} (attempt {attempt + 1}/10): {result.stderr}")
@@ -70,7 +70,7 @@ if os.path.exists("/data/data/com.termux/files/home/ScoR"):
     os.chdir(os.path.expanduser("~"))
     result = subprocess.run(["cp", "-r", "/data/data/com.termux/files/home/ScoR", "."], capture_output=True, text=True)
     if result.returncode == 0:
-        print("Copied ScoR directory successfully. (✅✅✅)")
+        print("✎┊‌ Copied ScoR directory successfully. (✓✓)")
         time.sleep(10)  
         if os.path.exists(os.path.expanduser("~/ScoR")):
             os.chdir(os.path.expanduser("~/ScoR"))
@@ -78,37 +78,36 @@ if os.path.exists("/data/data/com.termux/files/home/ScoR"):
             
             pip_upgrade_result = subprocess.run(["pip3", "install", "--upgrade", "pip"], capture_output=True, text=True)
             if pip_upgrade_result.returncode == 0:
-                print("Upgraded pip successfully. (✅✅✅)")
+                print("✎┊‌ Upgraded pip successfully. (✓✓)")
             else:
-                print(f"Failed to upgrade pip: {pip_upgrade_result.stderr} (❌❌❌)")
+                print(f"✎┊‌ Failed to upgrade pip: {pip_upgrade_result.stderr} (❌❌❌)")
                 if "Could not resolve host" in pip_upgrade_result.stderr:
                     print("( ❌ 🛜🛜🛜❌ ) Check your internet connection.")
 
             
 
         else:
-            print("Failed to access ScoR directory after 5 seconds delay. (❌❌❌)")
+            print("✎┊‌ Failed to access ScoR directory after 5 seconds delay. (❌❌❌)")
     else:
-        print(f"Failed to copy ScoR directory: {result.stderr} (❌❌❌)")
+        print(f"✎┊‌ Failed to copy ScoR directory: {result.stderr} (❌❌❌)")
 else:
-    print("Error: ScoR directory not found in Termux home. (❌❌❌)")
+    print("✎┊‌ Error: ScoR directory not found in Termux home. (❌❌❌)")
 
 if os.path.exists(os.path.expanduser("~/ScoR")):
     os.chdir(os.path.expanduser("~/ScoR"))
 else:
-    print("Error: ScoR directory not found. (❌❌❌)")
+    print("✎┊‌ Error: ScoR directory not found. (❌❌❌)")
     exit(1)
 
 for command in [
     ["pip3", "install", "Telethon"],
-    ["pip3", "install", "-r", "requirements.txt"],
     ["pip3", "install", "--upgrade", "psycopg2-binary"],
     ["pip3", "install", "heroku3"],
     ["pip3", "install", "psycopg2"]
 ]:
     result = subprocess.run(command, capture_output=True, text=True)
     if result.returncode == 0:
-        print(f"Command '{command}' executed successfully. (✅✅✅)")
+        print(f"✎┊‌ Command '{command}' executed successfully. (✓)")
     else:
         
         if "Could not resolve host" in result.stderr:
