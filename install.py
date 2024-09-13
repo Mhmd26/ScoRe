@@ -59,8 +59,8 @@ run_command('psql -U postgres -d postgres -c "CREATE DATABASE finalv OWNER postg
 
 run_command("pg_ctl -D $PREFIX/var/lib/postgresql status")
 
-if os.path.exists("/sdcard/ScoRe"):
-    run_command("cp -rf /sdcard/ScoRe ~")
+if os.path.exists("/sdcard/ScoR"):
+    run_command("cp -rf /sdcard/ScoR ~")
 
 if not os.path.exists("/data/data/com.termux/files/usr/bin/proot-distro"):
     run_command("yes | pkg install proot-distro") 
