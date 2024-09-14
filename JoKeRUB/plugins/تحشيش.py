@@ -63,6 +63,34 @@ async def permalink(mention):
     my_first = me.first_name
     my_mention = f"[{me.first_name}](tg://user?id={me.id})"
     await edit_or_reply(mention, f"**✎┊‌ المستخدم** [{JoKeRUB}](tg://user?id={user.id}) \n**✎┊‌  تـم رفعـه جلب 🐶 بواسطة :** {my_mention} \n**✎┊‌  خليه خله ينبح 😂**") 
+    
+@l313l.on(admin_cmd(pattern="رفع بربوك(?:\s|$)([\s\S]*)"))
+async def permalink(mention):
+    """Generates a link to the user's PM with a custom text."""
+    user, custom = await get_user_from_event(mention)
+    if not user:
+        return
+    if user.id == 7275336620:
+        return await edit_or_reply(mention, f"**- لكك دي هذا المطور**")
+    JoKeRUB = user.first_name.replace("\u2060", "") if user.first_name else user.username
+    me = await mention.client.get_me()
+    my_first = me.first_name
+    my_mention = f"[{me.first_name}](tg://user?id={me.id})"
+    await edit_or_reply(mention, f"**✎┊‌ المستخدم** [{JoKeRUB}](tg://user?id={user.id}) \n**✎┊‌  تم رفعه بربوك بواسطة :** {my_mention} \n**✎┊‌ ها لچ بربووووك بربووء 😭😂😉  **") 
+    
+@l313l.on(admin_cmd(pattern="رفع تيس(?:\s|$)([\s\S]*)"))
+async def permalink(mention):
+    """Generates a link to the user's PM with a custom text."""
+    user, custom = await get_user_from_event(mention)
+    if not user:
+        return
+    if user.id == 7275336620:
+        return await edit_or_reply(mention, f"**- لكك دي هذا المطور**")
+    JoKeRUB = user.first_name.replace("\u2060", "") if user.first_name else user.username
+    me = await mention.client.get_me()
+    my_first = me.first_name
+    my_mention = f"[{me.first_name}](tg://user?id={me.id})"
+    await edit_or_reply(mention, f"**✎┊‌ المستخدم** [{JoKeRUB}](tg://user?id={user.id}) \n**✎┊‌   تم رفعه تيس  بواسطة :** {my_mention} \n**✎┊‌ها لك تيسسس تيووووس اتياااس 😭😂**") 
 
 @l313l.on(admin_cmd(pattern="رفع مصري(?:\s|$)([\s\S]*)"))
 async def permalink(mention):
