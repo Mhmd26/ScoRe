@@ -86,7 +86,7 @@ async def pin(event):
     "To pin a message in chat"
     to_pin = event.reply_to_msg_id
     if not to_pin:
-        return await edit_delete(event, "✎┊‌ يـجب الـرد على الـرسالة التي تـريد تـثبيـتها ", 5)
+        return await edit_delete(event, "**✎┊‌ يـجب الـرد على الـرسالة التي تـريد تـثبيـتها** ", 5)
     options = event.pattern_match.group(1)
     is_silent = bool(options)
     try:
@@ -95,7 +95,7 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{str(e)}`", 5)
-    await edit_delete(event, "✎┊‌ تـم تـثبيـت الـرسالة بـنجـاح ✅", 3)
+    await edit_delete(event, "**✎┊‌ تـم تـثبيـت الـرسالة بـنجـاح ✅**", 3)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -120,7 +120,7 @@ async def pin(event):
     },
 )
 async def pin(event):
-    "✎┊‌ لإلغاء تثبيت رسائل من المجموعة  ⚠️"
+    "**✎┊‌ لإلغاء تثبيت رسائل من المجموعة  **"
     to_unpin = event.reply_to_msg_id
     options = (event.pattern_match.group(1)).strip()
     if not to_unpin and options != "all":
@@ -174,7 +174,7 @@ async def pin(event):
 )
 async def _iundlt(event):  # sourcery no-metrics
     "To check recent deleted messages in group"
-    catevent = await edit_or_reply(event, "✎┊‌ يـتم الـبحث عن اخـر الاحداث")
+    catevent = await edit_or_reply(event, "**✎┊‌ يـتم الـبحث عن اخـر الاحداث**")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))

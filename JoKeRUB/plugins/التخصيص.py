@@ -30,7 +30,7 @@ async def getvar(event):
         return
     if gvarstatus(input) is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
     await edit_or_reply(event, gvarstatus(input))
 
@@ -44,7 +44,7 @@ async def custom_HuRe(event):
         text = reply.text
     if text is None:
         return await edit_delete(
-            event, "**⌔∮ يجب عليك الرد على النص او الرابط حسب الفار الذي تضيفه **"
+            event, "**✎┊‌ يجب عليك الرد على النص او الرابط حسب الفار الذي تضيفه **"
         )
     input_str = event.pattern_match.group(1)
     if (
@@ -109,7 +109,7 @@ async def custom_HuRe(event):
     if input_str == "اشعارات" or input_str == "الاشعارات":
         addgvar("PRIVATE_GROUP_BOT_API_ID", text)
         var = "PRIVATE_GROUP_BOT_API_ID"
-    await edit_or_reply(event, f"**₰ تم بنجاح تحديث فار {input_str} 𓆰،**")
+    await edit_or_reply(event, f"**✎┊‌ تم بنجاح تحديث فار {input_str} **")
     delgvar(var)
     addgvar(var, text)
     if BOTLOG_CHATID:
@@ -131,19 +131,19 @@ async def custom_HuRe(event):
     ):
         if gvarstatus("pmpermit_txt") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("pmpermit_txt")
     if input_str == "كليشة الفحص" or input_str == "كليشه الفحص" or input_str == "كليشه فحص" or input_str == "كليشه فحص":
         if gvarstatus("ALIVE_TEMPLATE") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("ALIVE_TEMPLATE")
     if input_str == "كليشة الحظر" or input_str == "كليشه الحظر":
         if gvarstatus("pmblock") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("pmblock")
     if (
@@ -154,7 +154,7 @@ async def custom_HuRe(event):
     ):
         if gvarstatus("pmpermit_pic") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("pmpermit_pic")
     if (
@@ -171,67 +171,67 @@ async def custom_HuRe(event):
     if input_str == "صورة الفحص" or input_str == "صوره الفحص":
         if gvarstatus("ALIVE_PIC") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("ALIVE_PIC")
     if input_str == "كليشة البوت" or input_str == "كليشه البوت":
         if gvarstatus("START_TEXT") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌ عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("START_TEXT")
     if input_str == "ايموجي الفحص":
         if gvarstatus("ALIVE_EMOJI") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("ALIVE_EMOJI")
     if input_str == "التخزين" or input_str == "تخزين":
     	if gvatstatus("PM_LOGGER_GROUP_ID") is None:
-    	    return await edit_delete(event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**")
+    	    return await edit_delete(event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**")
     	delgvar("PM_LOGGER_GROUP_ID")
     if input_str == "اشعارات" or input_str == "الاشعارات":
     	if gvatstatus("PRIVATE_GROUP_BOT_API_ID") is None:
-    	    return await edit_delete(event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**")
+    	    return await edit_delete(event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**")
     	delgvar("PRIVATE_GROUP_BOT_API_ID")
     if input_str == "نص الفحص":
         if gvarstatus("ALIVE_TEXT") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("ALIVE_TEXT")
     if input_str == "زخرفة الارقام" or input_str == "زخرفه الارقام":
         if gvarstatus("JP_FN") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("JP_FN")
     if input_str == "بايو" or input_str == "البايو":
         if gvarstatus("DEFAULT_BIO") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("DEFAULT_BIO")
     if input_str == "رمز الاسم":
         if gvarstatus("TIME_JEP") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("TIME_JEP")
     if input_str == "عدد التحذيرات":
         if gvarstatus("MAX_FLOOD_IN_PMS") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("MAX_FLOOD_IN_PMS")
     if input_str == "صورة البنك" or input_str == "صوره البنك":
         if gvarstatus("PING_PIC") is None:
             return await edit_delete(
-                event, "**⎙ :: عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
+                event, "**✎┊‌عزيزي المستخدم انت لم تقوم باضافه هذا الفار اصلا**"
             )
         delgvar("PING_PIC")
     await edit_or_reply(
-        event, f"₰ هذا الفار تم حذفه بنجاح وارجاع قيمته الى القيمه الاصلية ✅"
+        event, f"✎┊‌ هذا الفار تم حذفه بنجاح وارجاع قيمته الى القيمه الاصلية ✅"
     )
     if BOTLOG_CHATID:
         await event.client.send_message(

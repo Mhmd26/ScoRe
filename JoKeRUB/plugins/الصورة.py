@@ -39,7 +39,7 @@ async def potocmd(event):
         uid = 1
         if int(uid) > (len(photos)):
             return await edit_delete(
-                event, "**لم يتـم العثـور على صـورة لـهذا الـشخص ❕**"
+                event, "**✎┊‌ لم يتـم العثـور على صـورة لـهذا الـشخص ❕**"
             )
         send_photos = await event.client.download_media(photos[uid - 1])
         await event.client.send_file(event.chat_id, send_photos)
@@ -48,7 +48,7 @@ async def potocmd(event):
             await event.client.send_file(event.chat_id, photos)
         else:
             try:
-                if u:  #ترجمه فريق الجوكر على التيلكرام
+                if u:  
                     photo = await event.client.download_profile_photo(user.sender)
                 else:
                     photo = await event.client.download_profile_photo(event.input_chat)
@@ -76,6 +76,6 @@ async def potocmd(event):
     await event.delete()
 CMD_HELP.update(
     {
-        "الصورة": "**╮•❐ الامر ⦂** `.صورة` <عدد الصور (اختياري)> <بالرد على الشخص>\nالوظيفة ⦂ لأخذ صورة حساب شخص معين بالرد عليه بالامر"
+        "الصورة": "**✎┊‌ الامر ⦂** `.صورة` <عدد الصور (اختياري)> <بالرد على الشخص>\nالوظيفة ⦂ لأخذ صورة حساب شخص معين بالرد عليه بالامر"
     }
 )

@@ -36,11 +36,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
-            caption=f"**✎┊‌حـالات واتـس قصيـرة 🧸♥️**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌حـالات واتـس قصيـرة **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="ستوري انمي$")
@@ -57,11 +57,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
-            caption=f"**✎┊‌ستـوريات آنمـي قصيـرة 🖤🧧**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ستـوريات آنمـي قصيـرة **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="رقيه$")
@@ -78,11 +78,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedgan),
-            caption=f"**◞مقاطـع رقيـه شرعيـة ➧🕋🌸◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞مقاطـع رقيـه شرعيـة **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="اولاد رمادي$")
@@ -99,11 +99,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات شبـاب ࢪمـاديه ➧🖤◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات شبـاب ࢪمـاديه **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="بنات رماديه$")
@@ -120,16 +120,16 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات بنـات ࢪمـاديه ➧🤎◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات بنـات ࢪمـاديه **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="بيست$")
 async def _(event):
-    zzevent = await edit_or_reply(event, "**✎┊‌ جـارِ تحميـل الآفتـار ...🧚🏻‍♀🧚🏻‍♀╰**")
+    zzevent = await edit_or_reply(event, "**✎┊‌ جـارِ تحميـل الآفتـار **")
     try:
         zedph = [
             zelzal
@@ -141,16 +141,16 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات بيست تطقيـم بنـات ➧🧚🏻‍♀🧚🏻‍♀◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات بيست تطقيـم بنـات **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="حب$")
 async def _(event):
-    zzevent = await edit_or_reply(event, "**✎┊‌ جـارِ تحميـل الآفتـار ...♥️╰**")
+    zzevent = await edit_or_reply(event, "**✎┊‌ جـارِ تحميـل الآفتـار **")
     try:
         zedph = [
             zelzal
@@ -162,11 +162,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات حـب تمبلـرࢪ ➧♥️◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات حـب تمبلـرࢪ **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="رياكشن$")
@@ -183,11 +183,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
-            caption=f"** 🎬┊رياكشـن تحشيـش ➧🎃😹◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"** ✎┊رياكشـن تحشيـش 😂😁**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="ادت$")
@@ -204,11 +204,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(ZTHONR),
-            caption=f"**🎬┊مقاطـع ايـدت منوعـه ➧ 🖤🎭◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊مقاطـع ايـدت منوعـه ✨**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 
@@ -227,11 +227,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**✎┊‌صـورة ومعلومـة ➧ 🛤💡◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌صـورة ومعلومـة 💡**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="تويت$")
@@ -248,11 +248,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedre),
-            caption=f"**✎┊‌كـت تـويت بالصـور ➧⁉️🌉◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌كـت تـويت بالصـور 🌉**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="ولد انمي$")
@@ -269,11 +269,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات آنمي شبـاب ➧🙋🏻‍♂◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات آنمي شبـاب **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="بنت انمي$")
@@ -290,11 +290,11 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات آنمي بنـات ➧🧚🏻‍♀◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات آنمي بنـات **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 
 @l313l.ar_cmd(pattern="بنات$")
@@ -311,10 +311,10 @@ async def _(event):
         await event.client.send_file(
             event.chat_id,
             file=random.choice(zedph),
-            caption=f"**◞افتـارات بنـات تمبلـرࢪ ➧🧚🏻‍♀◟**\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
+            caption=f"**✎┊‌ ◞افتـارات بنـات تمبلـرࢪ **\n\n**[العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](https://t.me/Scorpion_scorp)**",
         )
         await zzevent.delete()
     except Exception:
-        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب ☹️💔**")
+        await zzevent.edit("**✎┊‌ عـذراً .. لـم استطـع ايجـاد المطلـوب **")
 
 

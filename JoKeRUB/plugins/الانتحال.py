@@ -72,7 +72,7 @@ async def _(event):
         delgvar("fname")
         delgvar("lname")
         delgvar("oabout")
-        return await edit_delete(event, f"**فشل في الانتحال بسبب:**\n__{e}__")
+        return await edit_delete(event, f"**✎┊‌ فشل في الانتحال بسبب:**\n__{e}__")
     await edit_delete(event, "**✎┊‌تـم نسـخ الـحساب بـنجاح ،✅**")
     if BOTLOG:
         await event.client.send_message(
@@ -119,7 +119,7 @@ async def reda(event):
         msg = msg.replace(".انتحال_الدردشه", "")
         msg = msg.replace(" ", "")
         if msg == "":
-            return await edit_delete(event, "**قم بوضع يوزر الگروب او القناة بدون علامة @ للانتحال**")
+            return await edit_delete(event, "**✎┊‌ قم بوضع يوزر الگروب او القناة بدون علامة @ للانتحال**")
         chat_id = msg
         try:
             result = await l313l(GetFullChannelRequest(
@@ -144,20 +144,20 @@ async def reda(event):
             delgvar (f"{event.chat_id}about")
             return await edit_delete(event, "**✎┊‌ يجب ان تكون لديك صلاحيات لتغيير الاسم والصورة والبايو لانتحال قناة او كروب**")
         except FloodWaitError:
-            return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
+            return await edit_delete(event, "**✎┊‌ انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
         try:
             await l313l(functions.messages.EditChatAboutRequest(
             peer=event.chat_id,
             about=result.full_chat.about
         ))
         except FloodWaitError:
-            return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
+            return await edit_delete(event, "**✎┊‌ انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
         profile_pic = await l313l.download_profile_photo(chat_id, Config.TEMP_DIR)
         pfile = await l313l.upload_file(profile_pic)
         try:
             await l313l(functions.channels.EditPhotoRequest(event.chat_id, pfile))
         except FloodWaitError:
-            return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
+            return await edit_delete(event, "**✎┊‌ انتضر مدة لا تقل عن 5 دقائق للانتحال مجدداً FLOODWAITERROR خطأ من التيليجرام**")
         await edit_delete(event, "**✎┊‌ تم الانتحال بنجاح ✓**")
         base64m = 'QGplcHRob24='
         message = base64.b64decode(base64m)
@@ -185,7 +185,7 @@ async def reda_back(event):
             except ChatAdminRequiredError:
                 return await edit_delete(event, "**✎┊‌ يجب ان تكون لديك صلاحيات لتغيير الاسم والصورة والبايو لإعادة القناة او الكروب**")
             except FloodWaitError:
-                return await edit_delete(event, "**انتضر مدة لا تقل عن 5 دقائق لإعادة الدردشة مجدداً FLOODWAITERROR خطأ من التيليجرام**")
+                return await edit_delete(event, "**✎┊‌ انتضر مدة لا تقل عن 5 دقائق لإعادة الدردشة مجدداً FLOODWAITERROR خطأ من التيليجرام**")
             await l313l(functions.messages.EditChatAboutRequest(
             peer=event.chat_id,
             about=gvarstatus (f"{event.chat_id}about")
@@ -198,6 +198,6 @@ async def reda_back(event):
             delgvar (f"{event.chat_id}name")
             delgvar (f"{event.chat_id}about")
         else:
-            await edit_delete(event, "**لم تقم بانتحال قناة او كروب للإعادة**")
+            await edit_delete(event, "**✎┊‌ لم تقم بانتحال قناة او كروب للإعادة**")
     else:
         await edit_delete(event, "**✎┊‌ يمكنك إعادة الدردشة المُنتحِله عبر كتابة الامر في الكروب او القناة المُنتحِله فقط**")

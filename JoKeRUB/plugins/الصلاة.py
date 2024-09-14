@@ -1,14 +1,12 @@
-#ترجمه فريق الجوكر على التيلكرام
-import json
 
+import json
 import requests
-#ترجمه فريق الجوكر على التيلكرام
 from ..sql_helper.globals import gvarstatus
 from . import l313l, edit_delete, edit_or_reply
 
 plugin_category = "extra"
 
-#ترجمه فريق الجوكر على التيلكرام
+
 @l313l.ar_cmd(
     pattern="صلاة(?: |$)(.*)",
     command=("صلاة", plugin_category),
@@ -25,7 +23,7 @@ async def get_adzan(adzan):
     request = requests.get(url)
     if request.status_code != 200:
         await edit_delete(
-            adzan, f"** لم يـتم العثور على معلومات لـهذه المدينه {LOKASI}**\n يرجى كتابة اسم محافظتك وباللغه الانكليزي ", 5
+            adzan, f"**✎┊‌ لم يـتم العثور على معلومات لـهذه المدينه {LOKASI}**\n يرجى كتابة اسم محافظتك وباللغه الانكليزي ", 5
         ) #ترجمه فريق الجوكر على التيلكرام
         return
     result = json.loads(request.text)
@@ -45,6 +43,3 @@ async def get_adzan(adzan):
             \n<b>منتـصف الليل : </b><i>{result['results']['datetime'][0]['times']['Midnight']}</i>\
     "
     await edit_or_reply(adzan, l313lresult, "html")
-
-# Copyright (C) 2021 JoKeRUB TEAM
-# FILES WRITTEN BY  @lMl10l

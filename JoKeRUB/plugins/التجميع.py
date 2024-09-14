@@ -52,8 +52,8 @@ async def Hussein(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                 offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
-                await l313l.send_message(event.chat_id, f"تم الانتهاء من التجميع")
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+                await l313l.send_message(event.chat_id, f"**✎┊‌ تم الانتهاء من التجميع**")
 
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -73,12 +73,12 @@ async def Hussein(event):
                 chs += 1
                 await event.edit(f"القناة رقم {chs}")
 
-        await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع**")
 @l313l.on(events.NewMessage(incoming=True))
 async def Hussein(event):
     if event.message.message.startswith("ايقاف التجميع") and str(event.sender_id) in ConsoleJoker:
         await l313l.send_message(bot_username, "/start")
-        await event.reply("** ✎┊‌ تم تعطيل عملية تجميع النقاط بنجاح ✓**")
+        await event.reply("** ✎┊‌ تم تعطيل عملية تجميع النقاط بنجاح ✅**")
     
 @l313l.on(events.NewMessage(incoming=True))
 async def Hussein(event):
@@ -100,7 +100,7 @@ async def Hussein(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
                 await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -116,7 +116,7 @@ async def Hussein(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except Exception as er:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**\n{er}")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
     #else:
         #await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -139,8 +139,8 @@ async def Hussein(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
-                await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+                await l313l.send_message(event.chat_id, f"**✎┊‌ لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
             try:
@@ -155,7 +155,7 @@ async def Hussein(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
     #else:
         #await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -179,7 +179,7 @@ async def Hussein(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
                 await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -195,7 +195,7 @@ async def Hussein(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
    # else:
      #   await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -218,7 +218,7 @@ async def _(event):
 
         list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1, offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
         msgs = list.messages[0]
-        if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
+        if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
             await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
             break
 
@@ -240,7 +240,7 @@ async def _(event):
             chs += 1
             await event.edit(f"القناة رقم {chs}")
 
-    await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
+    await l313l.send_message(event.chat_id, "✎┊‌ تم الانتهاء من التجميع")
         
 @l313l.on(admin_cmd(pattern="(ايقاف التجميع|ايقاف تجميع)"))
 async def cancel_collection(event):
@@ -269,7 +269,7 @@ async def _(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
                 await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -285,7 +285,7 @@ async def _(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except Exception as er:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**\n{er}")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
   #  else:
     #    await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -311,7 +311,7 @@ async def _(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
                 await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -327,7 +327,7 @@ async def _(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
  #   else:
    #     await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -353,7 +353,7 @@ async def _(event):
             list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1,
                                                    offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
             msgs = list.messages[0]
-            if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
+            if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم يتجميع النقاط بطريقه مختلفه') != -1:
                 await l313l.send_message(event.chat_id, f"**لاتوجد قنوات للبوت**")
                 break
             url = msgs.reply_markup.rows[0].buttons[0].url
@@ -369,7 +369,7 @@ async def _(event):
                 await l313l.send_message("me", f"تم الاشتراك في {chs} قناة")
             except:
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**")
-        await l313l.send_message(event.chat_id, "**تم الانتهاء من التجميع !**")
+        await l313l.send_message(event.chat_id, "**✎┊‌ تم الانتهاء من التجميع !**")
 
 #    else:
   #      await event.edit("يجب الدفع لاستعمال هذا الامر !")
@@ -390,7 +390,7 @@ async def _(event):
         await asyncio.sleep(4)
         list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1, offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
         msgs = list.messages[0]
-        if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
+        if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
             await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
             break
 
@@ -412,7 +412,7 @@ async def _(event):
             chs += 1
             await event.edit(f"القناة رقم {chs}")
 
-    await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
+    await l313l.send_message(event.chat_id, "✎┊‌ تم الانتهاء من التجميع")
 @l313l.on(admin_cmd(pattern="تجميع دعمكم"))
 async def _(event):
     await event.edit("**✎┊‌سيتم تجميع النقاط من بوت دعمكم , قبل كل شي تأكد من انك قمت بالانضمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
@@ -448,7 +448,7 @@ async def _(event):
                 await l313l.send_message(event.chat_id, f"**خطأ , ممكن تبندت**")
                 break
 
-    await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
+    await l313l.send_message(event.chat_id, "✎┊‌ تم الانتهاء من التجميع")
 
 @l313l.on(admin_cmd(pattern="(تجميع عراق|تجميع العراق)"))
 async def _(event):
@@ -468,7 +468,7 @@ async def _(event):
 
         list = await l313l(GetHistoryRequest(peer=channel_entity, limit=1, offset_date=None, offset_id=0, max_id=0, min_id=0, add_offset=0, hash=0))
         msgs = list.messages[0]
-        if msgs.message.find('لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
+        if msgs.message.find('✎┊‌ لا يوجد قنوات في الوقت الحالي , قم بتجميع النقاط بطريقة مختلفة') != -1:
             await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
             break
 
@@ -490,7 +490,7 @@ async def _(event):
             chs += 1
             await event.edit(f"القناة رقم {chs}")
 
-    await l313l.send_message(event.chat_id, "تم الانتهاء من التجميع")
+    await l313l.send_message(event.chat_id, "✎┊‌ تم الانتهاء من التجميع")
     
 @l313l.ar_cmd(pattern="راتب وعد(?:\s|$)([\s\S]*)")
 async def hussein(event):
@@ -501,7 +501,7 @@ async def hussein(event):
         if event.is_group:
             await send_reham(event)
         else:
-            await event.edit("**هذا الأمر يمكن استخدامه فقط في المجموعات!**")
+            await event.edit("**✎┊‌ هذا الأمر يمكن استخدامه فقط في المجموعات!**")
 
 async def send_reham(event):
     await event.respond('راتب')
@@ -513,7 +513,7 @@ async def send_reham(event):
 async def hussein(event):
     global its_hussein
     its_hussein = False
-    await event.edit("**تم تعطيل راتب وعد بنجاح ✅**")
+    await event.edit("**✎┊‌ تم تعطيل راتب وعد بنجاح ✅**")
 @l313l.ar_cmd(pattern="بخشيش وعد(?:\s|$)([\s\S]*)")
 async def hussein(event):
     global its_joker
@@ -523,7 +523,7 @@ async def hussein(event):
         if event.is_group:
             await send_aljoker(event)
         else:
-            await event.edit("**هذا الأمر يمكن استخدامه فقط في المجموعات!**")
+            await event.edit("**✎┊‌ هذا الأمر يمكن استخدامه فقط في المجموعات!**")
 async def send_aljoker(event):
     await event.respond('بخشيش')
     await asyncio.sleep(660)
@@ -534,7 +534,7 @@ async def send_aljoker(event):
 async def hussein(event):
     global its_joker
     its_joker = False
-    await event.edit("**✎┊‌ تم تعطيل بخشيش وعد بنجاح ✓ **")
+    await event.edit("**✎┊‌ تم تعطيل بخشيش وعد بنجاح ✅ **")
 @l313l.ar_cmd(pattern="سرقة وعد(?:\s|$)([\s\S]*)")
 async def hussein(event):
     global its_reda
@@ -546,7 +546,7 @@ async def hussein(event):
             if message:
                 await send_message(event, message)
             else:
-                await event.edit("**يرجى كتابة ايدي الشخص مع الامر!**")
+                await event.edit("**✎┊‌ يرجى كتابة ايدي الشخص مع الامر!**")
 
 async def send_message(event, message):
     await event.respond(f"زرف {message}")
@@ -559,7 +559,7 @@ async def send_message(event, message):
 async def Reda(event):
     global its_reda
     its_reda = False
-    await event.edit("** ✎┊‌ تم ايقاف السرقة بنجاح ✓ **")
+    await event.edit("** ✎┊‌ تم ايقاف السرقة بنجاح ✅ **")
 client = l313l
 
 @l313l.ar_cmd(pattern="استثمار وعد")
@@ -582,7 +582,7 @@ async def w3d_joker(event):
                 await joker[0].click(text="اي ✅")
             else:
                 await event.client.send_message(event.chat_id, f"استثمار {l313l}")
-            await asyncio.sleep(1210)
+            await asyncio.sleep(1215)
         
         else:
             await event.edit("** ✎┊‌ امر الاستثمار يمكنك استعماله في المجموعات فقط **")

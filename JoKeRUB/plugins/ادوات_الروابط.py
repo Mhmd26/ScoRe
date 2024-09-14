@@ -26,7 +26,7 @@ async def _(event):
         input_str = reply.text
     if not input_str:
         return await edit_delete(
-            event, "✎┊‌  يجـب عليم الرد على الرابط او وضع الرابط مع الام", 5
+            event, "✎┊‌  يجـب عليم الرد على الرابط او وضع الرابط مع الامر", 5
         )
     check = url(input_str)
     if not check:

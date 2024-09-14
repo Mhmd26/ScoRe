@@ -32,7 +32,7 @@ async def get_full_user(event):
         if user.isnumeric():
             user = int(user)
         if not user:
-            await event.edit("✎┊‌ لا يمكنك بدون ايدي المستخدم")
+            await event.edit("**✎┊‌ لا يمكنك بدون ايدي المستخدم**")
             return
         if event.message.entities is not None:
             probable_user_mention_entity = event.message.entities[0]
@@ -44,7 +44,7 @@ async def get_full_user(event):
         try:
             user_obj = await event.client.get_entity(user)
         except Exception as err:
-            return await event.edit("✎┊‌ هنالك خطأ يرجى تبليغنا @Scorpion_scorp", str(err))           
+            return await event.edit("*✎┊‌ هنالك خطأ يرجى تبليغنا @Scorpion_scorp**", str(err))           
     return user_obj, extra
 
 global hawk,moth
@@ -65,7 +65,7 @@ async def gben(JoKeRUB):
     i = 0
     sender = await dc.get_sender()
     me = await JoKeRUB.client.get_me()
-    await razan.edit("✎┊‌ يتم رفع المستخدم في جميع المجموعات")
+    await razan.edit("**✎┊‌ يتم رفع المستخدم في جميع المجموعات**")
     my_mention = "[{}](tg://user?id={})".format(me.first_name, me.id)
     f"@{me.username}" if me.username else my_mention
     await JoKeRUB.get_chat()
@@ -79,7 +79,7 @@ async def gben(JoKeRUB):
     except:
         pass
     if me == user:
-       l313l = await razan.edit("✎┊‌ لا استطيع رفع نفسي ")
+       l313l = await razan.edit("**✎┊‌ لا استطيع رفع نفسي **")
        return
     try:
         if not rank:
@@ -130,7 +130,7 @@ async def gben(JoKeRUB):
     except:
         pass
     if me == user:
-       l313l = await razan.edit("✎┊‌ لا استطيع تنزيل نفسي ")
+       l313l = await razan.edit("**✎┊‌ لا استطيع تنزيل نفسي** ")
        return
     try:
         if not rank:

@@ -349,8 +349,7 @@ async def _(event):
             os.remove(new_required_file_name)
             await event.delete()
             
-#Copyright  By  @jepthon  © 2021
-#WRITE BY  @lMl10l
+
 
 @l313l.ar_cmd(
     pattern="تحويل متحركة ?([0-9.]+)?$",
@@ -387,7 +386,7 @@ async def _(event):
     for i in [inputfile, outputfile]:
         if os.path.exists(i):
             os.remove(i)
-#write Code By #Hussein For Aljoker 🤡
+            
 @l313l.ar_cmd(
     pattern=r"بنتيرست (.+)",
     command=("بنتيرست", plugin_category),
