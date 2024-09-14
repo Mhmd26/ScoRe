@@ -452,19 +452,19 @@ async def startmute(event):
                     event, "**✎┊‌ عــذراً .. ليـس لديـك صـلاحيـة حـذف الرسـائل هنـا**"
                 )
         except Exception as e:
-            return await edit_or_reply(event, f"**✎┊‌ خطــأ : **`{e}`")
+            return await edit_or_reply(event, f"**- خطــأ : **`{e}`")
         if reason:
             await event.client.send_file(
                 event.chat_id,
                 repthon_mute,
-                caption=f"**✎┊‌ المستخـدم :** {_format.mentionuser(user.first_name ,user.id)}  \n**- تـم كتمـه بنجـاح ☑️**\n\n**- السـبب :** {reason}",
+                caption=f"**- المستخـدم :** {_format.mentionuser(user.first_name ,user.id)}  \n**- تـم كتمـه بنجـاح ☑️**\n\n**- السـبب :** {reason}",
             )
             await event.delete()
         else:
             await event.client.send_file(
                 event.chat_id,
                 repthon_mute,
-                caption=f"**✎┊‌  المستخـدم :** {_format.mentionuser(user.first_name ,user.id)}  \n**- تـم كتمـه بنجـاح ☑️**\n\n",
+                caption=f"**- المستخـدم :** {_format.mentionuser(user.first_name ,user.id)}  \n**- تـم كتمـه بنجـاح ☑️**\n\n",
             )
             await event.delete()
         if BOTLOG:
@@ -482,7 +482,7 @@ async def endmute(event):
         replied_user = await event.client.get_entity(event.chat_id)
         if not is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "**✎┊‌ عــذراً .. هـذا الشخـص غيــر مكتــوم هنـا**"
+                "**عــذراً .. هـذا الشخـص غيــر مكتــوم هنـا**"
             )
         try:
             unmute(event.chat_id, event.chat_id)
@@ -490,7 +490,7 @@ async def endmute(event):
             await event.edit(f"**- خطــأ **\n`{e}`")
         else:
             await event.edit(
-                "**✎┊‌  تـم الغــاء كتــم الشخـص هنـا .. بنجــاح ✓**"
+                "**- تـم الغــاء كتــم الشخـص هنـا .. بنجــاح ✓**"
             )
         if BOTLOG:
             await event.client.send_message(
@@ -514,13 +514,13 @@ async def endmute(event):
         except AttributeError:
             return await edit_or_reply(
                 event,
-                "**✎┊‌ الشخـص غيـر مكـتـوم**",
+                "**- الشخـص غيـر مكـتـوم**",
             )
         except Exception as e:
             return await edit_or_reply(event, f"**- خطــأ : **`{e}`")
         await edit_or_reply(
             event,
-            f"**✎┊‌ المستخـدم :** {_format.mentionuser(user.first_name ,user.id)} \n**- تـم الغـاء كتمـه بنجـاح ☑️**",
+            f"**- المستخـدم :** {_format.mentionuser(user.first_name ,user.id)} \n**- تـم الغـاء كتمـه بنجـاح ☑️**",
         )
         if BOTLOG:
             await event.client.send_message(
@@ -537,9 +537,9 @@ async def kick(event):
     if not user:
         return
     if user.id == 815010872 or user.id == 7275336620 or user.id == 7275336620:
-        return await edit_delete(event, "**✎┊‌  دي لا يمڪنني طـرد احـد مطـورين السـورس  **")
+        return await edit_delete(event, "**  دي لا يمڪنني طـرد احـد مطـورين السـورس  **")
     if user.id == 815010872 or user.id == 7275336620 or user.id == 7275336620:
-        return await edit_delete(event, "**✎┊‌  دي . . لا يمڪنني طـرد مطـور السـورس  **")
+        return await edit_delete(event, "**  دي . . لا يمڪنني طـرد مطـور السـورس  **")
     zedevent = await edit_or_reply(event, "** ✎┊‌ جـاࢪِ الطــࢪد ...**")
     try:
         await event.client.kick_participant(event.chat_id, user.id)
@@ -547,10 +547,10 @@ async def kick(event):
         return await zedevent.edit(f"{NO_PERM}\n{e}")
     if reason:
         await zedevent.edit(
-            f"**✎┊‌ تـم طــࢪد**. [{user.first_name}](tg://user?id={user.id})  **بنجــاح ✓**\n\n**- السـبب :** {reason}"
+            f"**- تـم طــࢪد**. [{user.first_name}](tg://user?id={user.id})  **بنجــاح ✓**\n\n**- السـبب :** {reason}"
         )
     else:
-        await zedevent.edit(f"**✎┊‌ تـم طــࢪد**. [{user.first_name}](tg://user?id={user.id})  **بنجــاح ✓**")
+        await zedevent.edit(f"**- تـم طــࢪد**. [{user.first_name}](tg://user?id={user.id})  **بنجــاح ✓**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -573,10 +573,10 @@ async def kick(event):
     },
 )
 async def pin(event):
-    "✎┊‌ لـ تثبيـت الرسـائـل فـي الكــروب"
+    "لـ تثبيـت الرسـائـل فـي الكــروب"
     to_pin = event.reply_to_msg_id
     if not to_pin:
-        return await edit_delete(event, "**✎┊‌ بالــرد ع رسـالـه لـ تثبيتـهـا...**", 5)
+        return await edit_delete(event, "**- بالــرد ع رسـالـه لـ تثبيتـهـا...**", 5)
     options = event.pattern_match.group(1)
     is_silent = bool(options)
     try:
@@ -585,7 +585,7 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "**✎┊‌  تـم تثبيـت الرسـالـه .. بنجــاح ✓**", 3)
+    await edit_delete(event, "**- تـم تثبيـت الرسـالـه .. بنجــاح ✓**", 3)
     sudo_users = _sudousers_list()
     if event.sender_id in sudo_users:
         with contextlib.suppress(BadRequestError):
@@ -613,13 +613,13 @@ async def pin(event):
     },
 )
 async def unpin(event):
-    "✎┊‌ لـ الغــاء تثبيـت الرسـائـل فـي الكــروب"
+    "لـ الغــاء تثبيـت الرسـائـل فـي الكــروب"
     to_unpin = event.reply_to_msg_id
     options = (event.pattern_match.group(1)).strip()
     if not to_unpin and options != "الكل":
         return await edit_delete(
             event,
-            "**✎┊‌ بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**",
+            "**- بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**",
             5,
         )
     try:
@@ -629,13 +629,13 @@ async def unpin(event):
             await event.client.unpin_message(event.chat_id)
         else:
             return await edit_delete(
-                event, "**✎┊‌ بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**", 5
+                event, "**- بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**", 5
             )
     except BadRequestError:
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "**✎┊‌ تـم الغـاء تثبيـت الرسـالـه/الرسـائـل .. بنجــاح ✓**", 3)
+    await edit_delete(event, "**- تـم الغـاء تثبيـت الرسـالـه/الرسـائـل .. بنجــاح ✓**", 3)
     sudo_users = _sudousers_list()
     if event.sender_id in sudo_users:
         with contextlib.suppress(BadRequestError):
@@ -653,7 +653,7 @@ async def unpin(event):
     pattern="الاحداث( م)?(?: |$)(\d*)?",
     command=("الاحداث", plugin_category),
     info={
-        "header": "✎┊‌ لـ جـلب آخـر الرسـائـل المحـذوفـه مـن الاحـداث بـ العـدد",
+        "header": "لـ جـلب آخـر الرسـائـل المحـذوفـه مـن الاحـداث بـ العـدد",
         "امـر مضـاف": {
             "م": "{tr}الاحداث م لجـلب رسـائل الميديـا المحذوفـة من الاحـداث"
         },
@@ -670,8 +670,8 @@ async def unpin(event):
     require_admin=True,
 )
 async def _iundlt(event):  # sourcery no-metrics
-    "✎┊‌ لـ جـلب آخـر الرسـائـل المحـذوفـه مـن الاحـداث بـ العـدد"
-    zedevent = await edit_or_reply(event, "**✎┊‌ جـاري البحث عـن آخـر الاحداث انتظــر ...🔍**")
+    "لـ جـلب آخـر الرسـائـل المحـذوفـه مـن الاحـداث بـ العـدد"
+    zedevent = await edit_or_reply(event, "**- جـاري البحث عـن آخـر الاحداث انتظــر ...🔍**")
     flag = event.pattern_match.group(1)
     if event.pattern_match.group(2) != "":
         lim = int(event.pattern_match.group(2))
@@ -683,7 +683,7 @@ async def _iundlt(event):  # sourcery no-metrics
     adminlog = await event.client.get_admin_log(
         event.chat_id, limit=lim, edit=False, delete=True
     )
-    deleted_msg = f"**✎┊‌ اليـك آخـر {lim} رسـائـل محذوفــه لـ هـذا الكــروب 🗑 :**"
+    deleted_msg = f"**- اليـك آخـر {lim} رسـائـل محذوفــه لـ هـذا الكــروب 🗑 :**"
     if not flag:
         for msg in adminlog:
             ruser = await event.client.get_entity(msg.old.from_id)
