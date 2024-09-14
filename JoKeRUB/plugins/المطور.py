@@ -69,14 +69,17 @@ progs = [815010872, 7045643989]
 @l313l.on(events.NewMessage(incoming=True))
 async def reda(event):
     if event.reply_to and event.sender_id in progs:
-       reply_msg = await event.get_reply_message()
-       owner_id = reply_msg.from_id.user_id
-       if owner_id == l313l.uid:
-           if event.message.message == "حظر من السورس":
-               await event.reply("**حاظر مطوري ، لقد تم حظره من استخدام السورس**")
-               addgvar("blockedfrom", "yes")
-           elif event.message.message == "الغاء الحظر من السورس":
-               await event.reply("**حاظر مطوري، لقد الغيت الحظر**")
-               delgvar("blockedfrom")
-                
-
+        reply_msg = await event.get_reply_message()
+        owner_id = reply_msg.from_id.user_id
+        
+        # استثناء المطورين الموجودين في قائمة progs
+        if owner_id in progs:
+            return
+        
+        if owner_id == l313l.uid:
+            if event.message.message == "حظر من السورس":
+                await event.reply("**حاظر مطوري ، لقد تم حظره من استخدام السورس**")
+                addgvar("blockedfrom", "yes")
+            elif event.message.message == "الغاء الحظر من السورس":
+                await event.reply("**حاظر مطوري، لقد الغيت الحظر**")
+                delgvar("blockedfrom")
