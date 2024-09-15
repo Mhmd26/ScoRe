@@ -1,3 +1,4 @@
+import io
 import os
 from datetime import datetime
 import speech_recognition as sr
@@ -51,27 +52,24 @@ async def _(event):
     if not lan:
         return await edit_delete(event, "يجب أن تضع اختصار اللغة المطلوبة")
     
-    if not os.path.isdir(Config.TEMP_DIR):
-        os.makedirs(Config.TEMP_DIR)
-        
-    mediatype = media_type(reply)
-    if not reply or (mediatype and mediatype not in ["Voice", "Audio"]):
+    if not reply or media_type(reply) not in ["Voice", "Audio"]:
         return await edit_delete(event, "`قم بالرد على رسالة أو مقطع صوتي لتحويله إلى نص.`")
     
     jepevent = await edit_or_reply(event, "`يجري تنزيل الملف...`")
-    oggfi = await event.client.download_media(reply, Config.TEMP_DIR)
+    audio_file = io.BytesIO(await event.client.download_media(reply))
     await jepevent.edit("`يجري تحويل الكلام إلى نص....`")
     
     r = sr.Recognizer()
-    ogg = oggfi.removesuffix('.ogg')
-   
-    AudioSegment.from_file(oggfi).export(f"{ogg}.wav", format="wav")
-    user_audio_file = sr.AudioFile(f"{ogg}.wav")
-    with user_audio_file as source:
-        audio = r.record(source)
+    audio = AudioSegment.from_file(audio_file, format="ogg")
+    wav_file = io.BytesIO()
+    audio.export(wav_file, format="wav")
+    wav_file.seek(0)
+
+    with sr.AudioFile(wav_file) as source:
+        audio_data = r.record(source)
 
     try:
-        text = r.recognize_google(audio, language=lan)
+        text = r.recognize_google(audio_data, language=lan)
     except sr.UnknownValueError:
         return await edit_delete(event, "**لا يوجد كلام في المقطع الصوتي**")
     except sr.RequestError as e:
@@ -82,23 +80,6 @@ async def _(event):
     
     string_to_show = "**يقول : **`{}`".format(text)
     await jepevent.edit(string_to_show)
-    
-    # إزالة الملفات المؤقتة
-    os.remove(oggfi)
-    os.remove(f"{ogg}.wav")
-
-def to_text(pic, api):
-    try:
-        output = api.ocr_file(open(pic, 'rb'))
-    except Exception as e:
-        return f"حدث الخطأ التالي:\n{e}"
-    else:
-        if output:
-            return output
-        else:
-            return "حدث خطأ في النظام، حاول مجدداً"
-    finally:
-        os.remove(pic)
 
 @l313l.ar_cmd(pattern="استخرج(?:\s|$)([\s\S]*)",
                command=("استخرج", plugin_category))
@@ -109,7 +90,7 @@ async def _(event):
     if not reply:
         return await edit_delete(event, "**✎┊‌ قم بالرد على الصورة المراد استخراج النص منها**")
     
-    pic_file = await event.client.download_media(reply, Config.TMP_DOWNLOAD_DIRECTORY)
+    pic_file = io.BytesIO(await event.client.download_media(reply))
     if not pic_file:
         return await edit_delete(event, "**✎┊‌ قم بالرد على صورة**")
     
@@ -124,3 +105,15 @@ async def _(event):
     await edit_or_reply(event, "**✎┊‌ يجري استخراج النص...**")
     text = to_text(pic_file, api)
     await edit_or_reply(event, text)
+
+def to_text(pic, api):
+    try:
+        pic.seek(0)
+        output = api.ocr_file(pic)
+    except Exception as e:
+        return f"حدث الخطأ التالي:\n{e}"
+    else:
+        if output:
+            return output
+        else:
+            return "حدث خطأ في النظام، حاول مجدداً"
