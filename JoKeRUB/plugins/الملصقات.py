@@ -550,7 +550,7 @@ async def HuRepkg(_):
         return await edit_or_reply(_, str(er))
     await edit_or_reply(
         _,
-        f"**- تم اخذ الحزمة بنجاح ✓ \nالحزمة  → [اضغط هنا](https://t.me/addstickers/{HuRe_Jep.set.short_name})**",
+        f"**✎┊‌ تم اخذ الحزمة بنجاح ✓ \nالحزمة  → [اضغط هنا](https://t.me/addstickers/{HuRe_Jep.set.short_name})**",
     )
 @l313l.ar_cmd(
     pattern="معلومات_الملصق$",
