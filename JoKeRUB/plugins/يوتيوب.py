@@ -1,6 +1,4 @@
-#@lMl10l   - @jepthon
-# Copyright (C) 2021 JoKeRUB TEAM
-# FILES WRITTEN BY  @lMl10l
+
 import asyncio
 import io
 import os
@@ -344,7 +342,7 @@ async def yt_search(event):
 )
 async def kakashi(event):
     "For downloading instagram media"
-    chat = "@instasavegrambot"
+    chat = "@LEbot"
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         return await edit_or_reply(
@@ -362,7 +360,7 @@ async def kakashi(event):
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @instasavegrambot")
+            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
             return
         await catevent.delete()
         cat = await event.client.send_file(
@@ -375,9 +373,12 @@ async def kakashi(event):
             f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
             parse_mode="html",
         )
+    # Delete conversation with the bot
     await event.client.delete_messages(
         conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
     )
+    # Optionally, delete the entire chat with the bot
+    await event.client.delete_dialog(conv.chat_id)
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from JoKeRUB import l313l
@@ -389,24 +390,31 @@ async def _(event):
         return
     r_link = event.pattern_match.group(1)
     if ".com" not in r_link:
-        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
-    else:
-        await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
+        return await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+    
+    await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
+    
     chat = "@ttsavebot"
-    async with bot.conversation(chat) as conv:
+    async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
             r = await conv.get_response()
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
             video = await conv.get_response()
-            """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
-            await bot.send_read_acknowledge(conv.chat_id)
+            await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
             return
-        await bot.send_file(event.chat_id, video)
+        
+        await event.client.send_file(event.chat_id, video)
+        
+        # Delete messages in the conversation with the bot
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
+        
+        # Optionally, delete the entire chat with the bot
+        await event.client.delete_dialog(conv.chat_id)
+        
         await event.delete()
