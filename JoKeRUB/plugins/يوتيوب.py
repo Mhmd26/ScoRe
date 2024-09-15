@@ -348,7 +348,7 @@ from JoKeRUB import l313l
 )
 async def kakashi(event):
     "For downloading instagram media"
-    chat = "@instasavegrambot"
+    chat = "@LEbot"
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         return await edit_or_reply(
@@ -395,7 +395,7 @@ async def tiktok_handler(event):
         await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
         return
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@ttsavebot"
+    chat = "@LEbot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -427,7 +427,7 @@ async def youtube_handler(event):
         await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
         return
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@youtubesavebot"
+    chat = "@LEbot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
