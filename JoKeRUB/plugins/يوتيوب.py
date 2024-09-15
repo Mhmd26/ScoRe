@@ -1,21 +1,15 @@
-
 import asyncio
 import io
 import os
 import pathlib
 import re
 import time
-from datetime import datetime
-
-from JoKeRUB.utils import sudo_cmd
+from yt_dlp import YoutubeDL  # استخدم yt-dlp بدلاً من youtube_dl
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
 from telethon.utils import get_attributes
-from youtube_dl import YoutubeDL
-from urlextract import URLExtract
-from wget import download
 from JoKeRUB import l313l
-from youtube_dl.utils import (
+from yt_dlp.utils import (
     ContentTooShortError,
     DownloadError,
     ExtractorError,
@@ -51,6 +45,7 @@ audio_opts = {
     "outtmpl": "%(title)s.mp3",
     "quiet": True,
     "logtostderr": False,
+    "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"},
 }
 
 video_opts = {
@@ -65,6 +60,7 @@ video_opts = {
     "outtmpl": "%(title)s.mp4",
     "logtostderr": False,
     "quiet": True,
+    "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"},
 }
 
 
@@ -163,7 +159,7 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     command=("تحميل ص", plugin_category),
     info={
         "header": "To download audio from many sites like Youtube",
-        "description": "downloads the audio from the given link (Suports the all sites which support youtube-dl)",
+        "description": "downloads the audio from the given link (Supports all sites which support yt-dlp)",
         "examples": [
             "{tr}yta <reply to link>",
             "{tr}yta <link>",
@@ -183,7 +179,6 @@ async def download_audio(event):
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, audio_opts, url)
     if ytdl_data is None:
-
         return
     await catevent.edit(
         f"✎┊‌ يتم لتحميل الأغنية:\
@@ -231,7 +226,7 @@ async def download_audio(event):
     command=("تحميل ف", plugin_category),
     info={
         "header": "To download video from many sites like Youtube",
-        "description": "downloads the video from the given link(Suports the all sites which support youtube-dl)",
+        "description": "downloads the video from the given link (Supports all sites which support yt-dlp)",
         "examples": [
             "{tr}ytv <reply to link>",
             "{tr}ytv <link>",
@@ -246,26 +241,25 @@ async def download_video(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "✎┊‌ عـليك وضع رابـط اولا ليتـم تنـزيله")
-    catevent = await edit_or_reply(event, "✎┊‌ يتم التحميل انتظر قليلا")
+        return await edit_or_reply(event, "✎┊‌ - يجب وضع رابط لتحميله ❕")
+    catevent = await edit_or_reply(event, "✎┊‌ يتم الاعداد انتظر")
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, video_opts, url)
-    if ytdl_down is None:
+    if ytdl_data is None:
         return
+    await catevent.edit(
+        f"✎┊‌ يتم لتحميل الفيديو:\
+        \n✎┊‌ {ytdl_data['title']}\
+        \nبواسطة ✎┊‌ {ytdl_data['uploader']}"
+    )
     f = pathlib.Path(f"{ytdl_data['title']}.mp4".replace("|", "_"))
-    catthumb = pathlib.Path(f"{ytdl_data['title']}.jpg".replace("|", "_"))
+    catthumb = pathlib.Path(f"{ytdl_data['title']}.mp4.jpg".replace("|", "_"))
     if not os.path.exists(catthumb):
-        catthumb = pathlib.Path(f"{ytdl_data['title']}.webp".replace("|", "_"))
+        catthumb = pathlib.Path(f"{ytdl_data['title']}.mp4.webp".replace("|", "_"))
     if not os.path.exists(catthumb):
         catthumb = None
-    await catevent.edit(
-        f"✎┊‌ التحضيـر للـرفع انتظر:\
-        \n✎┊‌ {ytdl_data['title']}\
-        \nبـواسطة *{ytdl_data['uploader']}*"
-    )
-    ul = io.open(f, "rb")
     c_time = time.time()
-    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
+    ul = io.open(f, "rb")
     uploaded = await event.client.fast_upload_file(
         file=ul,
         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -273,6 +267,7 @@ async def download_video(event):
         ),
     )
     ul.close()
+    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
     media = types.InputMediaUploadedDocument(
         file=uploaded,
         mime_type=mime_type,
@@ -284,11 +279,13 @@ async def download_video(event):
         file=media,
         reply_to=reply_to_id,
         caption=ytdl_data["title"],
+        supports_streaming=True,
+        force_document=False,
     )
     os.remove(f)
     if catthumb:
         os.remove(catthumb)
-    await event.delete()
+    await catevent.delete()
 
 
 @l313l.ar_cmd(
