@@ -76,10 +76,10 @@ async def fetch_info(replied_user, event):
     full_name = full_name or first_name
     username = "@{}".format(username) if username else ("لايـوجـد معـرف")
     user_bio = "لاتـوجـد نبـذة" if not user_bio else user_bio
-    rotbat = "⌁ من مطورين السورس 𓄂𓆃 ⌁" if user_id == 7275336620 else ("⌁ العضـو 𓅫 ⌁")
-    rotbat = "⌁ من مطورين السورس 𓄂𓆃 ⌁" if user_id == 815010872 else ("⌁ العضـو 𓅫 ⌁")
+    rotbat = " مطور اساسي ✏️ " if user_id == 7275336620 else (" عضو 👀 ")
+    rotbat = " مطور اساسي ✏️ " if user_id == 815010872 else (" عضو 👀 ")
     rotbat = "⌁ مـالك الحساب 𓀫 ⌁" if user_id == (await event.client.get_me()).id and user_id != 705475246  else rotbat
-    caption = "=======================\n"
+    caption = "</b>ٴ𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>\n"
     caption += f"<b> {JEP_EM}╎الاسـم    ⇠ </b> {full_name}\n"
     caption += f"<b> {JEP_EM}╎المعـرف  ⇠ </b> {username}\n"
     caption += f"<b> {JEP_EM}╎الايـدي   ⇠ </b> <code>{user_id}</code>\n"
@@ -88,7 +88,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b> {JEP_EM}╎الحساب ⇠ </b> "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>'
     caption += f"\n<b> {JEP_EM}╎البايـو    ⇠ </b> {user_bio} \n"
-    caption += f"======================="
+    caption += f"</b>ٴ𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>"
     return photo, caption
 
 @l313l.ar_cmd(
