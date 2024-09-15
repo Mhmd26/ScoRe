@@ -331,7 +331,6 @@ async def yt_search(event):
     await edit_or_reply(video_q, reply_text)
 
 
-@l313l.ar_cmd(
 @l313l.on(admin_cmd(pattern="انستا(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
