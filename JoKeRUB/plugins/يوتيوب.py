@@ -344,7 +344,6 @@ async def _(event):
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            await bot.mute(chat)
             r = await conv.get_response()
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
@@ -379,7 +378,6 @@ async def _(event):
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            await bot.mute(chat)
             r = await conv.get_response()
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
@@ -409,7 +407,6 @@ async def _(event):
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
-                await bot.mute(chat)
                 r = await conv.get_response()
                 msg = await conv.send_message(r_link)
                 details = await conv.get_response()
