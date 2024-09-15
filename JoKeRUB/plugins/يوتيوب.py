@@ -354,9 +354,9 @@ async def _(event):
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
+        await bot.delete_dialog(conv.chat_id)
         await event.delete()
-        await bot.delete_chat(conv.chat_id)
-
+        
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from JoKeRUB import l313l
@@ -388,9 +388,9 @@ async def _(event):
         await event.client.delete_messages(
             conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
+        await bot.delete_dialog(conv.chat_id)
         await event.delete()
-        await bot.delete_chat(conv.chat_id)
-        
+                
 @l313l.on(admin_cmd(pattern="يوتيوب(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
@@ -417,5 +417,6 @@ async def _(event):
             await event.client.delete_messages(
                 conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
             )
+            await bot.delete_dialog(conv.chat_id)
             await event.delete()
-            await bot.delete_chat(conv.chat_id)
+        
