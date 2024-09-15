@@ -47,7 +47,7 @@ async def _(event):
 
     else:
 
-        await edit_or_reply(event, "- هذا نص غير صحيح")
+        await edit_or_reply(event, "✎┊‌ هذا نص غير صحيح")
         return
         text = text.strip()
         lan = lan.strip()
