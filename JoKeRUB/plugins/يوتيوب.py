@@ -331,14 +331,11 @@ async def yt_search(event):
     await edit_or_reply(video_q, reply_text)
 
 
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from JoKeRUB import l313l
-
 @l313l.ar_cmd(
     pattern="انستا (.*)",
     command=("انستا", plugin_category),
     info={
-        "header": "To download Instagram video/photo",
+        "header": "To download instagram video/photo",
         "description": "Note downloads only public profile photos/videos.",
         "examples": [
             "{tr}insta <link>",
@@ -346,15 +343,16 @@ from JoKeRUB import l313l
     },
 )
 async def kakashi(event):
-    "For downloading Instagram media"
+    "For downloading instagram media"
     chat = "@LEbot"
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         return await edit_or_reply(
             event, "✎┊‌ - يجب كتابة رابط من الانستغرام لتحميله ❕"
         )
-    start = datetime.now()
-    catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
+    else:
+        start = datetime.now()
+        catevent = await edit_or_reply(event, "**✎┊‌ جار التحميل انتظر قليلا **")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -367,45 +365,44 @@ async def kakashi(event):
             await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @instasavegrambot")
             return
         await catevent.delete()
-        cat = await event.client.send_file(event.chat_id, video)
+        cat = await event.client.send_file(
+            event.chat_id,
+            video,
+        )
         end = datetime.now()
         ms = (end - start).seconds
-        await cat.edit(
-            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
-            parse_mode="html",
-        )
     await event.client.delete_messages(
         conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
     )
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+from JoKeRUB import l313l
+
 
 @l313l.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
-async def tiktok_handler(event):
+async def _(event):
     if event.fwd_from:
         return
-    link = event.pattern_match.group(1)
-    if ".com" not in link:
-        return await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
-    
-    await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
+    r_link = event.pattern_match.group(1)
+    if ".com" not in r_link:
+        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+    else:
+        await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"
-    async with event.client.conversation(chat) as conv:
+    async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
+            r = await conv.get_response()
+            msg = await conv.send_message(r_link)
             details = await conv.get_response()
             video = await conv.get_response()
-            
-            await event.client.send_read_acknowledge(conv.chat_id)
+            """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
+            await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
             return
-        await event.client.send_file(event.chat_id, video)
-        await cat.edit(
-            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
-            parse_mode="html",
-        )
+        await bot.send_file(event.chat_id, video)
         await event.client.delete_messages(
-            conv.chat_id, [msg_start.id, response.id, msg.id, details.id, video.id]
+            conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
         await event.delete()
