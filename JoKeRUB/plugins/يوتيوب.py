@@ -341,10 +341,10 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
-    await bot.mute(chat)
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
+            await bot.mute(chat)
             r = await conv.get_response()
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
@@ -376,10 +376,10 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"
-    await bot.mute(chat)
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
+            await bot.mute(chat)
             r = await conv.get_response()
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
@@ -406,10 +406,10 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
         chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ YouTube
-        await bot.mute(chat)
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
+                await bot.mute(chat)
                 r = await conv.get_response()
                 msg = await conv.send_message(r_link)
                 details = await conv.get_response()
