@@ -139,8 +139,8 @@ async def set_group_photo(event):  # sourcery no-metrics
         await event.client.send_message(
             BOTLOG_CHATID,
             "#صـورة_المجمـوعـة\n"
-            f"صورة المجموعه {process} بنجاح ✓ "
-            f"الدردشة: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+            f"✎┊‌صورة المجموعه {process} بنجاح ✓ "
+            f"✎┊‌الدردشة: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
         )
 
 
@@ -385,9 +385,9 @@ async def startmute(event):
         replied_user = await event.client.get_entity(event.chat_id)
         if is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "✎┊‌ ❝ ⌊هـذا المسـتخـدم مڪتـوم . . سـابقـاً **"
+                "✎┊‌ هـذا المسـتخـدم مڪتـوم . . سـابقـاً **"
             )
-        if event.chat_id == zq_lo.uid:
+        if event.chat_id == l313l.uid:
             return await edit_delete(event, "✎┊‌ لا تستطــع كتـم نفسـك**")
         if event.chat_id == 7275336620 or event.chat_id == 815010872 or event.chat_id == 7045643989:
             return await edit_delete(event, "**  دي لا يمڪنني كتـم احـد مطـورين السـورس  **")
@@ -416,7 +416,7 @@ async def startmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == zq_lo.uid:
+        if user.id == l313l.uid:
             return await edit_or_reply(event, "✎┊‌ عــذراً .. لا استطيــع كتــم نفســي**")
         if user.id == 7275336620 or user.id == 815010872 or user.id == 7045643989:
             return await edit_or_reply(event, "**  دي لا يمڪنني كتـم احـد مطـورين السـورس  **")
@@ -431,7 +431,7 @@ async def startmute(event):
             if result.participant.banned_rights.send_messages:
                 return await edit_or_reply(
                     event,
-                    "**عــذراً .. هـذا الشخـص مكتــوم سـابقــاً هنـا**",
+                    "**✎┊‌عــذراً .. هـذا الشخـص مكتــوم سـابقــاً هنـا**",
                 )
         except AttributeError:
             pass
@@ -470,8 +470,8 @@ async def startmute(event):
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#الكــتم\n"
-                f"**الشخـص :** [{user.first_name}](tg://user?id={user.id})\n"
-                f"**الدردشـه :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+                f"**✎┊‌الشخـص :** [{user.first_name}](tg://user?id={user.id})\n"
+                f"**✎┊‌الدردشـه :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
             )
 
 
@@ -706,7 +706,3 @@ async def _iundlt(event):  # sourcery no-metrics
                     f"\n🖇┊{msg.old.message} \n\n**✎┊‌تم ارسـالهـا بـواسطـة** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
-@l313l.ar_cmd(incoming=True)
-async def watcher(event):
-    if is_muted(event.sender_id, "كتم_مؤقت"):
-        await event.delete()
