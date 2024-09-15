@@ -1,15 +1,23 @@
+#@lMl10l   - @jepthon
+# Copyright (C) 2021 JoKeRUB TEAM
+# FILES WRITTEN BY  @lMl10l
 import asyncio
 import io
 import os
 import pathlib
 import re
 import time
-from yt_dlp import YoutubeDL  # استخدم yt-dlp بدلاً من youtube_dl
+from datetime import datetime
+
+from JoKeRUB.utils import sudo_cmd
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl import types
 from telethon.utils import get_attributes
+from youtube_dl import YoutubeDL
+from urlextract import URLExtract
+from wget import download
 from JoKeRUB import l313l
-from yt_dlp.utils import (
+from youtube_dl.utils import (
     ContentTooShortError,
     DownloadError,
     ExtractorError,
@@ -45,7 +53,6 @@ audio_opts = {
     "outtmpl": "%(title)s.mp3",
     "quiet": True,
     "logtostderr": False,
-    "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"},
 }
 
 video_opts = {
@@ -60,7 +67,6 @@ video_opts = {
     "outtmpl": "%(title)s.mp4",
     "logtostderr": False,
     "quiet": True,
-    "headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"},
 }
 
 
@@ -159,7 +165,7 @@ async def _get_file_name(path: pathlib.Path, full: bool = True) -> str:
     command=("تحميل ص", plugin_category),
     info={
         "header": "To download audio from many sites like Youtube",
-        "description": "downloads the audio from the given link (Supports all sites which support yt-dlp)",
+        "description": "downloads the audio from the given link (Suports the all sites which support youtube-dl)",
         "examples": [
             "{tr}yta <reply to link>",
             "{tr}yta <link>",
@@ -179,6 +185,7 @@ async def download_audio(event):
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, audio_opts, url)
     if ytdl_data is None:
+
         return
     await catevent.edit(
         f"✎┊‌ يتم لتحميل الأغنية:\
@@ -226,7 +233,7 @@ async def download_audio(event):
     command=("تحميل ف", plugin_category),
     info={
         "header": "To download video from many sites like Youtube",
-        "description": "downloads the video from the given link (Supports all sites which support yt-dlp)",
+        "description": "downloads the video from the given link(Suports the all sites which support youtube-dl)",
         "examples": [
             "{tr}ytv <reply to link>",
             "{tr}ytv <link>",
@@ -241,25 +248,26 @@ async def download_video(event):
         myString = rmsg.text
         url = re.search("(?P<url>https?://[^\s]+)", myString).group("url")
     if not url:
-        return await edit_or_reply(event, "✎┊‌ - يجب وضع رابط لتحميله ❕")
-    catevent = await edit_or_reply(event, "✎┊‌ يتم الاعداد انتظر")
+        return await edit_or_reply(event, "✎┊‌ عـليك وضع رابـط اولا ليتـم تنـزيله")
+    catevent = await edit_or_reply(event, "✎┊‌ يتم التحميل انتظر قليلا")
     reply_to_id = await reply_id(event)
     ytdl_data = await ytdl_down(catevent, video_opts, url)
-    if ytdl_data is None:
+    if ytdl_down is None:
         return
-    await catevent.edit(
-        f"✎┊‌ يتم لتحميل الفيديو:\
-        \n✎┊‌ {ytdl_data['title']}\
-        \nبواسطة ✎┊‌ {ytdl_data['uploader']}"
-    )
     f = pathlib.Path(f"{ytdl_data['title']}.mp4".replace("|", "_"))
-    catthumb = pathlib.Path(f"{ytdl_data['title']}.mp4.jpg".replace("|", "_"))
+    catthumb = pathlib.Path(f"{ytdl_data['title']}.jpg".replace("|", "_"))
     if not os.path.exists(catthumb):
-        catthumb = pathlib.Path(f"{ytdl_data['title']}.mp4.webp".replace("|", "_"))
+        catthumb = pathlib.Path(f"{ytdl_data['title']}.webp".replace("|", "_"))
     if not os.path.exists(catthumb):
         catthumb = None
-    c_time = time.time()
+    await catevent.edit(
+        f"✎┊‌ التحضيـر للـرفع انتظر:\
+        \n✎┊‌ {ytdl_data['title']}\
+        \nبـواسطة *{ytdl_data['uploader']}*"
+    )
     ul = io.open(f, "rb")
+    c_time = time.time()
+    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
     uploaded = await event.client.fast_upload_file(
         file=ul,
         progress_callback=lambda d, t: asyncio.get_event_loop().create_task(
@@ -267,7 +275,6 @@ async def download_video(event):
         ),
     )
     ul.close()
-    attributes, mime_type = await fix_attributes(f, ytdl_data, supports_streaming=True)
     media = types.InputMediaUploadedDocument(
         file=uploaded,
         mime_type=mime_type,
@@ -279,13 +286,11 @@ async def download_video(event):
         file=media,
         reply_to=reply_to_id,
         caption=ytdl_data["title"],
-        supports_streaming=True,
-        force_document=False,
     )
     os.remove(f)
     if catthumb:
         os.remove(catthumb)
-    await catevent.delete()
+    await event.delete()
 
 
 @l313l.ar_cmd(
@@ -328,6 +333,7 @@ async def yt_search(event):
 
 from datetime import datetime
 from telethon.errors.rpcerrorlist import YouBlockedUserError
+from JoKeRUB import l313l
 
 @l313l.ar_cmd(
     pattern="انستا (.*)",
@@ -342,7 +348,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 )
 async def kakashi(event):
     "For downloading instagram media"
-    chat = "@LEbot"
+    chat = "@instasavegrambot"
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         return await edit_or_reply(
@@ -351,10 +357,6 @@ async def kakashi(event):
     else:
         start = datetime.now()
         catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
-    
-    # Block the bot before starting the conversation
-    await event.client.block_user(chat)
-    
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -364,56 +366,7 @@ async def kakashi(event):
             details = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
-            return
-        await catevent.delete()
-        cat = await event.client.send_file(
-            event.chat_id,
-            video,
-        )
-        end = datetime.now()
-        ms = (end - start).seconds
-        await cat.edit(
-            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
-from datetime import datetime
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-@l313l.ar_cmd(
-    pattern="انستا (.*)",
-    command=("انستا", plugin_category),
-    info={
-        "header": "To download instagram video/photo",
-        "description": "Note downloads only public profile photos/videos.",
-        "examples": [
-            "{tr}insta <link>",
-        ],
-    },
-)
-async def kakashi(event):
-    "For downloading instagram media"
-    chat = "@LEbot"
-    link = event.pattern_match.group(1)
-    if "www.instagram.com" not in link:
-        return await edit_or_reply(
-            event, "✎┊‌ - يجب كتابة رابط من الانستغرام لتحميله ❕"
-        )
-    else:
-        start = datetime.now()
-        catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
-    
-    # Block the bot before starting the conversation
-    await event.client.block_user(chat)
-    
-    async with event.client.conversation(chat) as conv:
-        try:
-            msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
-            video = await conv.get_response()
-            details = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
+            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @instasavegrambot")
             return
         await catevent.delete()
         cat = await event.client.send_file(
@@ -426,113 +379,71 @@ async def kakashi(event):
             f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
             parse_mode="html",
         )
-    # Delete conversation with the bot
-    await event.client.delete_messages(
-        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
-    )
-    # Optionally, delete the entire chat with the bot
-    await event.client.delete_dialog(conv.chat_id)
-    
-    # Unblock the bot after finishing
-    await event.client.unblock_user(chat)
+        # حذف المحادثة بالكامل مع البوت
+        await event.client.delete_dialog(conv.chat_id)
+    await event.delete()
+
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from JoKeRUB import l313l
 
 @l313l.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
-async def _(event):
+async def tiktok_handler(event):
     if event.fwd_from:
         return
-    r_link = event.pattern_match.group(1)
-    if ".com" not in r_link:
-        return await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
-    
+    video_link = event.pattern_match.group(1)
+    if ".com" not in video_link:
+        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+        return
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    
-    chat = "@LEbot"
-    
-    # Block the bot before starting the conversation
-    await event.client.block_user(chat)
-    
+    chat = "@ttsavebot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
             r = await conv.get_response()
-            msg = await conv.send_message(r_link)
+            msg = await conv.send_message(video_link)
             details = await conv.get_response()
             video = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
             return
-        
+        # إرسال الرسالة مع الفيديو
+        message = "**✎┊‌ تم تنزيل الفيديو بنجاح بواسطة  : لعقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"
+        await event.client.send_message(event.chat_id, message)
         await event.client.send_file(event.chat_id, video)
-        
-        # Delete messages in the conversation with the bot
-        await event.client.delete_messages(
-            conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
-        )
-        
-        # Optionally, delete the entire chat with the bot
+        # حذف المحادثة بالكامل مع البوت
         await event.client.delete_dialog(conv.chat_id)
-        
-        # Add message indicating that the download was completed
-        await event.edit("**✎┊‌ تم تنزيل الفيديو بنجاح من تيك توك**")
+    await event.delete()
     
-    # Unblock the bot after finishing
-    await event.client.unblock_user(chat)
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+from JoKeRUB import l313l
 
-@l313l.ar_cmd(
-    pattern="يوتيوب (.*)",
-    command=("يوتيوب", plugin_category),
-    info={
-        "header": "To download YouTube video",
-        "description": "Note downloads only public YouTube videos.",
-        "examples": [
-            "{tr}يوتيوب <link>",
-        ],
-    },
-)
-async def youtube(event):
-    "For downloading YouTube videos"
-    chat = "@LEbot"
-    link = event.pattern_match.group(1)
-    if "youtube.com" not in link and "youtu.be" not in link:
-        return await edit_or_reply(
-            event, "✎┊‌ - يجب كتابة رابط من يوتيوب لتحميله ❕"
-        )
-    else:
-        start = datetime.now()
-        catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
-    
-    # Block the bot before starting the conversation
-    await event.client.block_user(chat)
-    
+@l313l.on(admin_cmd(pattern="يوتيوب(?: |$)(.*)"))
+async def youtube_handler(event):
+    if event.fwd_from:
+        return
+    video_link = event.pattern_match.group(1)
+    if ".com" not in video_link:
+        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+        return
+    await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
+    chat = "@youtubesavebot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
-            video = await conv.get_response()
+            r = await conv.get_response()
+            msg = await conv.send_message(video_link)
             details = await conv.get_response()
+            video = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @youtubesavebot")
             return
-        await catevent.delete()
-        cat = await event.client.send_file(
-            event.chat_id,
-            video,
-        )
-        end = datetime.now()
-        ms = (end - start).seconds
-        await cat.edit(
-            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
-            parse_mode="html",
-        )
-    # Delete conversation with the bot
-    await event.client.delete_messages(
-        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
-    )
-    # Optionally, delete the entire chat with the bot
-    await event.client.delete_dialog(conv.chat_id)
+        # إرسال الرسالة مع الفيديو
+        message = "**✎┊‌ تم تنزيل الفيديو بنجاح بواسطة  : لعقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"
+        await event.client.send_message(event.chat_id, message)
+        await event.client.send_file(event.chat_id, video)
+        # حذف المحادثة بالكامل مع البوت
+        await event.client.delete_dialog(conv.chat_id)
+    await event.delete()
     
-    # Unblock the bot after finishing
-    await event.client.unblock_user(chat)
