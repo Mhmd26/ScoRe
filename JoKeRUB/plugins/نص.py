@@ -2,8 +2,7 @@ import datetime
 import asyncio
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.functions.account import UpdateNotifySettingsRequest
-from telethon.tl.functions.messages import DeleteDialogRequest
+from telethon.tl.functions.messages import DeleteHistoryRequest
 from JoKeRUB.utils import admin_cmd
 
 @borg.on(admin_cmd(pattern="تحويل نص ?(.*)"))
@@ -11,18 +10,18 @@ async def _(event):
     if event.fwd_from:
         return 
     if not event.reply_to_msg_id:
-        await event.edit("**✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم** ")
+        await event.edit("✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم )")
         return
     reply_message = await event.get_reply_message() 
     if not reply_message.text:
-        await event.edit("**✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم **")
+        await event.edit("✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم )")
         return
     chat = "@QuotLyBot"
     sender = reply_message.sender
     if reply_message.sender.bot:
-        await event.edit("**✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم **")
+        await event.edit("✎┊‌ يـجب. الرد علـى رسـالة الـمستخدم )")
         return
-    msg = await event.edit("**✎┊‌ جار تحويل النص الى ملصق**")
+    await event.edit("✎┊‌ جار تحويل النص الى ملصق")
     async with event.client.conversation(chat) as conv:
         try:     
             response = conv.wait_event(events.NewMessage(incoming=True, from_users=1031952739))
@@ -36,7 +35,5 @@ async def _(event):
         else: 
             await event.delete()
             await event.client.send_message(event.chat_id, response.message)
-            await msg.delete()
-            # Delete the conversation with the bot
-            await event.client(DeleteDialogRequest(peer=chat))
-        
+            # Delete conversation with bot
+            await event.client(DeleteHistoryRequest(peer=chat, max_id=0))
