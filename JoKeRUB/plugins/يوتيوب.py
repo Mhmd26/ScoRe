@@ -331,7 +331,6 @@ async def yt_search(event):
     await edit_or_reply(video_q, reply_text)
 
 
-from datetime import datetime
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 from JoKeRUB import l313l
 
@@ -339,7 +338,7 @@ from JoKeRUB import l313l
     pattern="انستا (.*)",
     command=("انستا", plugin_category),
     info={
-        "header": "To download instagram video/photo",
+        "header": "To download Instagram video/photo",
         "description": "Note downloads only public profile photos/videos.",
         "examples": [
             "{tr}insta <link>",
@@ -347,16 +346,15 @@ from JoKeRUB import l313l
     },
 )
 async def kakashi(event):
-    "For downloading instagram media"
+    "For downloading Instagram media"
     chat = "@LEbot"
     link = event.pattern_match.group(1)
     if "www.instagram.com" not in link:
         return await edit_or_reply(
             event, "✎┊‌ - يجب كتابة رابط من الانستغرام لتحميله ❕"
         )
-    else:
-        start = datetime.now()
-        catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
+    start = datetime.now()
+    catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -369,81 +367,45 @@ async def kakashi(event):
             await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @instasavegrambot")
             return
         await catevent.delete()
-        cat = await event.client.send_file(
-            event.chat_id,
-            video,
-        )
+        cat = await event.client.send_file(event.chat_id, video)
         end = datetime.now()
         ms = (end - start).seconds
         await cat.edit(
             f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
             parse_mode="html",
         )
-        # حذف المحادثة بالكامل مع البوت
-        await event.client.delete_dialog(conv.chat_id)
-    await event.delete()
-
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from JoKeRUB import l313l
+    await event.client.delete_messages(
+        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
+    )
 
 @l313l.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
 async def tiktok_handler(event):
     if event.fwd_from:
         return
-    video_link = event.pattern_match.group(1)
-    if ".com" not in video_link:
-        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
-        return
+    link = event.pattern_match.group(1)
+    if ".com" not in link:
+        return await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+    
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            r = await conv.get_response()
-            msg = await conv.send_message(video_link)
+            response = await conv.get_response()
+            msg = await conv.send_message(link)
             details = await conv.get_response()
             video = await conv.get_response()
+            
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
             return
-        # إرسال الرسالة مع الفيديو
-        message = "**✎┊‌ تم تنزيل الفيديو بنجاح بواسطة  : لعقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"
-        await event.client.send_message(event.chat_id, message)
         await event.client.send_file(event.chat_id, video)
-        # حذف المحادثة بالكامل مع البوت
-        await event.client.delete_dialog(conv.chat_id)
-    await event.delete()
-    
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-from JoKeRUB import l313l
-
-@l313l.on(admin_cmd(pattern="يوتيوب(?: |$)(.*)"))
-async def youtube_handler(event):
-    if event.fwd_from:
-        return
-    video_link = event.pattern_match.group(1)
-    if ".com" not in video_link:
-        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
-        return
-    await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@LEbot"
-    async with event.client.conversation(chat) as conv:
-        try:
-            msg_start = await conv.send_message("/start")
-            r = await conv.get_response()
-            msg = await conv.send_message(video_link)
-            details = await conv.get_response()
-            video = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
-        except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @youtubesavebot")
-            return
-        # إرسال الرسالة مع الفيديو
-        message = "**✎┊‌ تم تنزيل الفيديو بنجاح بواسطة  : لعقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"
-        await event.client.send_message(event.chat_id, message)
-        await event.client.send_file(event.chat_id, video)
-        # حذف المحادثة بالكامل مع البوت
-        await event.client.delete_dialog(conv.chat_id)
-    await event.delete()
-    
+        await cat.edit(
+            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
+            parse_mode="html",
+        )
+        await event.client.delete_messages(
+            conv.chat_id, [msg_start.id, response.id, msg.id, details.id, video.id]
+        )
+        await event.delete()
