@@ -332,48 +332,34 @@ async def yt_search(event):
 
 
 @l313l.ar_cmd(
-    pattern="انستا (.*)",
-    command=("انستا", plugin_category),
-    info={
-        "header": "To download instagram video/photo",
-        "description": "Note downloads only public profile photos/videos.",
-        "examples": [
-            "{tr}insta <link>",
-        ],
-    },
-)
-async def kakashi(event):
-    "For downloading instagram media"
-    chat = "@LEbot"
-    link = event.pattern_match.group(1)
-    if "www.instagram.com" not in link:
-        return await edit_or_reply(
-            event, "✎┊‌ - يجب كتابة رابط من الانستغرام لتحميله ❕"
-        )
+@l313l.on(admin_cmd(pattern="انستا(?: |$)(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    r_link = event.pattern_match.group(1)
+    if ".com" not in r_link:
+        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
     else:
-        start = datetime.now()
-        catevent = await edit_or_reply(event, "**✎┊‌ جار التحميل انتظر قليلا **")
-    async with event.client.conversation(chat) as conv:
+        await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
+    chat = "@InstagramBot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
+    async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
-            response = await conv.get_response()
-            msg = await conv.send_message(link)
-            video = await conv.get_response()
+            r = await conv.get_response()
+            msg = await conv.send_message(r_link)
             details = await conv.get_response()
-            await event.client.send_read_acknowledge(conv.chat_id)
+            video = await conv.get_response()
+        
+            await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @instasavegrambot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @InstagramBot")
             return
-        await catevent.delete()
-        cat = await event.client.send_file(
-            event.chat_id,
-            video,
+        await bot.send_file(event.chat_id, video)
+        await event.client.delete_messages(
+            conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
-        end = datetime.now()
-        ms = (end - start).seconds
-    await event.client.delete_messages(
-        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
-    )
+        await event.delete()
+
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from JoKeRUB import l313l
