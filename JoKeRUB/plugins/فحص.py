@@ -40,12 +40,12 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     uptime = await get_readable_time((time.time() - StartTime))
     start = datetime.now()
-    await edit_or_reply(event, "** ✎┊‌ 𝗣𝗹𝗲𝗮𝘀𝗲 𝘄𝗮𝗶𝘁 𝗳𝗼𝗿 𝘄𝗮𝗶𝘁𝗶𝗻𝗴 ⏳**")
+    await edit_or_reply(event, "** ✎┊‌ 𝗣𝗹𝗲𝗮𝘀𝗲 𝘄𝗮𝗶𝘁 𝗺𝗲 ⏳**")
     end = datetime.now()
     ms = (end - start).microseconds / 1000
     _, check_sgnirts = check_data_base_heal_th()
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✎┊‌"
-    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**╔==========================╗ **"
+    ALIVE_TEXT = gvarstatus("ALIVE_TEXT") or "**╔========================╗ **"
     HuRe_IMG = gvarstatus("ALIVE_PIC") or Config.A_PIC
     l313l_caption = gvarstatus("ALIVE_TEMPLATE") or temp
     me = await l313l.get_me()
@@ -89,7 +89,7 @@ async def amireallyalive(event):
 
 
 temp = """{ALIVE_TEXT}
- **   [𝗦𝗰𝗼𝗿𝗽𝗶𝗼 𝘄𝗼𝗿𝗸𝘀 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆](t.me/Scorpion_scorp) ✅
+ **   [𝗦𝗰𝗼𝗥 𝘄𝗼𝗿𝗸𝘀 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆](t.me/Scorpion_scorp) ✅
 
 {EMOJI}‌‎𝐍𝐢𝐦𝐞 | {mention} ٫
 
@@ -104,4 +104,4 @@ temp = """{ALIVE_TEXT}
 ‌‎{EMOJI}‌‎‌‎𝐒𝐞𝐭𝐮𝐩 𝐃𝐚𝐭𝐞 | {Tare5} ٫
 
      - 𝗚𝗼 𝗮𝗻𝗱 𝗲𝗻𝗷𝗼𝘆 😉**
-** ╚==========================╝ **"""
+** ╚========================╝ **"""
