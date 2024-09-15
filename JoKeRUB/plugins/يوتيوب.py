@@ -394,7 +394,7 @@ async def _(event):
     
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     
-    chat = "@ttsavebot"
+    chat = "@LEbot"
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -404,7 +404,7 @@ async def _(event):
             video = await conv.get_response()
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
             return
         
         await event.client.send_file(event.chat_id, video)
