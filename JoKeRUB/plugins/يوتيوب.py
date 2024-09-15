@@ -336,8 +336,8 @@ async def _(event):
     if event.fwd_from:
         return
     r_link = event.pattern_match.group(1)
-    if ".com" not in r_link:
-        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+    if "www.instagram.com" not in r_link:
+        await event.edit("**✎┊‌يجب وضع رابط الانستا مع الامر اولا **")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
@@ -351,7 +351,7 @@ async def _(event):
         
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @InstagramBot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
             return
         await bot.send_file(event.chat_id, video)
         await event.client.delete_messages(
@@ -369,8 +369,8 @@ async def _(event):
     if event.fwd_from:
         return
     r_link = event.pattern_match.group(1)
-    if ".com" not in r_link:
-        await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
+    if "tiktok.com" not in r_link:
+        await event.edit("**✎┊‌ يجب وضع رابط الفيديو من التيك توك مع الامر  **")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"
@@ -384,7 +384,7 @@ async def _(event):
             """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ttsavebot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
             return
         await bot.send_file(event.chat_id, video)
         await event.client.delete_messages(
@@ -401,7 +401,7 @@ async def _(event):
         await event.edit("**✎┊‌يجب وضع رابط يوتيوب فقط مع الأمر**")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-        chat = "@YouTubeBot"  # تغيير اسم البوت إلى البوت المناسب لـ YouTube
+        chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ YouTube
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
@@ -412,7 +412,7 @@ async def _(event):
                 """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
-                await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @YouTubeBot")
+                await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
                 return
             await bot.send_file(event.chat_id, video)
             await event.client.delete_messages(
