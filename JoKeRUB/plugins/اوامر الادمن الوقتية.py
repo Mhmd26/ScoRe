@@ -75,10 +75,10 @@ async def tmuter(event):  # sourcery no-metrics
                 await event.client.send_message(
                     BOTLOG_CHATID,
                     "#الكتـم المؤقـت\n"
-                    f"**المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**الدردشـه : **{event.chat.title}(`{event.chat_id}`)\n"
-                    f"**مدة الـكتم : **`{cattime}`\n"
-                    f"**السـبب : **`{reason}``",
+                    f"**✎┊‌المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
+                    f"**✎┊‌الدردشـه : **{event.chat.title}(`{event.chat_id}`)\n"
+                    f"**✎┊‌مدة الـكتم : **`{cattime}`\n"
+                    f"**✎┊‌السـبب : **`{reason}``",
                 )
         else:
             await event.client.send_file(
@@ -90,9 +90,9 @@ async def tmuter(event):  # sourcery no-metrics
                 await event.client.send_message(
                     BOTLOG_CHATID,
                     "#الـكتم المـؤقت\n"
-                    f"**المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**الدردشه : **{event.chat.title}(`{event.chat_id}`)\n"
-                    f"** مـدة الكتـم : **`{cattime}`",
+                    f"**✎┊‌المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
+                    f"**✎┊‌الدردشه : **{event.chat.title}(`{event.chat_id}`)\n"
+                    f"**✎┊‌مـدة الكتـم : **`{cattime}`",
                 )
         # Announce to logging group
     except UserIdInvalidError:
@@ -129,7 +129,7 @@ async def tmuter(event):  # sourcery no-metrics
 )
 async def tban(event):  # sourcery no-metrics
     "لحـظر شخص مع وقـت معيـن"
-    catevent = await edit_or_reply(event, "✎┊‌ يتـم  الـحظر مؤقـتا أنتـظر **")
+    catevent = await edit_or_reply(event, "**✎┊‌ يتـم الـحظر مؤقـتا أنتـظر **")
     user, reason = await get_user_from_event(event, catevent)
     if not user:
         return
@@ -143,7 +143,7 @@ async def tban(event):  # sourcery no-metrics
     if not ctime:
         return
     if user.id == event.client.uid:
-        return await catevent.edit(f"✎┊‌ عذرا لا يمكنني كتم نفسـي")
+        return await catevent.edit(f"✎┊‌ عذرا لا يمكنني حظر نفسـي")
     await catevent.edit("✎┊‌ تـم حـظره مـؤقـتا")
     try:
         await event.client(
@@ -155,7 +155,7 @@ async def tban(event):  # sourcery no-metrics
         )
     except UserAdminInvalidError:
         return await catevent.edit(
-            "✎┊‌ ** يبـدو أنك لسـت مشرف في المجموعة او تحاول كتم مشـرف هنا**"
+            "**✎┊‌  يبـدو أنك لسـت مشرف في المجموعة او تحاول كتم مشـرف هنا**"
         )
     except BadRequestError:
         return await catevent.edit(NO_PERM)
@@ -166,38 +166,38 @@ async def tban(event):  # sourcery no-metrics
             await reply.delete()
     except BadRequestError:
         return await catevent.edit(
-            "✎┊‌ ** لـيس لدي صلاحيـات الحذف لكن سيبقى محظور ❕**"
+            "**✎┊‌  لـيس لدي صلاحيـات الحذف لكن سيبقى محظور ❕**"
         )
     # Delete message and then tell that the command
     # is done gracefully
     # Shout out the ID, so that fedadmins can fban later
     if reason:
         await catevent.edit(
-            f"**المستخدم {_format.mentionuser(user.first_name ,user.id)}** /n **تـم حظره بنـجاح ✅**\n"
-            f"مـدة الحـظر {cattime}\n"
-            f"السـبب:`{reason}`"
+            f"**✎┊‌المستخدم {_format.mentionuser(user.first_name ,user.id)}** /n **تـم حظره بنـجاح ✅**\n"
+            f"**✎┊‌مـدة الحـظر** {cattime}\n"
+            f"**✎┊‌السـبب:**`{reason}`"
         )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#الـحظر المـؤقت\n"
-                f"**المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
-                f"**الدردشـه : **{event.chat.title}(`{event.chat_id}`)\n"
-                f"**مـدة الحـظر : **`{cattime}`\n"
-                f"**السـبب : **__{reason}__",
+                f"**✎┊‌المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
+                f"**✎┊‌الدردشـه : **{event.chat.title}(`{event.chat_id}`)\n"
+                f"**✎┊‌مـدة الحـظر : **`{cattime}`\n"
+                f"**✎┊‌السـبب : **__{reason}__",
             )
     else:
         await catevent.edit(
-            f"** الـمستخدم {_format.mentionuser(user.first_name ,user.id)} \n **تـم حظره بنـجاح ✅** \n"
-            f"**مـدة الحـظر** {cattime}\n"
+            f"**✎┊‌ الـمستخدم {_format.mentionuser(user.first_name ,user.id)} \n **تـم حظره بنـجاح ✅** \n"
+            f"**✎┊‌مـدة الحـظر** {cattime}\n"
         )
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#الـحظر المـؤقت\n"
-                f"**المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
-                f"**المستخدم : **{event.chat.title}(`{event.chat_id}`)\n"
-                f"**مـدة الحـظر : **`{cattime}`",
+                f"**✎┊‌المستخدم : **[{user.first_name}](tg://user?id={user.id})\n"
+                f"**✎┊‌المستخدم : **{event.chat.title}(`{event.chat_id}`)\n"
+                f"**✎┊‌مـدة الحـظر : **`{cattime}`",
             )
 
 @l313l.ar_cmd(
@@ -240,9 +240,9 @@ async def T8ed_Joker(event):
                 await event.client.send_message(
                     BOTLOG_CHATID,
                     "#تقييد المستخدم\n"
-                    f"**المستخدم: **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**الدردشة: **{event.chat.title}(`{event.chat_id}`)\n"
-                    f"**السبب: **`{reason}`",
+                    f"**✎┊‌المستخدم: **[{user.first_name}](tg://user?id={user.id})\n"
+                    f"**✎┊‌الدردشة: **{event.chat.title}(`{event.chat_id}`)\n"
+                    f"**✎┊‌السبب: **`{reason}`",
                 )
         else:
             await event.client.send_file(
@@ -254,8 +254,8 @@ async def T8ed_Joker(event):
                 await event.client.send_message(
                     BOTLOG_CHATID,
                     "#تقييد المستخدم\n"
-                    f"**المستخدم: **[{user.first_name}](tg://user?id={user.id})\n"
-                    f"**الدردشة: **{event.chat.title}(`{event.chat_id}`)",
+                    f"**✎┊‌المستخدم: **[{user.first_name}](tg://user?id={user.id})\n"
+                    f"**✎┊‌الدردشة: **{event.chat.title}(`{event.chat_id}`)",
                 )
     except UserIdInvalidError:
         return await event.edit("يبدو أن تقييد هذا المستخدم تم إلغاؤه.")
