@@ -326,6 +326,9 @@ async def yt_search(event):
     await edit_or_reply(video_q, reply_text)
 
 
+from datetime import datetime
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 @l313l.ar_cmd(
     pattern="انستا (.*)",
     command=("انستا", plugin_category),
@@ -348,6 +351,59 @@ async def kakashi(event):
     else:
         start = datetime.now()
         catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
+    
+    # Block the bot before starting the conversation
+    await event.client.block_user(chat)
+    
+    async with event.client.conversation(chat) as conv:
+        try:
+            msg_start = await conv.send_message("/start")
+            response = await conv.get_response()
+            msg = await conv.send_message(link)
+            video = await conv.get_response()
+            details = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
+            return
+        await catevent.delete()
+        cat = await event.client.send_file(
+            event.chat_id,
+            video,
+        )
+        end = datetime.now()
+        ms = (end - start).seconds
+        await cat.edit(
+            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
+from datetime import datetime
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
+@l313l.ar_cmd(
+    pattern="انستا (.*)",
+    command=("انستا", plugin_category),
+    info={
+        "header": "To download instagram video/photo",
+        "description": "Note downloads only public profile photos/videos.",
+        "examples": [
+            "{tr}insta <link>",
+        ],
+    },
+)
+async def kakashi(event):
+    "For downloading instagram media"
+    chat = "@LEbot"
+    link = event.pattern_match.group(1)
+    if "www.instagram.com" not in link:
+        return await edit_or_reply(
+            event, "✎┊‌ - يجب كتابة رابط من الانستغرام لتحميله ❕"
+        )
+    else:
+        start = datetime.now()
+        catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
+    
+    # Block the bot before starting the conversation
+    await event.client.block_user(chat)
+    
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -376,10 +432,9 @@ async def kakashi(event):
     )
     # Optionally, delete the entire chat with the bot
     await event.client.delete_dialog(conv.chat_id)
-from telethon.errors.rpcerrorlist import YouBlockedUserError
-
-from JoKeRUB import l313l
-
+    
+    # Unblock the bot after finishing
+    await event.client.unblock_user(chat)
 
 @l313l.on(admin_cmd(pattern="تيك توك(?: |$)(.*)"))
 async def _(event):
@@ -392,6 +447,10 @@ async def _(event):
     await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     
     chat = "@LEbot"
+    
+    # Block the bot before starting the conversation
+    await event.client.block_user(chat)
+    
     async with event.client.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -414,4 +473,66 @@ async def _(event):
         # Optionally, delete the entire chat with the bot
         await event.client.delete_dialog(conv.chat_id)
         
-        await event.delete()
+        # Add message indicating that the download was completed
+        await event.edit("**✎┊‌ تم تنزيل الفيديو بنجاح من تيك توك**")
+    
+    # Unblock the bot after finishing
+    await event.client.unblock_user(chat)
+
+@l313l.ar_cmd(
+    pattern="يوتيوب (.*)",
+    command=("يوتيوب", plugin_category),
+    info={
+        "header": "To download YouTube video",
+        "description": "Note downloads only public YouTube videos.",
+        "examples": [
+            "{tr}يوتيوب <link>",
+        ],
+    },
+)
+async def youtube(event):
+    "For downloading YouTube videos"
+    chat = "@LEbot"
+    link = event.pattern_match.group(1)
+    if "youtube.com" not in link and "youtu.be" not in link:
+        return await edit_or_reply(
+            event, "✎┊‌ - يجب كتابة رابط من يوتيوب لتحميله ❕"
+        )
+    else:
+        start = datetime.now()
+        catevent = await edit_or_reply(event, "✎┊‌ جار التحميل انتظر قليلا 🔍")
+    
+    # Block the bot before starting the conversation
+    await event.client.block_user(chat)
+    
+    async with event.client.conversation(chat) as conv:
+        try:
+            msg_start = await conv.send_message("/start")
+            response = await conv.get_response()
+            msg = await conv.send_message(link)
+            video = await conv.get_response()
+            details = await conv.get_response()
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await catevent.edit(" ✎┊‌ قـم بفتح الحظر ع بوت @LEbot")
+            return
+        await catevent.delete()
+        cat = await event.client.send_file(
+            event.chat_id,
+            video,
+        )
+        end = datetime.now()
+        ms = (end - start).seconds
+        await cat.edit(
+            f"** ✎┊‌ تم تنزيل بواسطة  : لعقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**",
+            parse_mode="html",
+        )
+    # Delete conversation with the bot
+    await event.client.delete_messages(
+        conv.chat_id, [msg_start.id, response.id, msg.id, video.id, details.id]
+    )
+    # Optionally, delete the entire chat with the bot
+    await event.client.delete_dialog(conv.chat_id)
+    
+    # Unblock the bot after finishing
+    await event.client.unblock_user(chat)
