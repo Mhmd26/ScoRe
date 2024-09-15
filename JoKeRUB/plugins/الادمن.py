@@ -127,13 +127,13 @@ async def set_group_photo(event):  # sourcery no-metrics
             except ImageProcessFailedError:
                 return await edit_delete(event, PP_ERROR)
             except Exception as e:
-                return await edit_delete(event, f"**- خطــأ : **`{str(e)}`")
+                return await edit_delete(event, f"**✎┊‌ خطــأ : **`{str(e)}`")
             process = "تم تغييرهـا"
     else:
         try:
             await event.client(EditPhotoRequest(event.chat_id, InputChatPhotoEmpty()))
         except Exception as e:
-            return await edit_delete(event, f"**- خطــأ : **`{e}`")
+            return await edit_delete(event, f"**✎┊‌ خطــأ : **`{e}`")
         process = "تم حذفهـا"
         await edit_delete(event, "**✎┊ ‌صورة الدردشـه {process} . . بنجـاح ✓**")
     if BOTLOG:
@@ -176,8 +176,8 @@ async def promote(event):
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#رفــع_مشــرف\
-            \n**- الشخـص :** [{user.first_name}](tg://user?id={user.id})\
-            \n**- الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
+            \n**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\
+            \n**✎┊‌ الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
         )
 
 
@@ -214,8 +214,8 @@ async def promote(event):
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#رفــع_مشــرف\
-            \n**- الشخـص :** [{user.first_name}](tg://user?id={user.id})\
-            \n**- الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
+            \n**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\
+            \n**✎┊‌ الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
         )
 
 
@@ -247,13 +247,13 @@ async def promote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
         return await zzevent.edit(NO_PERM)
-    await zzevent.edit("**- ❝ ⌊   تم  . . .**")
+    await zzevent.edit("**✎┊‌   تم  . .**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#رفــع_مشــرف\
-            \n**- الشخـص :** [{user.first_name}](tg://user?id={user.id})\
-            \n**- الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
+            \n**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\
+            \n**✎┊‌ الكــروب :** {get_display_name(await event.get_chat())} (`{event.chat_id}`)",
         )
 
 
@@ -282,13 +282,13 @@ async def demote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, newrights, rank))
     except BadRequestError:
         return await zzevent.edit(NO_PERM)
-    await zzevent.edit("**✎┊‌ تم تنزيلـه من الاشـرف بنجـاح  .**")
+    await zzevent.edit("**✎┊‌ تم تنزيلـه من الاشـرف بنجـاح ✓**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
             f"#تنـزيــل_مشــرف\
-            \n**- الشخـص : ** [{user.first_name}](tg://user?id={user.id})\
-            \n**- الكــروب :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+            \n**✎┊‌ الشخـص : ** [{user.first_name}](tg://user?id={user.id})\
+            \n**✎┊‌ الكــروب :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
         )
 
 
@@ -326,16 +326,16 @@ async def _ban_person(event):
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"#الحظــࢪ\
-                \n- الشخـص : [{user.first_name}](tg://user?id={user.id})\
-                \n- الدردشــه: {get_display_name(await event.get_chat())}(`{event.chat_id}`)\
-                \n- السـبب : {reason}",
+                \n**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\
+                \n**✎┊‌ الدردشــه:** {get_display_name(await event.get_chat())}(`{event.chat_id}`)\
+                \n**✎┊‌ السـبب :** {reason}",
             )
         else:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 f"#الحظــࢪ\
-                \n- الشخـص : [{user.first_name}](tg://user?id={user.id})\
-                \n- الدردشــه : {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+                \n**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\
+                \n**✎┊‌ الدردشــه :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
             )
         try:
             if reply:
@@ -352,7 +352,7 @@ async def nothanos(event):
     user, _ = await get_user_from_event(event)
     if not user:
         return
-    zedevent = await edit_or_reply(event, "**✎┊‌ .. جـاري الغاء حـظࢪه ..**")
+    zedevent = await edit_or_reply(event, "**✎┊‌ .. جـاري الغاء حـظࢪه **")
     try:
         await event.client(EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS))
         await zedevent.edit(
@@ -362,8 +362,8 @@ async def nothanos(event):
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#الغــاء_الحظــࢪ\n"
-                f"- الشخـص : [{user.first_name}](tg://user?id={user.id})\n"
-                f"- الدردشــه : {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+                f"**✎┊‌ الشخـص :** [{user.first_name}](tg://user?id={user.id})\n"
+                f"**✎┊‌ الدردشــه :** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
             )
     except UserIdInvalidError:
         await zedevent.edit("`Uh oh my unban logic broke!`")
@@ -386,9 +386,9 @@ async def startmute(event):
         replied_user = await event.client.get_entity(event.chat_id)
         if is_muted(event.chat_id, event.chat_id):
             return await event.edit(
-                "**✎┊‌  ⌊هـذا المسـتخـدم مڪتـوم . . سـابقـاً **"
+                "**✎┊‌ هـذا المسـتخـدم مڪتـوم . . سـابقـاً **"
             )
-        if event.chat_id == zq_lo.uid:
+        if event.chat_id == l313l.uid:
             return await edit_delete(event, "**✎┊‌ لا تستطــع كتـم نفسـك**")
         if event.chat_id == 7275336620 or event.chat_id == 815010872 or event.chat_id == 7045643989:
             return await edit_delete(event, "**✎┊‌  دي لا يمڪنني كتـم احـد مطـورين السـورس  **")
@@ -397,14 +397,14 @@ async def startmute(event):
         try:
             mute(event.chat_id, event.chat_id)
         except Exception as e:
-            await event.edit(f"**- خطـأ **\n`{e}`")
+            await event.edit(f"**✎┊‌ خطـأ **\n`{e}`")
         else:
             await event.edit("**✎┊‌ تم ڪتـم الـمستخـدم  . . بنجـاح **")
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#كتــم_الخــاص\n"
-                f"**- الشخـص  :** [{replied_user.first_name}](tg://user?id={event.chat_id})\n",
+                f"**✎┊‌ الشخـص  :** [{replied_user.first_name}](tg://user?id={event.chat_id})\n",
             )
     else:
         chat = await event.get_chat()
@@ -417,7 +417,7 @@ async def startmute(event):
         user, reason = await get_user_from_event(event)
         if not user:
             return
-        if user.id == zq_lo.uid:
+        if user.id == l313l.uid:
             return await edit_or_reply(event, "**✎┊‌ عــذراً .. لا استطيــع كتــم نفســي**")
         if user.id == 7275336620 or user.id == 815010872 or user.id == 7045643989:
             return await edit_or_reply(event, "**✎┊‌  دي لا يمڪنني كتـم احـد مطـورين السـورس  **")
