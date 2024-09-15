@@ -341,6 +341,7 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
+    await bot.mute(chat)
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -358,6 +359,7 @@ async def _(event):
             conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
         await event.delete()
+        await event.client.delete_chat(conv.chat_id)
 
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
@@ -374,6 +376,7 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
     chat = "@LEbot"
+    await bot.mute(chat)
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -391,6 +394,7 @@ async def _(event):
             conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
         )
         await event.delete()
+        await event.client.delete_chat(conv.chat_id)
 
 @l313l.on(admin_cmd(pattern="يوتيوب(?: |$)(.*)"))
 async def _(event):
@@ -402,6 +406,7 @@ async def _(event):
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
         chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ YouTube
+        await bot.mute(chat)
         async with bot.conversation(chat) as conv:
             try:
                 msg_start = await conv.send_message("/start")
@@ -419,4 +424,4 @@ async def _(event):
                 conv.chat_id, [msg_start.id, r.id, msg.id, details.id, video.id]
             )
             await event.delete()
-            
+            await event.client.delete_chat(conv.chat_id)
