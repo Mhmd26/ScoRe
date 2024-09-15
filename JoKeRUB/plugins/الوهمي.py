@@ -27,7 +27,7 @@ async def _(event):
             try:
                 t = await event.ban_time(t)
             except BaseException:
-                return await event.edit("**- يجب كتابة الامر بشكل صحيح**")
+                return await event.edit("**✎┊‌ يجب كتابة الامر بشكل صحيح**")
     await event.edit(f"**تم بدء وضع الكتابة الوهمية لـ {t} من الثوانـي**")
     async with event.client.action(event.chat_id, "typing"):
         await asyncio.sleep(t)
@@ -45,7 +45,7 @@ async def _(event):
             try:
                 t = await event.ban_time(t)
             except BaseException:
-                return await event.edit("**- يجب كتابة الامر بشكل صحيح**")
+                return await event.edit("**✎┊‌ يجب كتابة الامر بشكل صحيح**")
     await event.edit(f"**تم بدء وضع ارسال الصوتية الوهمية لـ {t} من الثوانـي**")
     async with event.client.action(event.chat_id, "record-audio"):
         await asyncio.sleep(t)
@@ -63,7 +63,7 @@ async def _(event):
             try:
                 t = await event.ban_time(t)
             except BaseException:
-                return await event.edit("**- يجب كتابة الامر بشكل صحيح**")
+                return await event.edit("**✎┊‌ يجب كتابة الامر بشكل صحيح**")
     await event.edit(f"**تم بدء وضع ارسال الفيديو الوهمي لـ {t} من الثوانـي**")
     async with event.client.action(event.chat_id, "record-video"):
         await asyncio.sleep(t)
@@ -81,7 +81,7 @@ async def _(event):
             try:
                 t = await event.ban_time(t)
             except BaseException:
-                return await event.edit("**- يجب كتابة الامر بشكل صحيح**")
+                return await event.edit("**✎┊‌ يجب كتابة الامر بشكل صحيح**")
     await event.edit(f"**تم بدء وضع اللعب الوهمي لـ {t} من الثوانـي**")
     async with event.client.action(event.chat_id, "game"):
         await asyncio.sleep(t)
@@ -96,14 +96,14 @@ async def _(e):
         )
     except no_admin:
         return await eod(rr, "عذرا انت لست مشرف في هذه الدردشة", time=10)
-    await eod(rr, f"- رابط الدردشة\n {r.link}")
+    await eod(rr, f"✎┊‌ رابط الدردشة\n {r.link}")
 
 
 @l313l.on(admin_cmd(pattern="للكل تاك$"))
 async def listall(JoKeRUB):
     if JoKeRUB.fwd_from:
         return
-    mentions = "- هذه هي قائمة جميع الاعضاء هنا: "
+    mentions = "✎┊‌ هذه هي قائمة جميع الاعضاء هنا: "
     chat = await bot.get_input_chat()
     async for x in borg.iter_participants(chat, 2000):
         mentions += f" \n[{x.first_name}](tg://user?id={x.id})"
