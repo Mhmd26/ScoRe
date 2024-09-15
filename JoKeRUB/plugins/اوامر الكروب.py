@@ -87,14 +87,14 @@ async def remoteaccess(event):
     mssg = await event.get_reply_message()
     if event.reply_to_msg_id:
         await event.client.send_message(chat_id, mssg)
-        await event.edit("تم الارسال الرسالة الى الرابط الذي وضعتة")
+        await event.edit("**✎┊‌تم الارسال الرسالة الى الرابط الذي وضعتة **")
     for i in m[1:]:
         msg += i + " "
     if msg == "":
         return
     try:
         await event.client.send_message(chat_id, msg)
-        await event.edit("تم ارسال الرساله الى الرابط الذي وضعتة")
+        await event.edit("**✎┊‌تم ارسال الرساله الى الرابط الذي وضعتة**")
     except BaseException:
         await event.edit("** عذرا هذا ليست مجموعة **")
 @l313l.ar_cmd(
@@ -110,7 +110,7 @@ async def remoteaccess(event):
 )
 async def kickme(leave):
     "to leave the group."
-    await leave.edit("✎┊‌  حسنا سأغادر المجموعه وداعا ")
+    await leave.edit("**✎┊‌  حسنا سأغادر المجموعه وداعا **")
     await leave.client.kick_participant(leave.chat_id, "me")
 
 @l313l.ar_cmd(
@@ -133,7 +133,7 @@ async def _(event):
     )
     if not result.participant.admin_rights.ban_users:
         return await edit_or_reply(
-            event, "✎┊‌ - يبدو انه ليس لديك صلاحيات الحذف في هذه الدردشة "
+            event, "**✎┊‌ يبدو انه ليس لديك صلاحيات الحذف في هذه الدردشة **"
         )
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
@@ -152,7 +152,7 @@ async def _(event):
             LOGS.info(str(e))
             await sleep(0.5)
     await event.reply(
-        f"✎┊‌  تم بنجاح طرد من {total} الاعضاء ✅ "
+        f"**✎┊‌  تم بنجاح طرد من {total} الاعضاء ✓** "
     )
 
 @l313l.ar_cmd(
@@ -175,7 +175,7 @@ async def _(event):
     )
     if not result:
         return await edit_or_reply(
-            event, "✎┊‌ - يبدو انه ليس لديك صلاحيات الحذف في هذه الدردشة ❕"
+            event, "*✎┊‌ يبدو انه ليس لديك صلاحيات الحذف في هذه الدردشة **"
         )
     admins = await event.client.get_participants(
         event.chat_id, filter=ChannelParticipantsAdmins
@@ -195,7 +195,7 @@ async def _(event):
         except Exception as e:
             LOGS.info(str(e))
     await event.reply(
-        f"✎┊‌  تم بنجاح حظر من {total} الاعضاء ✅ "
+        f"/*✎┊‌  تم بنجاح حظر من {total} الاعضاء ✓** "
     )
 
 
@@ -231,7 +231,7 @@ async def _(event):
                 functions.channels.EditBannedRequest(event.chat_id, i, rights)
             )
         except FloodWaitError as e:
-            LOGS.warn(f"لقد حدث عمليه تكرار كثير ارجو اعادة الامر او انتظر")
+            LOGS.warn(f"**✎┊‌ لقد حدث عمليه تكرار كثير ارجو اعادة الامر او انتظر **")
             await catevent.edit(
                 f"أنتـظر لـ {readable_time(e.seconds)} تحتاط لاعادة الامر لاكمال العملية"
             )
@@ -247,11 +247,11 @@ async def _(event):
             try:
                 if succ % 10 == 0:
                     await catevent.edit(
-                        f"✎┊‌  الغاء حظر جميع الحسابات\nتم الغاء حظر جميع الاعضاء بنجاح ✅"
+                        f"**✎┊‌  الغاء حظر جميع الحسابات\nتم الغاء حظر جميع الاعضاء بنجاح ✓**"
                     )
             except MessageNotModifiedError:
                 pass
-    await catevent.edit(f"✎┊‌ الغاء حظر :__{succ}/{total} في الدردشه {chat.title}__")
+    await catevent.edit(f"**✎┊‌ الغاء حظر :__{succ}/{total} في الدردشه {chat.title}__")
 
 # Ported by ©[NIKITA](t.me/kirito6969) and ©[EYEPATCH](t.me/NeoMatrix90)
 @l313l.ar_cmd(
@@ -268,17 +268,17 @@ async def rm_deletedacc(show):
     "To check deleted accounts and clean"
     con = show.pattern_match.group(1).lower()
     del_u = 0
-    del_status = "✎┊‌  لم يتم العثور على حسابات متروكه او حسابات محذوفة الكروب نظيف"
+    del_status = "**✎┊‌  لم يتم العثور على حسابات متروكه او حسابات محذوفة الكروب نظيف**"
     if con != "اطردهم":
         event = await edit_or_reply(
-            show, "✎┊‌  يتم البحث عن حسابات محذوفة او حسابات متروكة انتظر"
+            show, "**✎┊‌  يتم البحث عن حسابات محذوفة او حسابات متروكة انتظر**"
         )
         async for user in show.client.iter_participants(show.chat_id):
             if user.deleted:
                 del_u += 1
                 await sleep(0.5)
         if del_u > 0:
-            del_status = f"✎┊‌ تـم العـثور : **{del_u}** على حسابات محذوفة ومتروكه في هذه الدردشه من الحسابات في هذه الدردشه,\
+            del_status = f"**✎┊‌ تـم العـثور :** **{del_u}** على حسابات محذوفة ومتروكه في هذه الدردشه من الحسابات في هذه الدردشه,\
                            \nاطردهم بواسطه  `.المحذوفين اطردهم`"
         await event.edit(del_status)
         return
@@ -289,7 +289,7 @@ async def rm_deletedacc(show):
         await edit_delete(show, "أنا لسـت مشرف هـنا", 5)
         return
     event = await edit_or_reply(
-        show, "✎┊‌ جاري حذف الحسابات المحذوفة"
+        show, "**✎┊‌ جاري حذف الحسابات المحذوفة**"
     )
     del_u = 0
     del_a = 0
@@ -452,7 +452,7 @@ async def _(event):  # sourcery no-metrics
     o = 0
     q = 0
     r = 0
-    et = await edit_or_reply(event, "يتم البحث في القوائم ✎┊‌")
+    et = await edit_or_reply(event, "**✎┊‌ يتم البحث في القوائم**")
     async for i in event.client.iter_participants(event.chat_id):
         p += 1
         #
@@ -466,7 +466,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastMonth):
@@ -476,7 +476,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusLastWeek):
@@ -486,7 +486,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر** ")
                     e.append(str(e))
                     break
         if isinstance(i.status, UserStatusOffline):
@@ -494,7 +494,7 @@ async def _(event):  # sourcery no-metrics
             if "o" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر** ")
                     e.append(str(e))
                     break
                 else:
@@ -504,7 +504,7 @@ async def _(event):  # sourcery no-metrics
             if "q" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌  احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -516,7 +516,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
         if i.bot:
@@ -524,7 +524,7 @@ async def _(event):  # sourcery no-metrics
             if "b" in input_str:
                 status, e = await ban_user(event.chat_id, i, rights)
                 if not status:
-                    await et.edit("✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
                     break
                 else:
@@ -536,7 +536,7 @@ async def _(event):  # sourcery no-metrics
                 if status:
                     c += 1
                 else:
-                    await et.edit("✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر ")
+                    await et.edit("**✎┊‌ احتاج الى صلاحيات المشرفين للقيام بهذا الامر **")
                     e.append(str(e))
         elif i.status is None:
             n += 1
@@ -622,7 +622,7 @@ async def Hussein(event):
                     await l313l(LeaveChannelRequest(channel_username))
                     response = "**✎┊‌ تم الخروج من القناة بنجاح!**"
             except ValueError:
-                response = "خطأ في العثور على القناة. يرجى التأكد من المعرف الصحيح"
+                response = "** ✎┊‌ خطأ في العثور على القناة. يرجى التأكد من المعرف الصحيح**"
         else:
             response = "**✎┊‌ يُرجى تحديد معرف القناة أو المجموعة مع الخروج  ..**"
         #await event.reply(response)
