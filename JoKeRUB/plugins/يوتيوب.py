@@ -341,7 +341,7 @@ async def _(event):
         await event.edit("**✎┊‌يجب وضع رابط الفيديو مع الامر اولا **")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@InstagramBot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
+    chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
