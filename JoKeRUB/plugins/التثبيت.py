@@ -95,14 +95,14 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{str(e)}`", 5)
-    await edit_delete(event, "**✎┊‌ تـم تـثبيـت الـرسالة بـنجـاح ✅**", 3)
+    await edit_delete(event, "**✎┊‌ تـم تـثبيـت الـرسالة بـنجـاح ✓**",)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
-            f"✎┊‌ الـتثبيت\
+            f"**✎┊‌ الـتثبيت**\
                 \n **✎┊‌ تـم بـنجـاح الـتثبيت فـي الدردشـة**\
-                \nالـدردشـة: {event.chat.title}(`{event.chat_id}`)\
-                \nالـتثبيت: {is_silent}",
+                \n**✎┊‌الـدردشـة:** {event.chat.title}(`{event.chat_id}`)\
+                \n**✎┊‌الـتثبيت:** {is_silent}",
         )
 #admin plugin for  l313l
 @l313l.ar_cmd(
@@ -142,13 +142,13 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{str(e)}`", 5)
-    await edit_delete(event, "**⌔ ︙تم الغاء التثبيت بنجاح  ✅**", 3)
+    await edit_delete(event, "**✎┊‌ تم الغاء التثبيت بنجاح ✓**",)
     if BOTLOG and not event.is_private:
         await event.client.send_message(
             BOTLOG_CHATID,
             f"**✎┊‌ الـغاء التثبيت  ❗️ \
                 \n** ✎┊‌ تم بنجاح الغاء التثبيـت في الدردشة  ✅ \
-                \n✎┊‌الدردشـه  🔖 : {event.chat.title}(`{event.chat_id}`)",
+                \n**✎┊‌الدردشـه  🔖 :** {event.chat.title}(`{event.chat_id}`)",
         )
 #admin plugin for  l313l
 @l313l.ar_cmd(
@@ -208,11 +208,11 @@ async def _iundlt(event):  # sourcery no-metrics
             _media_type = media_type(msg.old)
             if _media_type is None:
                 await main_msg.reply(
-                    f"{msg.old.message}\n✎┊‌ ارسلت بواسطه {_format.mentionuser(ruser.first_name ,ruser.id)}"
+                    f"{msg.old.message}\n**✎┊‌ ارسلت بواسطه** {_format.mentionuser(ruser.first_name ,ruser.id)}"
                 )
             else:
                 await main_msg.reply(
-                    f"{msg.old.message}\n✎┊‌ ارسلت بواسطه {_format.mentionuser(ruser.first_name ,ruser.id)}",
+                    f"{msg.old.message}\n**✎┊‌ ارسلت بواسطه** {_format.mentionuser(ruser.first_name ,ruser.id)}",
                     file=msg.old.media,
                 )
 #admin plugin for  l313l
