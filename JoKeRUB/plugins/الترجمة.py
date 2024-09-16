@@ -94,8 +94,11 @@ async def translate_text(event):
         trans = await gtrans(text, lan)
         if not trans:
             return await edit_delete(event, "**تحقق من رمز اللغة !, لا يوجد هكذا لغة**")      
-        output_str = f"**تمت الترجمة من ar الى {lan}**\n`{trans}`"
-        await edit_or_reply(event, output_str)
+        if isinstance(trans, str):
+            output_str = f"**تمت الترجمة من ar الى {lan}**\n`{trans}`"
+            await edit_or_reply(event, output_str)
+        else:
+            await edit_delete(event, f"**خطا:**\n`استجابة غير صالحة`", time=5)
     except Exception as exc:
         await edit_delete(event, f"**خطا:**\n`{exc}`", time=5)
 
@@ -126,8 +129,12 @@ async def auto_translate(event):
         else:
             original_message = event.message.message
             if original_message:
-                translated_message = await gtrans(soft_deEmojify(original_message.strip()), gvarstatus("translang") or "en")
-                if translated_message:
-                    await event.message.edit(translated_message)
+                lang = gvarstatus("translang") or "en"
+                if lang:
+                    translated_message = await gtrans(soft_deEmojify(original_message.strip()), lang)
+                    if translated_message:
+                        await event.message.edit(translated_message)
+                    else:
+                        await event.message.edit("حدث خطأ أثناء الترجمة.")
                 else:
-                    await event.message.edit("حدث خطأ أثناء الترجمة.")
+                    await event.message.edit("لم يتم تحديد لغة الترجمة.")
