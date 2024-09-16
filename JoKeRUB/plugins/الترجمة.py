@@ -87,10 +87,7 @@ async def translate_text(event):
         )
     
     text = soft_deEmojify(text) or ""  # Ensure text is not None
-    
-    if len(text) < 2:
-        return await edit_delete(event, "قم بكتابة ما تريد ترجمته!")
-    
+
     try:
         trans = await gtrans(text, lan)
         if not trans:
