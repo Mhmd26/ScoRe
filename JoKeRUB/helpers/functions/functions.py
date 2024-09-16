@@ -216,6 +216,12 @@ async def unzip(downloaded_file_name):
 # https://github.com/ssut/py-googletrans/issues/234#issuecomment-722379788
 from asyncio import sleep
 
+import requests
+import json
+from asyncio import sleep
+from googletrans import Translator  # تأكد من استخدام مكتبة الترجمة المناسبة
+
+# دالة للحصول على الترجمة مع محاولة الترجمة عدة مرات في حال حدوث خطأ
 async def getTranslate(text, **kwargs):
     translator = Translator()
     result = None
@@ -225,11 +231,12 @@ async def getTranslate(text, **kwargs):
             if result is not None:
                 return result.text
         except Exception as e:
-            print(f"Error during translation attempt: {e}")
+            print(f"Translation error: {e}")
             translator = Translator()
             await sleep(0.5)  # زيادة وقت الانتظار قليلاً
     return "Translation failed after multiple attempts"
 
+# دالة للتعامل مع طلب الترجمة عبر HTTP
 def translate(*args, **kwargs):
     headers = {
         "Referer": "https://translate.google.co.in",
@@ -238,21 +245,38 @@ def translate(*args, **kwargs):
         "Chrome/47.0.2526.106 Safari/537.36",
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
     }
+    
     try:
         response = requests.post(
             "https://translate.google.co.in/_/TranslateWebserverUi/data/batchexecute",
             headers=headers,
-            data=_package_rpc(*args, **kwargs),
-        ).text
-        data = json.loads(json.loads(response[4:])[0][2])[1][0][0]
+            data=_package_rpc(*args, **kwargs),  # تأكد من أن _package_rpc ترجع البيانات بشكل صحيح
+        )
+        response_text = response.text
+        print(f"Raw response: {response_text}")  # طباعة الاستجابة للتحقق منها
+        
+        if not response_text.startswith(")]}'"):
+            raise ValueError("Unexpected response format")
+        
+        json_data = json.loads(response_text[4:])
+        parsed_data = json.loads(json_data[0][2])
+        data = parsed_data[1][0][0]
         subind = data[-2] or data[-1]
+        
         return ''.join(i[0] for i in subind)
     except (json.JSONDecodeError, IndexError, KeyError) as e:
-        print(f"Error processing translation response: {e}")
+        print(f"JSON processing error: {e}")
         return "Error processing translation response"
     except requests.RequestException as e:
         print(f"Request failed: {e}")
         return "Request failed"
+
+# تأكد من أن دالة _package_rpc تعمل بشكل صحيح
+def _package_rpc(*args, **kwargs):
+    # تنفيذ التحزيم المطلوب للبيانات وإرجاعها في التنسيق الصحيح
+    pass
+
+# اختبر الكود بترجمة نصوص مختلفة وتحقق من صحة النتائج.
 
 
 def _get_value(stri):
