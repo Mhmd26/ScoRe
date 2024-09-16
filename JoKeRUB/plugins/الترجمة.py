@@ -7,15 +7,15 @@
 # Please see: https://github.com/TgCatUB/catuserbot/blob/master/LICENSE
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
-from googletrans import LANGUAGES, Translator
-
-
+from asyncio import sleep
+import requests
+import json
+import os
+from JoKeRUB.helpers.functions.functions import translate
 from JoKeRUB import l313l
-
+from telethon import events, types
+from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.functions.functions import getTranslate
-from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID, soft_deEmojify
 
 plugin_category = "utils"
 
