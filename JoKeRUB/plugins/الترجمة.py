@@ -41,13 +41,11 @@ langs = {
 async def gtrans(text, lan):
     try:
         response = translate(text, lang_tgt=lan)
-        if response == 400:
-            return False
         if not response or not isinstance(response, (str, bytes)):
             return "تلقى استجابة غير صالحة من خدمة الترجمة"
+        return response
     except Exception as er:
         return f"حدث خطأ \n{er}"
-    return response
 
 @l313l.ar_cmd(pattern="event")
 async def handle_event(event):
