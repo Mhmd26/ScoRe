@@ -1,9 +1,10 @@
 def media_type(message):
     # تحقق من أن message هو كائن يحتوي على media
-    if hasattr(message, 'media'):
+    if hasattr(message, 'media') and message.media:
         media = message.media
-        if hasattr(media, 'document'):
-            # إذا كان هناك مستند، تحقق من نوع المحتوى
+        
+        # التحقق من نوع المستند
+        if hasattr(media, 'document') and media.document:
             content_type = media.document.mime_type if media.document.mime_type else ''
             if content_type.startswith('audio/'):
                 return 'Audio'
@@ -17,22 +18,18 @@ def media_type(message):
                 return 'Application'
             else:
                 return 'Unknown'
-        elif hasattr(media, 'photo'):
-            # إذا كان هناك صورة
+        
+        # التحقق من الأنواع الأخرى
+        if hasattr(media, 'photo'):
             return 'Image'
         elif hasattr(media, 'video'):
-            # إذا كان هناك فيديو
             return 'Video'
         elif hasattr(media, 'audio'):
-            # إذا كان هناك مقطع صوتي
             return 'Audio'
-        else:
-            return 'Unknown'
-    else:
-        # إذا لم يكن message يحتوي على media، ارجع 'Unknown'
-        return 'Unknown'
+        
+    return 'Unknown'
 
-# مثال على كيفية استخدام الدالة
+# اختبار الدالة
 class Message:
     def __init__(self, media):
         self.media = media
