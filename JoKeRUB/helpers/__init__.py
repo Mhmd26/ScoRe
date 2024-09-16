@@ -7,6 +7,7 @@ from .time_utils import time_formatter
 from .utiles import sanga_seperator
 from .times_utils import readable_time
 from .media_utils import media_type
+from .media_type import *  # إضافة اسم الملف هنا
     # تأكد من أنك قد حصلت على مفتاح API من Telegraph
                             
 flag = True
