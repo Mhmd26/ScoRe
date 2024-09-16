@@ -25,7 +25,6 @@ from telethon.tl.functions.contacts import UnblockRequest as unblock
 from ...Config import Config
 from ...sql_helper.globals import gvarstatus
 from ..resources.states import states
-import soft_deEmojify
 imdb = IMDb()
 
 mov_titles = [
@@ -515,7 +514,3 @@ async def waifutxt(text, chat_id, reply_to_id, bot):
     if cat:
         await bot.send_file(int(chat_id), cat, reply_to=reply_to_id)
         await cat.delete()
-
-def soft_deEmojify(text):
-    # منطق إزالة الرموز التعبيرية
-    return ''.join(c for c in text if c not in emoji.UNICODE_EMOJI['en'])
