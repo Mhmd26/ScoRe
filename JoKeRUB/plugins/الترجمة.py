@@ -127,3 +127,4 @@ async def reda(event):
             original_message = event.message.message
             translated_message = await gtrans(soft_deEmojify(original_message.strip()), gvarstatus("translang") or "en")
             await event.message.edit(translated_message)
+            
