@@ -1,3 +1,4 @@
 def soft_deEmojify(text):
-    # تنفيذ الوظيفة هنا
-    pass
+    if text is None:
+        return ""  # أو قيمة مناسبة أخرى
+    # بقية تنفيذ الدالة
