@@ -214,16 +214,21 @@ async def unzip(downloaded_file_name):
 
 
 # https://github.com/ssut/py-googletrans/issues/234#issuecomment-722379788
+from asyncio import sleep
+
 async def getTranslate(text, **kwargs):
     translator = Translator()
     result = None
     for _ in range(10):
         try:
             result = translator.translate(text, **kwargs)
-        except Exception:
+            if result is not None:
+                return result.text
+        except Exception as e:
+            print(f"Error during translation attempt: {e}")
             translator = Translator()
-            await sleep(0.1)
-    return result
+            await sleep(0.5)  # زيادة وقت الانتظار قليلاً
+    return "Translation failed after multiple attempts"
 
 def translate(*args, **kwargs):
     headers = {
@@ -233,19 +238,22 @@ def translate(*args, **kwargs):
         "Chrome/47.0.2526.106 Safari/537.36",
         "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
     }
-    x = requests.post(
-        "https://translate.google.co.in/_/TranslateWebserverUi/data/batchexecute",
-        headers=headers,
-        data=_package_rpc(*args, **kwargs),
-    ).text
-    response = ""
-    data = json.loads(json.loads(x[4:])[0][2])[1][0][0]
-    subind = data[-2]
-    if not subind:
-        subind = data[-1]
-    for i in subind:
-        response += i[0]
-    return response
+    try:
+        response = requests.post(
+            "https://translate.google.co.in/_/TranslateWebserverUi/data/batchexecute",
+            headers=headers,
+            data=_package_rpc(*args, **kwargs),
+        ).text
+        data = json.loads(json.loads(response[4:])[0][2])[1][0][0]
+        subind = data[-2] or data[-1]
+        return ''.join(i[0] for i in subind)
+    except (json.JSONDecodeError, IndexError, KeyError) as e:
+        print(f"Error processing translation response: {e}")
+        return "Error processing translation response"
+    except requests.RequestException as e:
+        print(f"Request failed: {e}")
+        return "Request failed"
+
 
 def _get_value(stri):
     try:
