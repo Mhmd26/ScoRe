@@ -7,7 +7,7 @@ from JoKeRUB import l313l
 from telethon import events, types
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
 from ..core.managers import edit_delete, edit_or_reply
-from ..helpers.functions import soft_deEmojify  # تأكد من أن هذه دالة وليست وحدة
+from ..helpers.functions import soft_deEmojify
 
 langs = {
     'عربي': 'ar',
@@ -42,7 +42,7 @@ async def gtrans(text, lan):
     try:
         response = translate(text, lang_tgt=lan)
         if response == 400:
-            return False  # صحح "Flase" إلى "False"
+            return Flase
     except Exception as er:
         return f"حدث خطأ \n{er}"
     return response
@@ -52,7 +52,7 @@ async def Reda(event):
     if event.reply_to_msg_id:
         m = await event.get_reply_message()
         with open("reply.txt", "w") as file:
-            file.write(str(m))
+                file.write(str(m))
         await event.client.send_file(event.chat_id, "reply.txt")
         os.remove("reply.txt")
 
@@ -61,7 +61,7 @@ async def Reda(event):
     command=("ترجمة", "tools"),
     info={
         "header": "To translate the text to required language.",
-        "note": "For language codes check [this link](https://bit.ly/2SRQ6WU)",
+        "note": "For langugage codes check [this link](https://bit.ly/2SRQ6WU)",
         "usage": [
             "{tr}tl <language code> ; <text>",
             "{tr}tl <language codes>",
@@ -79,21 +79,23 @@ async def _(event):
     elif ";" in input_str:
         lan, text = input_str.split(";")
     else:
-        return await edit_delete(event, "** قم بالرد على الرسالة للترجمة **", time=5)
-    
+        return await edit_delete(
+            event, "** قم بالرد على الرسالة للترجمة **", time=5
+        )
     text = soft_deEmojify(text.strip())
     lan = lan.strip()
     if len(text) < 2:
         return await edit_delete(event, "قم بكتابة ما تريد ترجمته!")
-    
     try:
         trans = await gtrans(text, lan)
         if not trans:
             return await edit_delete(event, "**تحقق من رمز اللغة !, لا يوجد هكذا لغة**")      
-        output_str = f"**تمت الترجمة من ar الى {lan}**\n`{trans}`"
+        output_str = f"**تمت الترجمة من ar الى {lan}**\
+                \n`{trans}`"
         await edit_or_reply(event, output_str)
     except Exception as exc:
-        await edit_delete(event, f"**خطأ:**\n`{exc}`", time=5)
+        await edit_delete(event, f"**خطا:**\n`{exc}`", time=5)
+
 
 @l313l.ar_cmd(pattern="(الترجمة الفورية|الترجمه الفوريه|ايقاف الترجمة|ايقاف الترجمه)")
 async def reda(event):
@@ -106,19 +108,21 @@ async def reda(event):
 
 @l313l.ar_cmd(pattern="لغة الترجمة")
 async def Reda_is_Here(event):
-    t = event.text.replace(".لغة الترجمة", "").replace(" ", "")
+    t = event.text.replace(".لغة الترجمة", "")
+    t = t.replace(" ", "")
     try:  
         lang = langs[t]
-    except KeyError:
+    except BaseException as er:
         return await edit_delete(event, "**✎┊‌ !تأكد من قائمة اللغات. لا يوجد هكذا لغة**")
     addgvar("translang", lang)
     await edit_delete(event, f"**✎┊‌ تم تغير لغة الترجمة الى {lang} بنجاح ✓ **")
 
+# Reda
 @l313l.on(events.NewMessage(outgoing=True))
 async def reda(event):
     if gvarstatus("transnow"):
         if event.media or isinstance(event.media, types.MessageMediaDocument) or isinstance(event.media, types.MessageMediaInvoice):
-            print("JoKeRUB")
+            print ("JoKeRUB")
         else:
             original_message = event.message.message
             translated_message = await gtrans(soft_deEmojify(original_message.strip()), gvarstatus("translang") or "en")
