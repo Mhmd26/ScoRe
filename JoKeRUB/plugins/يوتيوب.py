@@ -337,7 +337,7 @@ async def _(event):
         await event.edit("**✎┊‌يجب وضع رابط الانستا مع الامر اولا **")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@LEbot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
+    chat = "@Insstaaebot"  # تغيير اسم البوت إلى البوت المناسب لـ Instagram
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -348,7 +348,7 @@ async def _(event):
         
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @Insstaaebot")
             return
         await bot.send_file(event.chat_id, video)
         await event.client.delete_messages(
@@ -371,7 +371,7 @@ async def _(event):
         await event.edit("**✎┊‌ يجب وضع رابط الفيديو من التيك توك مع الامر  **")
     else:
         await event.edit("**✎┊‌تتم المعالجة انتظر قليلا**")
-    chat = "@LEbot"
+    chat = "@G_mailbbot"
     async with bot.conversation(chat) as conv:
         try:
             msg_start = await conv.send_message("/start")
@@ -379,10 +379,9 @@ async def _(event):
             msg = await conv.send_message(r_link)
             details = await conv.get_response()
             video = await conv.get_response()
-            """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @G_mailbbot")
             return
         await bot.send_file(event.chat_id, video)
         await event.client.delete_messages(
@@ -408,7 +407,6 @@ async def _(event):
                 msg = await conv.send_message(r_link)
                 details = await conv.get_response()
                 video = await conv.get_response()
-                """ قناة الجوكر  **العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**"""
                 await bot.send_read_acknowledge(conv.chat_id)
             except YouBlockedUserError:
                 await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @LEbot")
