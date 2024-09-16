@@ -1,13 +1,3 @@
-# Zed-Thon - ZelZal
-# Copyright (C) 2022 Zedthon . All Rights Reserved
-#
-# This file is a part of < https://github.com/Zed-Thon/ZelZal/ >
-# PLease read the GNU Affero General Public License in
-# <https://www.github.com/Zed-Thon/ZelZal/blob/master/LICENSE/>.
-
-#الملف محمي بحقوق الملكيـه الخـاصه بـ GNU Affero General Public License
-#So تخمـط الملف ابلـع سـورسك بانـد
-
 import asyncio
 import aiohttp
 import os
@@ -23,6 +13,9 @@ from ..Config import Config
 
 ZELZAL_APP_ID = "6e65179ed1d879f3d905e28ef8803625"
 
+def get_extension(content_type):
+    ext = guess_extension(content_type)
+    return ext if ext else ".jpg"  # تعيين ".jpg" كقيمة افتراضية إذا كانت القيمة None
 
 @l313l.ar_cmd(pattern="صور (.*)")
 async def _(event):
@@ -58,7 +51,7 @@ async def _(event):
             caption = result.get("description")
             image_url = result.get("url")
             image_req_set = await requests.get(image_url)
-            image_file_name = str(time.time()) + "" + guess_extension(
+            image_file_name = str(time.time()) + "" + get_extension(
                 image_req_set.headers.get("Content-Type")
             )
             image_save_path = os.path.join(
@@ -87,8 +80,6 @@ async def _(event):
     )
     await asyncio.sleep(5)
     await event.delete()
-
-
 
 @l313l.ar_cmd(pattern="خلفيات (.*)")
 async def _(event):
@@ -124,7 +115,7 @@ async def _(event):
             caption = result.get("description")
             image_url = result.get("url")
             image_req_set = await requests.get(image_url)
-            image_file_name = str(time.time()) + "" + guess_extension(
+            image_file_name = str(time.time()) + "" + get_extension(
                 image_req_set.headers.get("Content-Type")
             )
             image_save_path = os.path.join(
@@ -153,3 +144,4 @@ async def _(event):
     )
     await asyncio.sleep(5)
     await event.delete()
+    
