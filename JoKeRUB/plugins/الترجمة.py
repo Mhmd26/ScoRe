@@ -43,6 +43,8 @@ async def gtrans(text, lan):
         response = translate(text, lang_tgt=lan)
         if response == 400:
             return False
+        if not response or not isinstance(response, (str, bytes)):
+            return "تلقى استجابة غير صالحة من خدمة الترجمة"
     except Exception as er:
         return f"حدث خطأ \n{er}"
     return response
@@ -125,4 +127,7 @@ async def auto_translate(event):
             original_message = event.message.message
             if original_message:
                 translated_message = await gtrans(soft_deEmojify(original_message.strip()), gvarstatus("translang") or "en")
-                await event.message.edit(translated_message)
+                if translated_message:
+                    await event.message.edit(translated_message)
+                else:
+                    await event.message.edit("حدث خطأ أثناء الترجمة.")
