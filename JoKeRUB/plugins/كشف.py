@@ -87,7 +87,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b> {JEP_EM} 𝐑𝐚𝐧𝐤   ➟ {rotbat} </b>\n\n"
     caption += f"<b> {JEP_EM} 𝐏𝐡𝐨𝐭𝐨𝐬   ➟ {replied_user_profile_photos_count}</b>\n"
     caption += f"<b> {JEP_EM} 𝐁𝐢𝐨    ➟ {user_bio}</b> \n\n"
-    caption += f"<b> {JEP_EM} 𝐂𝐡𝐚𝐧𝐧𝐞𝐥   ➟ </b> <a href="https://t.me/Scorpion_scorp">𝗦𝗰𝗼𝗥</a> \n"
+    caption += f"<b> {JEP_EM} 𝐂𝐡𝐚𝐧𝐧𝐞𝐥   ➟ </b> <a href="https://t.me/Scorpion_scorp">𝗦𝗰𝗼𝗥</a>\n"
     caption += f"<b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>"
     return photo, caption
 
@@ -118,7 +118,7 @@ async def _(event):
     try:
         dc_id, location = get_input_location(replied_user.profile_photo)
     except Exception:
-        dc_id = "Couldn't fetch DC ID!"
+        dc_id = "No DC ID!"
     if spamwatch:
         ban = spamwatch.get_ban(user_id)
         if ban:
@@ -140,11 +140,11 @@ async def _(event):
             cas = "**Antispam(CAS) Banned :** `False`"
     else:
         cas = "**Antispam(CAS) Banned :** `Couldn't Fetch`"
-    caption = """**معلومات المسـتخدم**[{}](tg://user?id={}):
-   **✎┊‌⚕️ الايدي: **`{}`
-  ** ✎┊‌👥 المجموعات المشتركه : **`{}`
-  ** ✎┊‌🌏 رقم قاعده البيانات : **`{}`
-  ** ✎┊‌🔏 هل هو حساب موثق  : **`{}`
+    caption = """**معلومات المسـتخدم** : [{}](tg://user?id={}):
+   **✎┊‌ الايدي: **`{}`
+  ** ✎┊‌ المجموعات المشتركه : {} **
+  ** ✎┊‌ رقم قاعده البيانات : {} **
+  ** ✎┊‌ هل هو حساب موثق  : {}**
 """.format(
         first_name,
         user_id,
