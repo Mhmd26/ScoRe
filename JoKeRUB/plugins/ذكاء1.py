@@ -3,7 +3,7 @@
 import asyncio
 from telethon import events
 from telethon.errors import YouBlockedUserError
-from gpt import gpt  # استيراد دالة gpt من الملف الأول
+from gpt4 import gpt  # استيراد دالة gpt من الملف الأول
 
 from JoKeRUB import l313l
 from . import l313l
