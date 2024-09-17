@@ -140,9 +140,11 @@ async def _(event):
             cas = "**Antispam(CAS) Banned :** `False`"
     else:
         cas = "**Antispam(CAS) Banned :** `Couldn't Fetch`"
-    caption = """**معلومات المسـتخدم** : [{}](tg://user?id={})
-   **✎┊‌ الايدي: **`{}`
+    caption = """  ** معلومات المسـتخدم** : [{}](tg://user?id={})
+    
+  **✎┊‌ الايدي: **`{}`
   ** ✎┊‌ المجموعات المشتركه : {} **
+  
   ** ✎┊‌ رقم قاعده البيانات : {} **
   ** ✎┊‌ هل هو حساب موثق  : {}**
 """.format(
