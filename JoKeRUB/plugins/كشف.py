@@ -105,7 +105,7 @@ async def _(event):
     replied_user = await get_user_from_event(event)
     if not replied_user:
         return
-    catevent = await edit_or_reply(event, "**✎┊‌ جار إحضار معلومات المستخدم اننظر قليلا ⏳**")
+    catevent = await edit_or_reply(event, "**✎┊‌ جار إحضار معلومات المستخدم ⏳**")
     replied_user = await event.client(GetFullUserRequest(replied_user.id))
     user_id = replied_user.users[0].id
     first_name = html.escape(replied_user.users[0].first_name)
