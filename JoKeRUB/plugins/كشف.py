@@ -79,16 +79,16 @@ async def fetch_info(replied_user, event):
     rotbat = " مطور اساسي 𓅓 " if user_id == 7275336620 else (" عضو 𓅛 ")
     rotbat = " مطور اساسي 𓅓 " if user_id == 815010872 else (" عضو 𓅛 ")
     rotbat = "مـالك الحساب 𓀫 " if user_id == (await event.client.get_me()).id and user_id != 705475246  else rotbat
-    caption = "</b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>\n"
+    caption = "<b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>\n"
     caption += f"<b> {JEP_EM} 𝐍𝐚𝐦𝐞   ➟ </b> "
     caption += f'<a href="tg://user?id={user_id}">{first_name}</a>\n'
-    caption += f"<b> {JEP_EM} 𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞  ➟ </b> {username}\n\n"
+    caption += f"<b> {JEP_EM} 𝐔𝐬𝐞𝐫𝐧𝐚𝐦𝐞  ➟ {username}</b>\n\n"
     caption += f"<b> {JEP_EM} 𝐀𝐜 𝐈𝐃   ➟ </b> <code>{user_id}</code>\n"
     caption += f"<b> {JEP_EM} 𝐑𝐚𝐧𝐤   ➟ {rotbat} </b>\n\n"
-    caption += f"<b> {JEP_EM} 𝐏𝐡𝐨𝐭𝐨𝐬   ➟ </b> {replied_user_profile_photos_count}"
-    caption += f"\n<b> {JEP_EM} 𝐁𝐢𝐨    ➟ </b> {user_bio} \n\n"
+    caption += f"<b> {JEP_EM} 𝐏𝐡𝐨𝐭𝐨𝐬   ➟ {replied_user_profile_photos_count}</b>\n"
+    caption += f"<b> {JEP_EM} 𝐁𝐢𝐨    ➟ {user_bio}</b> \n\n"
     caption += f"<b> {JEP_EM} 𝐂𝐡𝐚𝐧𝐧𝐞𝐥   ➟ </b> <a href="https://t.me/Scorpion_scorp">𝗦𝗰𝗼𝗥</a> \n"
-    caption += f"</b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>"
+    caption += f"<b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>"
     return photo, caption
 
 @l313l.ar_cmd(
