@@ -13,7 +13,7 @@ from ..helpers.utils import reply_id
 
 plugin_category = "البوت"
 
-@l313l.ar_cmd(pattern="سؤال(?: |$)(.*)")
+@l313l.ar_cmd(pattern="سو(?: |$)(.*)")
 async def zelzal_gpt(event):
     question = event.pattern_match.group(1)
     reply_message = await event.get_reply_message()
