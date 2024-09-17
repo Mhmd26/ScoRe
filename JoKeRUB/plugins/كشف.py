@@ -87,7 +87,7 @@ async def fetch_info(replied_user, event):
     caption += f"<b> {JEP_EM} 𝐑𝐚𝐧𝐤   ➟ {rotbat} </b>\n\n"
     caption += f"<b> {JEP_EM} 𝐏𝐡𝐨𝐭𝐨𝐬   ➟ {replied_user_profile_photos_count}</b>\n"
     caption += f"<b> {JEP_EM} 𝐁𝐢𝐨    ➟ {user_bio}</b> \n\n"
-    caption += f"<b>{JEP_EM} Channel ➟</b> <a href='https://t.me/Scorpion_scorp'>ScoR</a>\n"
+    caption += f"<b>{JEP_EM} 𝐂𝐡𝐚𝐧𝐧𝐞𝐥 ➟</b> <a href='https://t.me/Scorpion_scorp'>𝗦𝗰𝗼𝗥</a>\n"
     caption += f"<b>𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳𓏳</b>"
     return photo, caption
 
