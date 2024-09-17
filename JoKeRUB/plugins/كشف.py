@@ -105,7 +105,7 @@ async def _(event):
     replied_user = await get_user_from_event(event)
     if not replied_user:
         return
-    catevent = await edit_or_reply(event, "✎┊‌ جار إحضار معلومات المستخدم اننظر قليلا ⚒️")
+    catevent = await edit_or_reply(event, "**✎┊‌ جار إحضار معلومات المستخدم اننظر قليلا ⏳**")
     replied_user = await event.client(GetFullUserRequest(replied_user.id))
     user_id = replied_user.users[0].id
     first_name = html.escape(replied_user.users[0].first_name)
@@ -140,11 +140,11 @@ async def _(event):
             cas = "**Antispam(CAS) Banned :** `False`"
     else:
         cas = "**Antispam(CAS) Banned :** `Couldn't Fetch`"
-    caption = """**معلومات المسـتخدم[{}](tg://user?id={}):
-   ✎┊‌⚕️ الايدي: **`{}`
-   ✎┊‌👥**المجموعات المشتركه : **`{}`
-   ✎┊‌🌏**رقم قاعده البيانات : **`{}`
-   ✎┊‌🔏**هل هو حساب موثق  : **`{}`
+    caption = """**معلومات المسـتخدم**[{}](tg://user?id={}):
+   **✎┊‌⚕️ الايدي: **`{}`
+  ** ✎┊‌👥 المجموعات المشتركه : **`{}`
+  ** ✎┊‌🌏 رقم قاعده البيانات : **`{}`
+  ** ✎┊‌🔏 هل هو حساب موثق  : **`{}`
 """.format(
         first_name,
         user_id,
@@ -174,7 +174,7 @@ async def who(event):
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        return await edit_or_reply(cat, "**- لـم استطـع العثــور ع الشخــص**")
+        return await edit_or_reply(cat, "**✎┊‌ لـم استطـع العثــور ع الشخــص**")
     message_id_to_reply = event.message.reply_to_msg_id
     if not message_id_to_reply:
         message_id_to_reply = None
@@ -226,17 +226,17 @@ async def _(event):
         try:
             if p.first_name:
                 return await edit_or_reply(
-                    event, f"✎┊‌ ايدي المستخدم : `{input_str}` هو `{p.id}`"
+                    event, f"**✎┊‌ ايدي المستخدم :**  `{input_str}`  هو  `{p.id}`"
                 )
         except Exception:
             try:
                 if p.title:
                     return await edit_or_reply(
-                        event, f"✎┊‌ ايدي الدردشة/القناة `{p.title}` هو `{p.id}`"
+                        event, f"**✎┊‌ ايدي الدردشة/القناة:**  `{p.title}`  هو  `{p.id}`"
                     )
             except Exception as e:
                 LOGS.info(str(e))
-        await edit_or_reply(event, "✎┊‌ يـجب كـتابة مـعرف الشـخص او الـرد عـليه")
+        await edit_or_reply(event, "**✎┊‌ يـجب كـتابة مـعرف الشـخص او الـرد عـليه**")
     elif event.reply_to_msg_id:
         await event.get_input_chat()
         r_msg = await event.get_reply_message()
@@ -244,12 +244,12 @@ async def _(event):
             bot_api_file_id = pack_bot_file_id(r_msg.media)
             await edit_or_reply(
                 event,
-                f"✎┊‌ ايدي الدردشه: `{str(event.chat_id)}` \n✎┊‌ ايدي المستخدم: `{str(r_msg.sender_id)}` \n✎┊‌ ايدي الميديا: `{bot_api_file_id}`",
+                f"**✎┊‌ ايدي الدردشه:** `{str(event.chat_id)}` \n**✎┊‌ ايدي المستخدم:** `{str(r_msg.sender_id)}` \n**✎┊‌ ايدي الميديا:** `{bot_api_file_id}`",
             )
         else:
             await edit_or_reply(
                 event,
-               f"✎┊‌ ايدي الدردشه : `{str(event.chat_id)}` \n✎┊‌ ايدي المستخدم: `{str(r_msg.sender_id)}` ",
+               f"**✎┊‌ ايدي الدردشه :** `{str(event.chat_id)}` \n**✎┊‌ ايدي المستخدم:** `{str(r_msg.sender_id)}` ",
             )
     else:
-        await edit_or_reply(event, f"✎┊‌ الـدردشـة الـحالية : `{str(event.chat_id)}`")
+        await edit_or_reply(event, f"**✎┊‌ الـدردشـة الـحالية :** `{str(event.chat_id)}`")
