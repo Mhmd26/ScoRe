@@ -1,6 +1,7 @@
 telethon
 pydub
 pytgpt
+g4f
 schedule
 waitress
 gunicorn
