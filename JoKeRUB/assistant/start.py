@@ -32,10 +32,11 @@ async def start(event):
     if event.sender_id == bot.uid:
         await tgbot.send_message(
             vent,
-            message=f"**اهـلا يا مالكـي انـه انـا {bot_id}, مسـاعدك  \nمـاذا تريـد ان تفعـل اليـوم **",
+            message=f"**اهـلا يا مالكـي انـه انـا {bot_id},  \n بماذا تريد ان اساعدك **",
             buttons=[
                 [Button.inline("عرض المستخدمين ", data="users"), Button.inline(
                                          "اوامر البـوت ", data="gibcmd")],
+                [Button.inline(" الذكاء الاصطناعي ", data="Ope")],
                 [Button.url("المطـور محمد", "https://t.me/Zo_r0")],
                 [Button.url("المطـور علوش", "https://t.me/I_e_e_l")],
 
@@ -91,6 +92,12 @@ async def users(event):
     else:
         pass
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Ope")))
+async def users(event):
+    await event.delete()
+    rorsa = "**✎┊‌ اهلا بك في بوت الذكاء الاصطناعي الخاص بسورس العقرب \n ملاحظه حته يشتغل وياك البوت ارسل \n `/openai` للتشغيل \n `/closeai` للإيقاف \n\nتم الصنيع بواسطة :\nالمطور [𝗠𝗼𝗵𝗮𝗺𝗲𝗱](t.me/Zo_r0) \nالمطور [𝗔𝗹𝗹𝗼𝘂𝘀𝗵](t.me/I_e_e_l)**"
+    await tgbot.send_message(event.chat_id, rorsa)
+    
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
 async def users(event):
