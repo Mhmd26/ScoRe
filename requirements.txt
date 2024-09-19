@@ -1,6 +1,6 @@
 telethon
 pydub
-pytgpt
+python-tgpt
 g4f
 schedule
 waitress
