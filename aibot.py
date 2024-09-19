@@ -3,7 +3,7 @@ import os
 from sai import gpt
 
 # الحصول على توكن البوت من المتغير البيئي
-TOKEN = os.getenv('TOKEN')
+TOKEN = os.getenv('TG_BOT_TOKEN')
 if not TOKEN:
     raise ValueError("لم يتم تعيين متغير البيئة 'TOKEN'.")
 
