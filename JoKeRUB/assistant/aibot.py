@@ -1,6 +1,6 @@
 import telebot
 import os
-from gpt import gpt
+from sai import gpt
 
 # الحصول على توكن البوت من المتغير البيئي
 TOKEN = os.getenv('TOKEN')
