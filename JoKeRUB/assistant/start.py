@@ -96,7 +96,7 @@ async def users(event):
 async def users(event):
     await event.delete()
     rorsa = "**✎┊‌ اهلا بك في بوت الذكاء الاصطناعي الخاص بسورس العقرب \n\n ملاحظه حته يشتغل وياك البوت ارسل \n `/p + السؤال ` لكي يعمل \n\nتم الصنيع بواسطة :\nالمطور [𝗠𝗼𝗵𝗮𝗺𝗲𝗱](t.me/Zo_r0) \nالمطور [𝗔𝗹𝗹𝗼𝘂𝘀𝗵](t.me/I_e_e_l)**"
-    await tgbot.send_message(event.chat_id, rorsa, disable_web_page_preview=True)
+    await tgbot.send_message(event.chat_id, rorsa)
     
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
