@@ -1,6 +1,3 @@
-#    جميع الحقوق لمطوري سورس جـيبثون حصريا لهم فقط
-#    اذا تخمط الملف اذك الحقوق وكاتبيه ومطوريه لا تحذف الحقوق وتصير فاشل 👍
-#    كتابة الشسد 
 import asyncio
 import io
 import re
@@ -36,6 +33,7 @@ async def start(event):
             buttons=[
                 [Button.inline("عرض المستخدمين ", data="users"), Button.inline(
                                          "اوامر البـوت ", data="gibcmd")],
+                [Button.inline("الذكاء الاصطناعي | GPT  ", data="ope")],
                 [Button.url("المطـور محمد", "https://t.me/Zo_r0")],
                 [Button.url("المطـور علوش", "https://t.me/I_e_e_l")],
 
@@ -98,7 +96,42 @@ async def users(event):
     rorza = "** قـائمـة اوامـر بوت العقرب الخاصـة بك **:\n\n- **جميع هذه الاوامر تستخدم بعد اضافة البوت في مجموعة ورفعه مشـرف مع بعض الصلاحيـات\n\n• /start \n ( للـتأكد من حالـة البـوت) \n\n• /ping \n ( امـر بنـك )  \n\n• /broadcast \n ( لعمـل اذاعـة لجميـع المستخدمين في البـوت )  \n\n• /id \n  ( لعـرض ايدي المسـتخدم ) \n\n• /alive \n- ( لـرؤية معلومات البـوت ) \n\n• /bun \n-  ( تعمل في المجموعات لحظر شخص )\n\n• /unbun  \n-  ( تعمل في المجموعات لالغاء حظر مستخدم )  \n\n• /prumote  \n-  ( لرفـع شخص مشـرف )\n\n• /demute  \n-  ( لتنزيل الشخص من رتبة الاشراف ) \n\n• /pin  \n-  ( لتثبيـت رسالة في المجموعـة )  \n\n• /stats  \n-  ( لعرض مستخدمين البوت )  \n\n• /purge  \n-  ( بالرد على رسالة ليقوم بحذف ما تحتها من رسائل ) \n\n• /del  \n-  ( بالـرد على الرسالـة لحـذفها ) \n\n [العقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](t.me/Scorpions_scorp)**"
     await tgbot.send_message(event.chat_id, rorza)
 
+from telethon import Button
+import re
+from telethon import events
 
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
+async def users(event):
+    await event.delete()
+    rorza = "**مرحبا **"
+    buttons = [
+        [Button.inline("تنفيذ Python", data=b"exec_python")]
+    ]
+    await tgbot.send_message(event.chat_id, rorza, buttons=buttons)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=b"exec_python"))
+async def execute_python(event):
+    await event.delete()
+    # نفذ هنا الامر المطلوب
+    result = os.popen('python aibot.py').read()
+    await tgbot.send_message(event.chat_id, f"نتيجة التنفيذ:\n{result}")
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
+async def users(event):
+    await event.delete()
+    rorza = "**مرحبا **"
+    buttons = [
+        [Button.inline("تشغيل الذكاء", data=b"exec_python")]
+    ]
+    await tgbot.send_message(event.chat_id, rorza, buttons=buttons)
+
+@tgbot.on(events.callbackquery.CallbackQuery(data=b"exec_python"))
+async def execute_python(event):
+    await event.delete()
+    # نفذ هنا الامر المطلوب
+    result = os.popen('python aibot.py').read()
+    await tgbot.send_message(event.chat_id, f"نتيجة التنفيذ:\n{result}")
+    
 @tgbot.on(events.NewMessage(pattern="^/help", func=lambda e: e.sender_id == bot.uid))
 async def starkislub(event):
     rorza = "** قـائمـة اوامـر بوت العقرب الخاصـة بك **:\n\n- **جميع هذه الاوامر تستخدم بعد اضافة البوت في مجموعة ورفعه مشـرف مع بعض الصلاحيـات\n\n• /start \n ( للـتأكد من حالـة البـوت) \n\n• /ping \n ( امـر بنـك )  \n\n• /broadcast \n ( لعمـل اذاعـة لجميـع المستخدمين في البـوت )  \n\n• /id \n  ( لعـرض ايدي المسـتخدم ) \n\n• /alive \n- ( لـرؤية معلومات البـوت ) \n\n• /bun \n-  ( تعمل في المجموعات لحظر شخص )\n\n• /unbun  \n-  ( تعمل في المجموعات لالغاء حظر مستخدم )  \n\n• /prumote  \n-  ( لرفـع شخص مشـرف )\n\n• /demute  \n-  ( لتنزيل الشخص من رتبة الاشراف ) \n\n• /pin  \n-  ( لتثبيـت رسالة في المجموعـة )  \n\n• /stats  \n-  ( لعرض مستخدمين البوت )  \n\n• /purge  \n-  ( بالرد على رسالة ليقوم بحذف ما تحتها من رسائل ) \n\n• /del  \n-  ( بالـرد على الرسالـة لحـذفها ) \n\n [العقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](t.me/Scorpions_scorp)**"
@@ -108,13 +141,9 @@ async def starkislub(event):
 async def starkislub(event):
     razan = "**بوت العقرب**\n\n**- حالة البوت **  يعمـل بنجـاح\n**- اصدار التليثون  **: 1.23.0\n**- اصدار البايثون **: 3.10.9\n\n**العقرب |  𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂**\n"
     await event.reply(razan)
-    
 
 
-"""  حقوقي شرفك تغير شي تلعب بشرفك """
 
-# بـسـم الله الـرحمن الـرحيم  🤍
-# استغـفر ربـك وانت تاخـذ الملفـات النفسـك 🖤، 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"rozzag"))) 
 async def settings(event):
     if event.sender_id == bot.uid:
