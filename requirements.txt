@@ -1,5 +1,6 @@
 telethon
 pydub
+telebot
 python-tgpt
 g4f
 schedule
