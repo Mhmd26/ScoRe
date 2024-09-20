@@ -1,6 +1,5 @@
 import asyncio
 import io
-import os
 import re
 from telethon import Button, custom, events
 from telethon.tl.functions.users import GetFullUserRequest
@@ -98,7 +97,6 @@ async def users(event):
     await tgbot.send_message(event.chat_id, rorza)
 
 from telethon import events
-import os
 import re
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ope")))
@@ -109,12 +107,6 @@ async def users(event):
         [Button.inline("تنفيذ Python", data=b"exec_python")]
     ]
     await tgbot.send_message(event.chat_id, rorza, buttons=buttons)
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=b"exec_python"))
-async def execute_python(event):
-    await event.delete()
-    result = os.popen('python aibot.py').read()
-    await tgbot.send_message(event.chat_id, f"نتيجة التنفيذ:\n{result}")
     
 @tgbot.on(events.NewMessage(pattern="^/help", func=lambda e: e.sender_id == bot.uid))
 async def starkislub(event):
