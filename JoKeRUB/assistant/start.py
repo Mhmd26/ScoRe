@@ -33,7 +33,6 @@ async def start(event):
             buttons=[
                 [Button.inline("عرض المستخدمين ", data="users"), Button.inline(
                                          "اوامر البـوت ", data="gibcmd")],
-                [Button.inline("الذكاء الاصطناعي | GPT  ", data="ope")],
                 [Button.url("المطـور محمد", "https://t.me/Zo_r0")],
                 [Button.url("المطـور علوش", "https://t.me/I_e_e_l")],
 
@@ -96,17 +95,6 @@ async def users(event):
     rorza = "** قـائمـة اوامـر بوت العقرب الخاصـة بك **:\n\n- **جميع هذه الاوامر تستخدم بعد اضافة البوت في مجموعة ورفعه مشـرف مع بعض الصلاحيـات\n\n• /start \n ( للـتأكد من حالـة البـوت) \n\n• /ping \n ( امـر بنـك )  \n\n• /broadcast \n ( لعمـل اذاعـة لجميـع المستخدمين في البـوت )  \n\n• /id \n  ( لعـرض ايدي المسـتخدم ) \n\n• /alive \n- ( لـرؤية معلومات البـوت ) \n\n• /bun \n-  ( تعمل في المجموعات لحظر شخص )\n\n• /unbun  \n-  ( تعمل في المجموعات لالغاء حظر مستخدم )  \n\n• /prumote  \n-  ( لرفـع شخص مشـرف )\n\n• /demute  \n-  ( لتنزيل الشخص من رتبة الاشراف ) \n\n• /pin  \n-  ( لتثبيـت رسالة في المجموعـة )  \n\n• /stats  \n-  ( لعرض مستخدمين البوت )  \n\n• /purge  \n-  ( بالرد على رسالة ليقوم بحذف ما تحتها من رسائل ) \n\n• /del  \n-  ( بالـرد على الرسالـة لحـذفها ) \n\n [العقرب | 𝗦𝗰𝗼𝗿𝗽𝗶𝗼 🦂](t.me/Scorpions_scorp)**"
     await tgbot.send_message(event.chat_id, rorza)
 
-from telethon import events
-import re
-
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ope")))
-async def users(event):
-    await event.delete()
-    rorza = "**مرحبا بك**"
-    buttons = [
-        [Button.inline("تنفيذ Python", data=b"exec_python")]
-    ]
-    await tgbot.send_message(event.chat_id, rorza, buttons=buttons)
     
 @tgbot.on(events.NewMessage(pattern="^/help", func=lambda e: e.sender_id == bot.uid))
 async def starkislub(event):
