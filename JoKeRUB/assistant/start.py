@@ -100,7 +100,6 @@ async def users(event):
 from telethon import events
 import os
 import re
-from telethon.tl import Button
 
 @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ope")))
 async def users(event):
