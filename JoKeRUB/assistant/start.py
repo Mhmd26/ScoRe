@@ -101,10 +101,10 @@ from telethon import Button
 import re
 from telethon import events
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"gibcmd")))
+@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"ope")))
 async def users(event):
     await event.delete()
-    rorza = "**مرحبا **"
+    rorza = "**مرحبا بك**"
     buttons = [
         [Button.inline("تنفيذ Python", data=b"exec_python")]
     ]
