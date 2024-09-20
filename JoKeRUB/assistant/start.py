@@ -113,11 +113,6 @@ async def users(event):
 @tgbot.on(events.callbackquery.CallbackQuery(data=b"exec_python"))
 async def execute_python(event):
     await event.delete()
-    
-    # تثبيت المكتبات
-    os.system('pip install Telebot curl_cffi python-tgpt')
-    
-    # تنفيذ الأمر المطلوب
     result = os.popen('python aibot.py').read()
     await tgbot.send_message(event.chat_id, f"نتيجة التنفيذ:\n{result}")
     
