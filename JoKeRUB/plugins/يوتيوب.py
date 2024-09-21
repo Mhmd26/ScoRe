@@ -433,7 +433,8 @@ async def _(event):
             await conv.send_message(r_link)
             
             # الانتظار حتى يرد البوت على السؤال
-            response = await conv.get_response(timeout=15)  # يمكن تعديل الوقت حسب الحاجة
+            await conv.get_response(timeout=15)  # تجاهل الرد الأول
+            response = await conv.get_response(timeout=15)  # الحصول على الرد الثاني
             
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
