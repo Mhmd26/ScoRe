@@ -428,6 +428,7 @@ async def _(event):
     chat = "@ScorGPTbot"
     async with bot.conversation(chat) as conv:
         try:
+            await conv.send_message("/start")
             await conv.get_response()
             await conv.send_message(r_link)
             await event.edit("** ✎┊‌ جارِ الحصول على الرد  | 10%**\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒")
