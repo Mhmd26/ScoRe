@@ -434,7 +434,8 @@ async def _(event):
             
             # الانتظار حتى يرد البوت على السؤال
             response = await conv.get_response(timeout=20)  # يمكن تعديل الوقت حسب الحاجة
-            
+            response = await conv.get_response(timeout=20)  # يمكن تعديل الوقت حسب الحاجة
+
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
