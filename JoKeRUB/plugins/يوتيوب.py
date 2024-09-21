@@ -429,18 +429,21 @@ async def _(event):
     async with bot.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
-            await conv.get_response()
+            await conv.get_response()  # انتظار رد البوت على /start
             await conv.send_message(r_link)
-            response = await conv.get_response()
-
-            # الانتظار حتى يرد البوت
-            answer = await conv.get_response()
+            
+            # الانتظار حتى يرد البوت على السؤال
+            response = await conv.get_response(timeout=15)  # يمكن تعديل الوقت حسب الحاجة
+            
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
             return
+        except Exception as e:
+            await event.edit(f"✎┊‌حدث خطأ: {str(e)}")
+            return
         
-        await event.edit(answer.text)  # إرسال النصوص إلى المستخدم
+        await event.edit(response.text)  # إرسال النصوص إلى المستخدم
         await bot.delete_dialog(conv.chat_id)
-        await event.delete()
 
+    await event.delete()
