@@ -10,7 +10,7 @@ from ..core import check_owner
 from ..Config import Config
 
 JEP_IC = "https://telegra.ph/file/72f6967e81cb527cfa2b5.jpg"
-ROE = "**هاي الاوامر الخاصه بسورس العقرب 🦂 **"
+ROE = "[𝗦𝗰𝗼𝗿𝗚𝗣𝗧 | 𝗚𝗲𝗺𝗶𝗻𝗶](t.me/Scorpion_scorp)\n\n✎┊‌ اهلا وسهلا بك في قسم الذكاء الاصطناعي"
 
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 
