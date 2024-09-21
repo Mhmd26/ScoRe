@@ -431,10 +431,13 @@ async def _(event):
             await conv.send_message("/start")
             await conv.get_response()  # انتظار رد البوت على /start
             await conv.send_message(r_link)
+
+            responses = []  # قائمة لتخزين جميع الردود
+            # جمع الردود حتى تصل إلى عدد معين (مثل 5) أو حتى الوصول إلى وقت محدد
+            for _ in range(5):  # يمكنك تعديل العدد حسب الحاجة
+                response = await conv.get_response(timeout=15)
+                responses.append(response.text)
             
-            # الانتظار حتى يرد البوت على السؤال
-            response = await conv.get_response(timeout=30)  # يمكن تعديل الوقت حسب الحاجة
-    
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
@@ -443,7 +446,8 @@ async def _(event):
             await event.edit(f"✎┊‌حدث خطأ: {str(e)}")
             return
         
-        await event.edit(response.text)  # إرسال النصوص إلى المستخدم
+        all_responses = "\n".join(responses)  # دمج جميع الردود في نص واحد
+        await event.edit(all_responses)  # إرسال النصوص إلى المستخدم
         await bot.delete_dialog(conv.chat_id)
 
     await event.delete()
