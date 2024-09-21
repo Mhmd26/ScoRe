@@ -418,6 +418,8 @@ async def _(event):
             await bot.delete_dialog(conv.chat_id)
             await event.delete()
         
+import asyncio
+
 @l313l.on(admin_cmd(pattern="سؤال(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
@@ -432,9 +434,10 @@ async def _(event):
             await conv.get_response()  # انتظار رد البوت على /start
             await conv.send_message(r_link)
 
-            # جمع الردود وإرسال كل رد على حدة
+            # جمع الردود وإرسال كل رد على حدة بعد 10 ثوانٍ
             for _ in range(3):  # يمكنك تعديل العدد حسب الحاجة
-                response = await conv.get_response(timeout=25)
+                await asyncio.sleep(10)  # الانتظار لمدة 10 ثوانٍ
+                response = await conv.get_response(timeout=15)
                 await event.edit(response.text)  # إرسال كل رد بشكل منفصل
             
             await bot.send_read_acknowledge(conv.chat_id)
