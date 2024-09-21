@@ -9,7 +9,7 @@ from JoKeRUB import l313l
 from ..core import check_owner
 from ..Config import Config
 
-JEP_IC = "https://telegra.ph/file/72f6967e81cb527cfa2b5.jpg"
+JEP_IC = "https://ibb.co/F8MtpXL"
 ROE = "[𝗦𝗰𝗼𝗿𝗽𝗶ون 𝗚𝗣𝗧 | 𝗚𝗲𝗺𝗶𝗻𝗶](t.me/Scorpion_scorp)\n\n**✎┊‌ اهلا وسهلا بك في قسم الذكاء الاصطناعي \n الخاص بسورس العقرب 🤖 **\n\n✎┊ يمكن تشغيله من خلال ارسال { .سؤال } **بلاضافة الى سؤالك وسيتم الرد عليك بعد بضع ثوانٍ\n\nو يمكنك الذهاب مباشره الى دردشة الذكاء لمعرفة الاصدارات الاخرى ✓‌**"
 
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
@@ -20,7 +20,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         result = None
         query = event.text
         await bot.get_me()
-        if query.startswith("ذكاء") and event.query.user_id == bot.uid:
+        if query.startswith("26") and event.query.user_id == bot.uid:
             buttons = [
                 [Button.inline("𝗦𝗰𝗼𝗥 𝗚𝗲𝗺𝗶𝗻𝗶", data="l313l0")],
             ]
@@ -45,14 +45,24 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
                 )
             await event.answer([result] if result else None)
 
-
-@bot.on(admin_cmd(outgoing=True, pattern="ذكاء"))
+@bot.on(admin_cmd(outgoing=True, pattern="26"))
 async def repo(event):
     if event.fwd_from:
         return
     lMl10l = Config.TG_BOT_USERNAME
     if event.reply_to_msg_id:
         await event.get_reply_message()
-    response = await bot.inline_query(lMl10l, "ذكاء")
+    response = await bot.inline_query(lMl10l, "26")
     await response[0].click(event.chat_id)
     await event.delete()
+
+
+@l313l.tgbot.on(CallbackQuery(data=re.compile(rb"l313l0")))
+@check_owner
+async def _(event):
+    buttons = [
+    [
+      Button.inline("التالي", data="jrzst"),
+      Button.inline("القائمة الرئيسية", data="ROE"),]]
+    await event.edit(ROZADM, buttons=buttons)
+    
