@@ -418,8 +418,6 @@ async def _(event):
             await bot.delete_dialog(conv.chat_id)
             await event.delete()
         
-import asyncio
-
 @l313l.on(admin_cmd(pattern="سؤال(?: |$)(.*)"))
 async def _(event):
     if event.fwd_from:
@@ -427,18 +425,20 @@ async def _(event):
     r_link = event.pattern_match.group(1)
 
     await event.edit("**✎┊‌يتم الاجابه عن سؤالك ⏳**")
-    chat = "@ScorGPTbot"  # تغيير اسم البوت إلى البوت المناسب لجلب النصوص
+    chat = "@ScorGPTbot"
     async with bot.conversation(chat) as conv:
         try:
             await conv.send_message("/start")
-            await conv.get_response()  # انتظار رد البوت على /start
+            await conv.get_response()
             await conv.send_message(r_link)
 
-            # جمع الردود وإرسال كل رد على حدة بعد 10 ثوانٍ
-            for _ in range(1):  # يمكنك تعديل العدد حسب الحاجة
-                await asyncio.sleep(10)  # الانتظار لمدة 10 ثوانٍ
+            while True:  # حلقة للانتظار حتى نحصل على رد مناسب
+                await asyncio.sleep(2)
                 response = await conv.get_response(timeout=35)
-                await event.edit(response.text)  # إرسال كل رد بشكل منفصل
+
+                if "✎┊‌ 𝗪𝗮𝗶𝘁 𝗺𝗲 ⏳" not in response.text:  # شرط لتجاهل النص
+                    await event.edit(response.text)
+                    break
             
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -448,7 +448,6 @@ async def _(event):
             await event.edit(f"✎┊‌حدث خطأ: {str(e)}")
             return
         
-        # حذف المحادثة مع البوت بعد الحصول على الردود
         await bot.delete_dialog(conv.chat_id)
 
     await event.delete()
