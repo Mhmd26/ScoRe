@@ -432,13 +432,16 @@ async def _(event):
             await conv.get_response()
             await conv.send_message(r_link)
 
-            while True:  # حلقة للانتظار حتى نحصل على رد مناسب
-                await asyncio.sleep(2)
+            attempts = 5  # عدد المحاولات للحصول على رد مناسب
+            for _ in range(attempts):
+                await asyncio.sleep(10)
                 response = await conv.get_response(timeout=35)
 
                 if "✎┊‌ 𝗪𝗮𝗶𝘁 𝗺𝗲 ⏳" not in response.text:  # شرط لتجاهل النص
                     await event.edit(response.text)
                     break
+            else:
+                await event.edit("✎┊‌لم يتم الحصول على رد مناسب بعد عدة محاولات.")
             
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
@@ -451,3 +454,4 @@ async def _(event):
         await bot.delete_dialog(conv.chat_id)
 
     await event.delete()
+
