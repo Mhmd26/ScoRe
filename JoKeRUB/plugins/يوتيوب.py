@@ -434,7 +434,7 @@ async def _(event):
 
             attempts = 5  # عدد المحاولات للحصول على رد مناسب
             for _ in range(attempts):
-                await asyncio.sleep(10)
+                await asyncio.sleep(1)
                 response = await conv.get_response(timeout=35)
 
                 if "✎┊‌ 𝗪𝗮𝗶𝘁 𝗺𝗲 ⏳" not in response.text:  # شرط لتجاهل النص
