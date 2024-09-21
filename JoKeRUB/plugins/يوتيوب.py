@@ -437,7 +437,7 @@ async def _(event):
             await conv.send_message(r_link)
 
             # جمع الردود وإرسال كل رد على حدة بعد 10 ثوانٍ
-            for _ in range(3):  # يمكنك تعديل العدد حسب الحاجة
+            for _ in range(1):  # يمكنك تعديل العدد حسب الحاجة
                 await asyncio.sleep(4)  # الانتظار لمدة 10 ثوانٍ
                 response = await conv.get_response(timeout=35)
 
