@@ -451,7 +451,7 @@ async def _(event):
             await asyncio.sleep(1)
             await event.edit("**✎┊‌ جارِ الحصول على الرد  | 100%**\n████████████████████████")
             await asyncio.sleep(1)
-
+            await event.edit("**✎┊‌ شكرا لأنتظارك 🙏🏻**")
             while True:
                 await asyncio.sleep(1)
                 response = await conv.get_response(timeout=35)
@@ -463,8 +463,8 @@ async def _(event):
             
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
+            await event.edit("**✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot **")
             return
         except Exception as e:
-            await event.edit(f"✎┊‌حدث خطأ في الحصول على الرد : {str(e)}")
+            await event.edit(f"✎┊‌حدث خطأ :\n `{str(e)}` ")
             return
