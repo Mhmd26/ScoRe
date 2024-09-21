@@ -21,7 +21,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         await bot.get_me()
         if query.startswith("اوامري") and event.query.user_id == bot.uid:
             buttons = [
-                [Button.url("— 𝗚𝗼 𝗧𝗼 𝗖𝗵𝗮𝘁 —", "https://t.me/Zo_r0")],
+                [Button.url("— 𝗚𝗼 𝗧𝗼 𝗖𝗵𝗮𝘁 —", "https://t.me/ScorGPTbot")],
             ]
             if JEP_IC and JEP_IC.endswith((".jpg", ".png", "gif", "mp4")):
                 result = builder.photo(
