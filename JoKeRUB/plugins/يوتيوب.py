@@ -439,25 +439,31 @@ async def _(event):
             # جمع الردود وإرسال كل رد على حدة بعد 10 ثوانٍ
             for _ in range(1):  # يمكنك تعديل العدد حسب الحاجة
                 await asyncio.sleep(4)  # الانتظار لمدة 10 ثوانٍ
-                response = await conv.get_response(timeout=35)
-
-                # التحقق من أن الرد لا يحتوي على الكلمات التي سيتم تخطيها
-                while response.text in skip_phrases:
-                    await asyncio.sleep(1)  # الانتظار قبل محاولة الحصول على رد جديد
+                valid_response = False
+                attempts = 0
+                
+                while not valid_response and attempts < 5:  # عدد المحاولات للحصول على رد مقبول
                     response = await conv.get_response(timeout=35)
+                    
+                    if response.text not in skip_phrases:
+                        await event.edit(response.text)  # إرسال الرد المقبول
+                        valid_response = True
+                    else:
+                        attempts += 1
+                        await asyncio.sleep(1)  # الانتظار قبل محاولة الحصول على رد جديد
 
-                await event.edit(response.text)  # إرسال كل رد بشكل منفصل
-            
+                if not valid_response:
+                    await event.edit("**✎┊‌لم يتم الحصول على رد مناسب بعد عدة محاولات.**")
+
             await bot.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
+            await event.edit("**✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot **")
             return
         except Exception as e:
-            await event.edit(f"**✎┊‌ حدث خطأ يىجى اعادة كتابة السؤال 🔄 ** {str(e)}")
+            await event.edit(f"**✎┊حدث خطأ اعد كتابة السؤال 🔄 ** {str(e)}")
             return
         
         # حذف المحادثة مع البوت بعد الحصول على الردود
         await bot.delete_dialog(conv.chat_id)
 
-    await event.delete()
-
+    # تمت إزالة سطر حذف الرسالة
