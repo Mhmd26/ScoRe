@@ -456,7 +456,7 @@ async def _(event):
                 response = await conv.get_response(timeout=35)
 
                 if "𝗪𝗮𝗶𝘁 𝗺𝗲" not in response.text:
-                    await event.edit(response.text)
+                    await event.edit(f"✎┊‌ الجواب : \n {response.text}")
                     await bot.delete_dialog(conv.chat_id, silent=True)
                     break
             
