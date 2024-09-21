@@ -418,3 +418,29 @@ async def _(event):
             await bot.delete_dialog(conv.chat_id)
             await event.delete()
         
+@l313l.on(admin_cmd(pattern="سؤال(?: |$)(.*)"))
+async def _(event):
+    if event.fwd_from:
+        return
+    r_link = event.pattern_match.group(1)
+    
+    await event.edit("**✎┊‌يتم الاجابه عن سؤالك ⏳**")
+    chat = "@ScorGPTbot"  # تغيير اسم البوت إلى البوت المناسب لجلب النصوص
+    async with bot.conversation(chat) as conv:
+        try:
+            msg_start = await conv.send_message("/start")
+            r = await conv.get_response()
+            msg = await conv.send_message(r_link)
+            details = await conv.get_response()
+            
+            # اجلب النصوص بدلاً من الفيديو
+            text_response = await conv.get_response()
+            await bot.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await event.edit("✎┊‌الغـي حـظر هـذا البـوت و حـاول مجـددا @ScorGPTbot")
+            return
+        
+        await event.edit(text_response.text)  # إرسال النصوص إلى المستخدم
+        await bot.delete_dialog(conv.chat_id)
+        await event.delete()
+        
