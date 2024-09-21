@@ -2,7 +2,7 @@ from JoKeRUB import l313l
 from ..core.managers import edit_or_reply
 from telethon import Button
 
-@l313l.on(admin_cmd(pattern="26(?: |$)(.*)"))
+@l313l.on(admin_cmd(pattern="260(?: |$)(.*)"))
 async def _(event):
     # Sending the welcome message
     welcome_message = (
