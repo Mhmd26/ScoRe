@@ -428,8 +428,10 @@ async def _(event):
     chat = "@ScorGPTbot"
     async with bot.conversation(chat) as conv:
         try:
+            await bot.block_user(chat)
             await conv.send_message("/start")
             await conv.get_response()
+            await bot.unblock_user(chat)
             await conv.send_message(r_link)
             await event.edit("** ✎┊‌ جارِ الحصول على الرد  | 10%**\n\n▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒")
             await asyncio.sleep(1)
