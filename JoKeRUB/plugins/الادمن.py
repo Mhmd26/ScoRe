@@ -126,21 +126,21 @@ async def set_group_photo(event):  # sourcery no-metrics
             except ImageProcessFailedError:
                 return await edit_delete(event, PP_ERROR)
             except Exception as e:
-                return await edit_delete(event, f"✎┊‌ خطــأ : **`{str(e)}`")
+                return await edit_delete(event, f"**✎┊‌ خطــأ : **`{str(e)}`")
             process = "تم تغييرهـا"
     else:
         try:
             await event.client(EditPhotoRequest(event.chat_id, InputChatPhotoEmpty()))
         except Exception as e:
-            return await edit_delete(event, f"✎┊‌ خطــأ : **`{e}`")
+            return await edit_delete(event, f"**✎┊‌ خطــأ : **`{e}`")
         process = "تم حذفهـا"
-        await edit_delete(event, "✎┊‌ صورة الدردشـه {process} . . بنجـاح ✓**")
+        await edit_delete(event, "**✎┊‌ صورة الدردشـه {process} . . بنجـاح ✓**")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
             "#صـورة_المجمـوعـة\n"
-            f"✎┊‌صورة المجموعه {process} بنجاح ✓ "
-            f"✎┊‌الدردشة: {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
+            f"**✎┊‌صورة المجموعه {process} بنجاح ✓ **"
+            f"**✎┊‌الدردشة:** {get_display_name(await event.get_chat())}(`{event.chat_id}`)",
         )
 
 
@@ -170,7 +170,7 @@ async def promote(event):
         await event.client(EditAdminRequest(event.chat_id, user.id, new_rights, rank))
     except BadRequestError:
         return await zzevent.edit(NO_PERM)
-    await zzevent.edit("✎┊‌  تـم تـرقيتـه مشـرف .. بنجـاح **")
+    await zzevent.edit("**✎┊‌  تـم تـرقيتـه مشـرف .. بنجـاح **")
     if BOTLOG:
         await event.client.send_message(
             BOTLOG_CHATID,
@@ -398,7 +398,7 @@ async def startmute(event):
         except Exception as e:
             await event.edit(f"**✎┊‌ خطـأ **\n`{e}`")
         else:
-            await event.edit("**✎┊‌ تم ڪتـم الـمستخـدم  . . بنجـاح 🔕**")
+            await event.edit("**✎┊‌ تم ڪتـم الـمستخـدم  . . بنجـاح ✓**")
         if BOTLOG:
             await event.client.send_message(
                 BOTLOG_CHATID,
@@ -420,7 +420,7 @@ async def startmute(event):
             return await edit_or_reply(event, "**✎┊‌ عــذراً .. لا استطيــع كتــم نفســي**")
         if user.id == 7275336620 or user.id == 815010872 or user.id == 7045643989:
             return await edit_or_reply(event, "**  دي لا يمڪنني كتـم احـد مطـورين السـورس  **")
-        if user.id == 7275336620 or user.id == 815010872 or user.id == 5502537272:
+        if user.id == 7275336620 or user.id == 815010872 or user.id == 7045643989:
             return await edit_or_reply(event, "**  دي . . لا يمڪنني كتـم مطـور السـورس  **")
         if is_muted(user.id, event.chat_id):
             return await edit_or_reply(
@@ -436,7 +436,7 @@ async def startmute(event):
         except AttributeError:
             pass
         except Exception as e:
-            return await edit_or_reply(event, f"✎┊‌ خطــأ : **`{e}`")
+            return await edit_or_reply(event, f"**✎┊‌ خطــأ : **`{e}`")
         try:
             mute(user.id, event.chat_id)
         except UserAdminInvalidError:
@@ -575,7 +575,7 @@ async def pin(event):
     "لـ تثبيـت الرسـائـل فـي الكــروب"
     to_pin = event.reply_to_msg_id
     if not to_pin:
-        return await edit_delete(event, "✎┊‌ بالــرد ع رسـالـه لـ تثبيتـهـا...**", 5)
+        return await edit_delete(event, "**✎┊‌ بالــرد ع رسـالـه لـ تثبيتـهـا...**")
     options = event.pattern_match.group(1)
     is_silent = bool(options)
     try:
@@ -584,7 +584,7 @@ async def pin(event):
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "✎┊‌ تـم تثبيـت الرسـالـه .. بنجــاح ✓**", 3)
+    await edit_delete(event, "** ✎┊‌ تم تثبيت الرسالة بنجاح ✓ **")
     sudo_users = _sudousers_list()
     if event.sender_id in sudo_users:
         with contextlib.suppress(BadRequestError):
@@ -628,13 +628,13 @@ async def unpin(event):
             await event.client.unpin_message(event.chat_id)
         else:
             return await edit_delete(
-                event, "✎┊‌ بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**", 5
+                event, "**✎┊‌ بالــرد ع رســالـه لـ الغــاء تثبيتـهــا او اسـتخـدم امـر .الغاء تثبيت الكل**"
             )
     except BadRequestError:
         return await edit_delete(event, NO_PERM, 5)
     except Exception as e:
         return await edit_delete(event, f"`{e}`", 5)
-    await edit_delete(event, "✎┊‌ تـم الغـاء تثبيـت الرسـالـه/الرسـائـل .. بنجــاح ✓**", 3)
+    await edit_delete(event, "** ✎┊‌ تـم الغـاء تثبيـت الرسـالـه/الرسـائـل .. بنجــاح ✓**")
     sudo_users = _sudousers_list()
     if event.sender_id in sudo_users:
         with contextlib.suppress(BadRequestError):
