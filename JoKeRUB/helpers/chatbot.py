@@ -1,6 +1,5 @@
 import asyncio
 import aiohttp
-from .utils.extdl import install_pip
 
 async def create_client():
     async with aiohttp.ClientSession() as session:
