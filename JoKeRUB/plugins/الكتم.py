@@ -196,9 +196,4 @@ async def show_muted_users(event):
         await event.edit("**✎┊‌ لا يوجد مستخدمين مكتومين حاليًا**")
 # ===================================== # 
 
-@l313l.ar_cmd(incoming=True)
-async def watcher(event):
-    if is_muted(event.sender_id, "كتم_مؤقت"):
-        await event.delete()
-
 #=====================================  #
